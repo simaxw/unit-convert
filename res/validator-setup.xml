@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<validator-setup>
+
+    <double binding = "txt_vol_liter" />
+    <double binding = "txt_vol_gallon" />
+    <double binding = "txt_vol_pint" />
+
+    <double binding = "txt_mass_gram" />
+    <double binding = "txt_mass_kg" />
+    <double binding = "txt_mass_pound" />
+    <double binding = "txt_mass_tonshort" />
+    <double binding = "txt_mass_tonmetric" />
+    <double binding = "txt_mass_grain" />
+    <double binding = "txt_mass_tonlong" />
+    <double binding = "txt_mass_ouncetroy" />
+    <double binding = "txt_mass_ounceav" />
+
+    <double binding = "txt_area_squaremeter" />
+    <double binding = "txt_area_squarefoot" />
+    <double binding = "txt_area_acre" />
+    <double binding = "txt_area_squareyard" />
+    <double binding = "txt_area_squareinch" />
+    <double binding = "txt_area_squaremile" />
+    <double binding = "txt_area_hectare" />
+    <double binding = "txt_area_squarekm" />
+
+    <double binding = "txt_temp_kelvin" />
+    <double binding = "txt_temp_fahrenheit" />
+    <double binding = "txt_temp_celsius" />
+    <double binding = "txt_temp_rankine" />
+
+    <regex
+        binding = "special_txt_dist_feetin"
+        pattern = "([0-9]+)'? ?- ?([0-9\.]+)&#34;?"
+        />
+
+    <double binding = "txt_dist_millimeter" />
+    <double binding = "txt_dist_feet" />
+    <double binding = "txt_dist_miles" />
+    <double binding = "txt_dist_centimeter" />
+    <double binding = "txt_dist_inches" />
+    <double binding = "txt_dist_meter" />
+    <double binding = "txt_dist_kilometer" />
+
+    <double binding = "txt_pres_pa" />
+    <double binding = "txt_pres_inwg" />
+    <double binding = "txt_pres_mmw" />
+    <double binding = "txt_pres_atm" />
+    <double binding = "txt_pres_kpa" />
+    <double binding = "txt_pres_bar" />
+    <double binding = "txt_pres_mbar" />
+    <double binding = "txt_pres_psi" />
+
+    <double binding = "txt_mom_poundsquarefoot" />
+    <double binding = "txt_mom_kgmsquared" />
+</validator-setup>
+

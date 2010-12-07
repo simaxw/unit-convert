@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<setup>
+    <!--
+    SxWConvert Setup XML File
+    Version: 2.65
+
+    Simon A. Wilper
+    Aug 23 2006
+
+    The first unit should be the SI Unit of that particular group
+    and is represented by factor 1.
+    All factors of the subsequent units if multiplied by will result
+    in the SI Unit.
+
+    Use the transform attribute to perform more complex transformation
+    of the values.
+    -->
+
+    <group id="vol">
+        <unit id="txt_vol_liter" type="factor" value="1" />
+        <unit id="txt_vol_gallon" type="factor" value="3.785412" />
+        <unit id="txt_vol_pint" type="factor" value=".4731765" />
+    </group>
+
+    <!-- distance - relative to base SI unit m (meter) -->
+    <group id="dist">
+        <unit id="txt_dist_meter" type="factor" value="1" />
+        <unit id="txt_dist_centimeter" type="factor" value=".01" />
+        <unit id="txt_dist_millimeter" type="factor" value=".001" />
+        <unit id="txt_dist_kilometer" type="factor" value="1e+3" />
+        <unit id="txt_dist_feet" type="factor" value=".3048" />
+        <unit id="txt_dist_inches" type="factor" value=".0254" />
+        <unit id="txt_dist_miles" type="factor" value="1609.344" />
+
+
+        <!--
+        <unit id="txt_dist_foot" type="factor" value="0.3048" />
+        <unit id="txt_dist_inch" type="factor" value="0.0254" />
+        -->
+    </group>
+
+    <!-- temperature - relative to base SI unit K (Kelvin) -->
+    <group id="temp">
+        <unit id="txt_temp_kelvin" type="transform"
+            toSI="%1 * 1" fromSI="%1 * 1" />
+
+        <unit id="txt_temp_celsius" type="transform"
+            toSI="%1 - 273.15" fromSI="%1 + 273.15" />
+
+        <unit id="txt_temp_fahrenheit" type="transform"
+            toSI="%1 * 1.8 - 459.67" fromSI="%1 + 459.67 / 1.8" />
+
+        <unit id="txt_temp_rankine" type="transform"
+            toSI="%1 * 1.8" fromSI="%1 / 1.8" />
+    </group>
+
+    <!-- pressure - relative to base SI unit kPa (Kilopascal) -->
+    <group id="pres">
+        <unit id="txt_pres_kpa"  type="factor" value="1" />
+        <unit id="txt_pres_pa"   type="factor" value=".001" />
+        <unit id="txt_pres_inwg" type="factor" value=".24884" />
+        <unit id="txt_pres_mmw"  type="factor" value="0.009804" />
+        <unit id="txt_pres_atm"  type="factor" value="101.325" />
+        <unit id="txt_pres_bar"  type="factor" value="100" />
+        <unit id="txt_pres_mbar" type="factor" value=".1" />
+        <unit id="txt_pres_psi"  type="factor" value="6.894757" />
+        <!-- <unit id="txt_pres_inchmercury" type="factor" value="3.38638" /> -->
+    </group>
+
+    <!-- areas - relative to base SI unit square km -->
+    <group id="area">
+        <unit id="txt_area_squaremeter" type="factor" value="1" />
+        <unit id="txt_area_squarekm"    type="factor" value="1e+6" />
+        <unit id="txt_area_acre"        type="factor" value="4046.9" />
+        <unit id="txt_area_squareinch"  type="factor" value=".00064516" />
+        <unit id="txt_area_squarefoot"  type="factor" value=".09290304" />
+        <unit id="txt_area_hectare"     type="factor" value="10000" />
+        <unit id="txt_area_squareyard"  type="factor" value=".8361274" />
+        <unit id="txt_area_squaremile"  type="factor" value="2589988" />
+    </group>
+
+    <!-- mass - relative to base SI unit kg -->
+    <group id="mass">
+        <unit id="txt_mass_kg"        type="factor" value="1" />
+        <unit id="txt_mass_gram"      type="factor" value=".001" />
+        <unit id="txt_mass_pound"     type="factor" value=".45359237" />
+        <unit id="txt_mass_tonshort"  type="factor" value="907.18474" />
+        <unit id="txt_mass_tonmetric" type="factor" value="1000" />
+        <unit id="txt_mass_grain"     type="factor" value="64.798e-6" />
+        <unit id="txt_mass_tonlong"   type="factor" value="1016.047" />
+        <unit id="txt_mass_ouncetroy" type="factor" value="31.10348e-3" />
+        <unit id="txt_mass_ounceav"   type="factor" value="28.34952e-3" />
+    </group>
+
+	<group id="mom">
+		<unit id="txt_mom_kgmsquared"      type="factor" value="1" />
+		<unit id="txt_mom_poundsquarefoot" type="factor" value=".04214011" />
+	</group>
+
+</setup>
+
