@@ -3,23 +3,24 @@
 #define __about_hpp
 
 #include <QtGui>
+#include <QtWidgets>
 
 #include "ui_aboutbox_convert.h"
 
-class SxWConvertAboutbox : public QDialog {
-	Q_OBJECT
+class UnitConvertAboutbox : public QDialog {
+  Q_OBJECT
 
-	public:
-		SxWConvertAboutbox();
-		void reset();
+  public:
+    UnitConvertAboutbox();
+    void reset();
 
-	protected:
-		void keyPressEvent( QKeyEvent* );
+  protected:
+    void keyPressEvent( QKeyEvent* );
 
-	private:
-		void initialize();
+  private:
+    void initialize();
 
-		Ui::aboutbox ui;
+    Ui::aboutbox ui;
 };
 
 #endif

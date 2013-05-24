@@ -1,10 +1,13 @@
 #include "main.hpp"
 
-SxWConvert::SxWConvert() {
-	initialize();
+UnitConvert::UnitConvert() {
+  se.globalObject().setProperty("x",2);
+  QScriptValue val = se.evaluate("1+x*4");
+  qDebug() << val.toInteger();
+  initialize();
 }
 
-void SxWConvert::convertEditChanged( QString str ) {
+void UnitConvert::convertEditChanged( QString str ) {
     QLineEdit *lineEdit = qobject_cast<QLineEdit*>( sender() );
     if ( lineEdit == 0 ) {
         return;
@@ -53,7 +56,7 @@ void SxWConvert::convertEditChanged( QString str ) {
     }
 }
 
-void SxWConvert::specialtxtFeetEdited( QString str ) {
+void UnitConvert::specialtxtFeetEdited( QString str ) {
     const QRegExpValidator *validator;
 
     if ( (validator = qobject_cast<const QRegExpValidator*>(
@@ -64,75 +67,75 @@ void SxWConvert::specialtxtFeetEdited( QString str ) {
 
     QRegExp rgxFeet = validator->regExp();
 
-	// execute regular expression
-	rgxFeet.indexIn( str );
+  // execute regular expression
+  rgxFeet.indexIn( str );
 
-	// save second capture (the inches)
-	double cap2;
+  // save second capture (the inches)
+  double cap2;
 
-	// determine slash-position if user enters eg 22-1/5
-	int slashPos =  rgxFeet.cap(2).indexOf( "/" );
+  // determine slash-position if user enters eg 22-1/5
+  int slashPos =  rgxFeet.cap(2).indexOf( "/" );
 
-	// proceed only if slash is neither first nor at last position
-	if ( slashPos > 0 && slashPos < rgxFeet.cap(2).length()-1 ) {
+  // proceed only if slash is neither first nor at last position
+  if ( slashPos > 0 && slashPos < rgxFeet.cap(2).length()-1 ) {
 
-		// split and do the math
-		QStringList list = rgxFeet.cap(2).split("/");
-		cap2 = list[0].toDouble() / list[1].toDouble();
+    // split and do the math
+    QStringList list = rgxFeet.cap(2).split("/");
+    cap2 = list[0].toDouble() / list[1].toDouble();
 
-	} else {
+  } else {
 
-		// otherwise copy the second capture to cap2
-		cap2 = rgxFeet.cap(2).toDouble();
-	}
+    // otherwise copy the second capture to cap2
+    cap2 = rgxFeet.cap(2).toDouble();
+  }
 
-	double inches = (rgxFeet.cap(1).toDouble() * 12) + cap2;
-	double cm = inches * 2.54;
-	double m = cm * 1e-2;
-	double km = m * 1e-3;
-	double mm = m * 1e3;
+  double inches = (rgxFeet.cap(1).toDouble() * 12) + cap2;
+  double cm = inches * 2.54;
+  double m = cm * 1e-2;
+  double km = m * 1e-3;
+  double mm = m * 1e3;
 
-	ui.txt_dist_meter->setText( QString::number( inches / 12 * 0.3048 ) );
-	ui.txt_dist_centimeter->setText( QString::number( inches / 12 * 0.3048 * 100 ) );
+  ui.txt_dist_meter->setText( QString::number( inches / 12 * 0.3048 ) );
+  ui.txt_dist_centimeter->setText( QString::number( inches / 12 * 0.3048 * 100 ) );
     ui.txt_dist_millimeter->setText( QString::number( mm ) );
     ui.txt_dist_kilometer->setText( QString::number( km ) );
 
     ui.txt_dist_feet->setText( QString::number( inches / 12 ) );
 
-	ui.txt_dist_millimeter->setText( QString::number( mm ) );
-	ui.txt_dist_kilometer->setText( QString::number( km ) );
+  ui.txt_dist_millimeter->setText( QString::number( mm ) );
+  ui.txt_dist_kilometer->setText( QString::number( km ) );
 
-	ui.txt_dist_inches->setText( QString::number( inches ) );
-	ui.txt_dist_miles->setText( QString::number( inches / 5280 / 12 ) );
+  ui.txt_dist_inches->setText( QString::number( inches ) );
+  ui.txt_dist_miles->setText( QString::number( inches / 5280 / 12 ) );
 }
 
 // Actions
-void SxWConvert::about() {
-	aboutBox.reset();
-	aboutBox.exec();
+void UnitConvert::about() {
+  aboutBox.reset();
+  aboutBox.exec();
 }
 
-void SxWConvert::quit() {
-	saveSettings();
-	qApp->quit();
+void UnitConvert::quit() {
+  saveSettings();
+  qApp->quit();
 }
 
 
 // Focushandler
-void SxWConvert::focusChangeHandler( QWidget *old, QWidget *now ) {
+void UnitConvert::focusChangeHandler( QWidget *old, QWidget *now ) {
     if ( qobject_cast<QLineEdit*>( now ) == 0 ) {
         return;
     }
 
     currentFocusDesc = now->objectName();
-	ui.lblDesc->setText( descList[currentFocusDesc] );
+  ui.lblDesc->setText( descList[currentFocusDesc] );
 }
 
-void SxWConvert::closeEvent( QCloseEvent *e ) {
-	saveSettings();
+void UnitConvert::closeEvent( QCloseEvent *e ) {
+  saveSettings();
 }
 
-QString SxWConvert::calc( QString str ) {
+QString UnitConvert::calc( QString str ) {
     QStringList list = str.split( " " );
     if ( list.size() % 2 == 0 ) {
         return 0;
@@ -167,52 +170,52 @@ QString SxWConvert::calc( QString str ) {
 /** Main Initialization Point to be called by all Constructors
  * @return void
  */
-void SxWConvert::initialize() {
+void UnitConvert::initialize() {
 
-	// construct QSettings object
-	settings = new QSettings( "settings.ini", QSettings::IniFormat, this );
-	settings->beginGroup( "general" );
+  // construct QSettings object
+  settings = new QSettings( "settings.ini", QSettings::IniFormat, this );
+  settings->beginGroup( "general" );
 
-	ui.setupUi(this);
+  ui.setupUi(this);
 
     // restore geometry and selected page from QSettings object
-	setGeometry( settings->value( "geometry", QRect( 100, 100, 400, 450 ) ).toRect() );
-	ui.tabwidgetConvertUnitSelection->setCurrentIndex( settings->value( "page", 0 ).toInt() );
+  setGeometry( settings->value( "geometry", QRect( 100, 100, 400, 450 ) ).toRect() );
+  ui.tabwidgetConvertUnitSelection->setCurrentIndex( settings->value( "page", 0 ).toInt() );
 
-	settings->endGroup();
-	
-	// description map
+  settings->endGroup();
+
+  // description map
     loadDesc();
 
     // validators
     loadValidators();
 
-	installSlots();
+  installSlots();
     setup();
 }
 
 /** installs the slots
  */
-void SxWConvert::installSlots() {
+  void UnitConvert::installSlots() {
     foreach( QLineEdit *lineEdit, findChildren<QLineEdit*>( QRegExp( "^txt_" ) ) ) {
-        connect( lineEdit, SIGNAL( textEdited( QString ) ), this, SLOT( convertEditChanged( QString ) ) );
+      connect( lineEdit, SIGNAL( textEdited( QString ) ), this, SLOT( convertEditChanged( QString ) ) );
     }
 
     connect( ui.special_txt_dist_feetin, SIGNAL( textEdited( QString ) ),
-            this, SLOT( specialtxtFeetEdited( QString ) ) );
+        this, SLOT( specialtxtFeetEdited( QString ) ) );
 
-	// actions (menubar)
-	connect( ui.actionAbout, SIGNAL( triggered() ), this, SLOT( about() ) );
-	connect( ui.actionQuit, SIGNAL( triggered() ), this, SLOT( quit() ) );
+    // actions (menubar)
+    connect( ui.actionAbout, SIGNAL( triggered() ), this, SLOT( about() ) );
+    connect( ui.actionQuit, SIGNAL( triggered() ), this, SLOT( quit() ) );
 
-	// focusmanager
-	connect(
-			qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ),
-            this, SLOT( focusChangeHandler( QWidget*, QWidget* ) )
-			);
-}
+    // focusmanager
+    connect(
+        qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ),
+        this, SLOT( focusChangeHandler( QWidget*, QWidget* ) )
+        );
+  }
 
-void SxWConvert::loadDesc() {
+void UnitConvert::loadDesc() {
     QFile f( ":/info/info.xml" );
 
     if ( !f.open( QIODevice::ReadOnly ) ) {
@@ -251,7 +254,7 @@ void SxWConvert::loadDesc() {
     } // for
 }
 
-void SxWConvert::loadValidators() {
+void UnitConvert::loadValidators() {
     QFile f( ":/info/validator-setup.xml" );
 
     if ( !f.open( QIODevice::ReadOnly ) ) {
@@ -298,7 +301,7 @@ void SxWConvert::loadValidators() {
     } // for
 }
 
-void SxWConvert::setup() {
+void UnitConvert::setup() {
     QFile f( ":/info/setup.xml" );
 
     if ( !f.open( QIODevice::ReadOnly ) ) {
@@ -343,18 +346,18 @@ void SxWConvert::setup() {
 }
 
 // Save Settings on Exit
-void SxWConvert::saveSettings() {
-	settings->beginGroup( "general" );
-	settings->setValue( "geometry", geometry() );
-	settings->setValue( "page", ui.tabwidgetConvertUnitSelection->currentIndex() );
-	settings->endGroup();
-	settings->sync();
+void UnitConvert::saveSettings() {
+  settings->beginGroup( "general" );
+  settings->setValue( "geometry", geometry() );
+  settings->setValue( "page", ui.tabwidgetConvertUnitSelection->currentIndex() );
+  settings->endGroup();
+  settings->sync();
 }
 
-QString SxWConvert::getFeetInchesFormat( double in ) {
-	int feet = (int)(in) / 12;
-	double inches = ( (int)(in) % 12 ) + ( in - (int)in );
-	return QString::number( feet ) + "' - " + QString::number( inches ) + "\"";
+QString UnitConvert::getFeetInchesFormat( double in ) {
+  int feet = (int)(in) / 12;
+  double inches = ( (int)(in) % 12 ) + ( in - (int)in );
+  return QString::number( feet ) + "' - " + QString::number( inches ) + "\"";
 }
 
 /** Main
@@ -363,17 +366,17 @@ QString SxWConvert::getFeetInchesFormat( double in ) {
  * @return int returnvalue of app.exec();
  */
 int main( int argc, char *argv[] ) {
-    const QString version = "V0.7 [dev]";
+    const QString version = "V0.8 [dev]";
 
     QApplication app( argc, argv );
 
-    app.setOrganizationName("polat");
-    app.setOrganizationDomain("polysiususa.com");
-    app.setApplicationName("sxwconvert");
+    app.setOrganizationName("Wizardworx");
+    app.setOrganizationDomain("wizardworx.com");
+    app.setApplicationName("unitconvert");
 
-    SxWConvert *sxwconvert = new SxWConvert;
-    sxwconvert->setWindowTitle( "SxWConvert " + version );
-    sxwconvert->show();
-	
-	return app.exec();
+    UnitConvert uc;
+    uc.setWindowTitle( "UnitConvert " + version );
+    uc.show();
+
+  return app.exec();
 }

@@ -9,7 +9,7 @@ TEMPLATE = app
 
 TARGET = bin/convert
 
-DEPENDPATH +=  src inc ui res
+VPATH += obj src inc ui res
 INCLUDEPATH += inc
 
 OBJECTS_DIR = obj
@@ -17,20 +17,20 @@ MOC_DIR = obj
 UI_DIR = obj
 RCC_DIR = obj
 
-QT += xml
+QT += xml widgets script
 
 RESOURCES +=\
-	mainwindow.qrc
+  mainwindow.qrc
 
 FORMS +=\
-	aboutbox_convert.ui\
-	mainwindow_convert.ui
+  aboutbox_convert.ui\
+  mainwindow_convert.ui
 
 SOURCES +=\
-	main.cpp\
-	about.cpp
+  main.cpp\
+  about.cpp
 
 HEADERS +=\
-	main.hpp\
-	about.hpp
+  main.hpp\
+  about.hpp
 
