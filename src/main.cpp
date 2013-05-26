@@ -1,9 +1,15 @@
 #include "main.hpp"
+#include "parser.hpp"
 
 UnitConvert::UnitConvert() {
+
+  UnitXMLParser p( "units.xml" );
+
+  /*
   se.globalObject().setProperty("x",2);
   QScriptValue val = se.evaluate("1+x*4");
   qDebug() << val.toInteger();
+  */
   initialize();
 }
 

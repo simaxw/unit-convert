@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+UnitConvert Setup XML File
+Version: 0.0.2
+Simon Wilper
+2013-05-25
+2013-03-31
+2006-08-23
+
+The first unit should be the SI Unit of that particular group and is
+represented by factor 1.  All factors of the subsequent units if multiplied by
+will result in the SI Unit.
+
+Use the transform attribute to perform more complex transformation of the
+values.
+-->
+
+<units>
+
+  <!-- volumes - relative to base SI unit cubic metre -->
+  <group id="vol" desc="Volumes">
+    <unit id="cubicmetre" type="factor" value="1" />
+    <unit id="liter" type="factor" value=".001" />
+    <unit id="gallon" type="factor" value="3.785412">
+      <info>
+        <![CDATA[The gallon (abbreviation "gal"), is a measure of volume that
+        was used in many parts of Western Europe and is still used in the
+        United States. Historically its value differed depending on locality
+        and commodity. In most localities it has been replaced by the litre,
+        but three variants in current use: the imperial gallon (≈ 4.546 L)
+        which since metrication is used colloquially in the United Kingdom and
+        semi-officially within Canada, the United States (liquid) gallon (≈
+        3.79 L), and the lesser used US dry gallon (≈ 4.40 L). The gallon, be
+        it the imperial or US gallon, is sometimes found in other
+        English-speaking countries. Source: <a
+          href="http://en.wikipedia.org/wiki/Gallon">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="pint" type="factor" value=".4731765" />
+  </group>
+
+  <!-- distance - relative to base SI unit m (meter) -->
+  <group id="dist" desc="Distances">
+    <unit id="meter" type="factor" value="1" />
+    <unit id="centimeter" type="factor" value=".01" />
+    <unit id="millimeter" type="factor" value=".001" />
+    <unit id="kilometer" type="factor" value="1e+3" />
+    <unit id="feet" type="factor" value=".3048" />
+    <unit id="inches" type="factor" value=".0254" />
+    <unit id="miles" type="factor" value="1609.344" />
+    <unit id="feet_inches" type="special" value=".0254" pattern="([0-9]+)'? ?- ?([0-9]+)&#34;?">
+      <subunit id="feet" multiply="12" />
+    </unit>
+  </group>
+
+</units>

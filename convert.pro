@@ -1,9 +1,10 @@
 # /* vim: set filetype=make : */
 
-# Simon Wilper / Aug 23 2006
-# Changes:
-# Aug 23 2007
-# Nov 23 2010
+#Simon Wilper
+#2013-05-25
+#2010-11-23
+#2007-08-23
+#2006-08-23
 
 TEMPLATE = app
 
@@ -20,17 +21,18 @@ RCC_DIR = obj
 QT += xml widgets script
 
 RESOURCES +=\
-  mainwindow.qrc
+	mainwindow.qrc
 
 FORMS +=\
-  aboutbox_convert.ui\
-  mainwindow_convert.ui
+	aboutbox_convert.ui\
+	mainwindow_convert.ui
 
 SOURCES +=\
-  main.cpp\
-  about.cpp
+	main.cpp\
+	about.cpp\
+	parser.cpp
 
 HEADERS +=\
-  main.hpp\
-  about.hpp
-
+	main.hpp\
+	about.hpp\
+	parser.hpp
