@@ -1,19 +1,72 @@
 #include "main.hpp"
-#include "parser.hpp"
 
-UnitConvert::UnitConvert() {
+/*
+Convert::Convert() {
 
-  UnitXMLParser p( "units.xml" );
+  Unit *u = new Unit(Unit::UNDEFINED,"gen", "Generic");
+  TransformUnit *tu = new TransformUnit("tunit", "TransformUnit", "A", "B");
+  FactorUnit *fu = new FactorUnit ("funit", "FactorUnit", 42.4);
+  FormattedUnit *fmu = new FormattedUnit( "fmu", "Formatted Unit", "(\\d+)-(\\d+)");
 
-  /*
+  QList<Unit*> lst;
+  lst << u << fu << tu << fmu;
+
+  foreach ( Unit *u, lst ) {
+    switch(u->type) {
+      case Unit::TRANSFORM:
+        {
+        TransformUnit *tu = (TransformUnit*)u;
+        qDebug() << "ToSI: " << tu->toString();
+        }
+        break;
+      case Unit::FACTOR:
+        {
+        FactorUnit *fu = (FactorUnit*)u;
+        qDebug() << "Factor: " << fu->toString();
+        }
+        break;
+      case Unit::FORMATTED:
+        {
+        FormattedUnit *fmu = (FormattedUnit*)u;
+        qDebug() << "Format Pattern: " << fmu->toString();
+        }
+        break;
+      case Unit::UNDEFINED:
+        qDebug() << "Undefined";
+        break;
+    }
+  }
+  //qDebug() << "INFO: " << typeid(u).name();
+
   se.globalObject().setProperty("x",2);
   QScriptValue val = se.evaluate("1+x*4");
   qDebug() << val.toInteger();
-  */
-  initialize();
+  //initialize();
+}
+*/
+
+bool Convert::initialize() {
+  UnitXMLParser p( qApp->applicationDirPath() + "/units.xml" );
+
+  if ( !p.initialize()) {
+    QMessageBox::critical( this, tr("Error"), p.getErrorMessage() );
+    return false;
+  }
+
+  int i=1;
+  foreach( UnitGroup* g, p.getUnitGroups() ) {
+    qDebug() << (i++) << g->label;
+    foreach ( Unit* u, g->units ) {
+      qDebug() << "\tUnit: " << u->label << " // " << u->info;
+    }
+  }
+
+  return true;
+
 }
 
-void UnitConvert::convertEditChanged( QString str ) {
+void Convert::convertEditChanged( QString ) {
+  /*
     QLineEdit *lineEdit = qobject_cast<QLineEdit*>( sender() );
     if ( lineEdit == 0 ) {
         return;
@@ -60,9 +113,11 @@ void UnitConvert::convertEditChanged( QString str ) {
                 getFeetInchesFormat( ui.txt_dist_inches->text().toDouble() )
                 );
     }
+    */
 }
 
-void UnitConvert::specialtxtFeetEdited( QString str ) {
+void Convert::specialtxtFeetEdited( QString ) {
+  /*
     const QRegExpValidator *validator;
 
     if ( (validator = qobject_cast<const QRegExpValidator*>(
@@ -113,35 +168,40 @@ void UnitConvert::specialtxtFeetEdited( QString str ) {
 
   ui.txt_dist_inches->setText( QString::number( inches ) );
   ui.txt_dist_miles->setText( QString::number( inches / 5280 / 12 ) );
+
+  */
 }
 
 // Actions
-void UnitConvert::about() {
+void Convert::about() {
   aboutBox.reset();
   aboutBox.exec();
 }
 
-void UnitConvert::quit() {
+void Convert::quit() {
   saveSettings();
   qApp->quit();
 }
 
 
 // Focushandler
-void UnitConvert::focusChangeHandler( QWidget *old, QWidget *now ) {
+void Convert::focusChangeHandler( QWidget*, QWidget* ) {
+  /*
     if ( qobject_cast<QLineEdit*>( now ) == 0 ) {
         return;
     }
 
     currentFocusDesc = now->objectName();
   ui.lblDesc->setText( descList[currentFocusDesc] );
+  */
 }
 
-void UnitConvert::closeEvent( QCloseEvent *e ) {
-  saveSettings();
+void Convert::closeEvent( QCloseEvent* ) {
+  //saveSettings();
 }
 
-QString UnitConvert::calc( QString str ) {
+QString Convert::calc( QString ) {
+  /*
     QStringList list = str.split( " " );
     if ( list.size() % 2 == 0 ) {
         return 0;
@@ -171,12 +231,15 @@ QString UnitConvert::calc( QString str ) {
     }
 
     return QString::number( A );
+    */
+  return QString();
 }
 
 /** Main Initialization Point to be called by all Constructors
  * @return void
  */
-void UnitConvert::initialize() {
+  /*
+void Convert::initialize() {
 
   // construct QSettings object
   settings = new QSettings( "settings.ini", QSettings::IniFormat, this );
@@ -186,7 +249,7 @@ void UnitConvert::initialize() {
 
     // restore geometry and selected page from QSettings object
   setGeometry( settings->value( "geometry", QRect( 100, 100, 400, 450 ) ).toRect() );
-  ui.tabwidgetConvertUnitSelection->setCurrentIndex( settings->value( "page", 0 ).toInt() );
+  //ui.tabwidgetConvertUnitSelection->setCurrentIndex( settings->value( "page", 0 ).toInt() );
 
   settings->endGroup();
 
@@ -199,16 +262,18 @@ void UnitConvert::initialize() {
   installSlots();
     setup();
 }
+    */
 
 /** installs the slots
  */
-  void UnitConvert::installSlots() {
+  void Convert::installSlots() {
+    /*
     foreach( QLineEdit *lineEdit, findChildren<QLineEdit*>( QRegExp( "^txt_" ) ) ) {
       connect( lineEdit, SIGNAL( textEdited( QString ) ), this, SLOT( convertEditChanged( QString ) ) );
     }
 
-    connect( ui.special_txt_dist_feetin, SIGNAL( textEdited( QString ) ),
-        this, SLOT( specialtxtFeetEdited( QString ) ) );
+    //connect( ui.special_txt_dist_feetin, SIGNAL( textEdited( QString ) ),
+      //  this, SLOT( specialtxtFeetEdited( QString ) ) );
 
     // actions (menubar)
     connect( ui.actionAbout, SIGNAL( triggered() ), this, SLOT( about() ) );
@@ -219,9 +284,11 @@ void UnitConvert::initialize() {
         qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ),
         this, SLOT( focusChangeHandler( QWidget*, QWidget* ) )
         );
+        */
   }
 
-void UnitConvert::loadDesc() {
+void Convert::loadDesc() {
+  /*
     QFile f( ":/info/info.xml" );
 
     if ( !f.open( QIODevice::ReadOnly ) ) {
@@ -258,9 +325,11 @@ void UnitConvert::loadDesc() {
             } // N.isCDATASection
         } // N.isElement
     } // for
+    */
 }
 
-void UnitConvert::loadValidators() {
+void Convert::loadValidators() {
+  /*
     QFile f( ":/info/validator-setup.xml" );
 
     if ( !f.open( QIODevice::ReadOnly ) ) {
@@ -305,9 +374,11 @@ void UnitConvert::loadValidators() {
             } // if tagName
         } // if N.isElement()
     } // for
+    */
 }
 
-void UnitConvert::setup() {
+void Convert::setup() {
+  /*
     QFile f( ":/info/setup.xml" );
 
     if ( !f.open( QIODevice::ReadOnly ) ) {
@@ -349,21 +420,27 @@ void UnitConvert::setup() {
 
         groups[ groupElement.attribute( "id" ) ] = mapUnits;
     }
+    */
 }
 
 // Save Settings on Exit
-void UnitConvert::saveSettings() {
+void Convert::saveSettings() {
+  /*
   settings->beginGroup( "general" );
   settings->setValue( "geometry", geometry() );
-  settings->setValue( "page", ui.tabwidgetConvertUnitSelection->currentIndex() );
+  //settings->setValue( "page", ui.tabwidgetConvertUnitSelection->currentIndex() );
   settings->endGroup();
   settings->sync();
+  */
 }
 
-QString UnitConvert::getFeetInchesFormat( double in ) {
+QString Convert::getFeetInchesFormat( double ) {
+  /*
   int feet = (int)(in) / 12;
   double inches = ( (int)(in) % 12 ) + ( in - (int)in );
   return QString::number( feet ) + "' - " + QString::number( inches ) + "\"";
+  */
+  return QString();
 }
 
 /** Main
@@ -372,17 +449,28 @@ QString UnitConvert::getFeetInchesFormat( double in ) {
  * @return int returnvalue of app.exec();
  */
 int main( int argc, char *argv[] ) {
-    const QString version = "V0.8 [dev]";
+  QApplication app( argc, argv );
 
-    QApplication app( argc, argv );
+  Convert c;
+  if ( !c.initialize() ) {
+    return -1;
+  }
+
+  return 0; //app.exec();
+
+  /*
 
     app.setOrganizationName("Wizardworx");
     app.setOrganizationDomain("wizardworx.com");
     app.setApplicationName("unitconvert");
 
-    UnitConvert uc;
-    uc.setWindowTitle( "UnitConvert " + version );
-    uc.show();
+    //const QString version = "V0.8 [dev]";
 
-  return app.exec();
+  UnitConvert uc;
+  //uc.setWindowTitle( "UnitConvert " + version );
+  //uc.show();
+
+  return 0;
+  //return app.exec();
+  */
 }

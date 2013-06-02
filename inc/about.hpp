@@ -5,7 +5,7 @@
 #include <QtGui>
 #include <QtWidgets>
 
-#include "ui_aboutbox_convert.h"
+#include "ui_about.h"
 
 class UnitConvertAboutbox : public QDialog {
   Q_OBJECT

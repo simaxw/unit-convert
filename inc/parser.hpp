@@ -5,32 +5,9 @@
 #include <QXmlInputSource>
 #include <QXmlDefaultHandler>
 #include <QXmlSimpleReader>
-#include <QDebug>
+#include <QStack>
 
-class Unit {
-
-  public:
-    enum _type { FACTOR, TRANSFORM };
-    _type type;
-    QString id;
-    QString desc;
-    double value;
-    QString fromSI;
-    QString toSI;
-    QList<double> lstSubUnits;
-};
-
-class UnitGroup {
-
-  public:
-    UnitGroup( const QString& _id, const QString& _desc ) :
-      id(_id),
-      desc(_desc)
-    {}
-    QString id;
-    QString desc;
-    QList<Unit> units;
-};
+#include "unit.hpp"
 
 class UnitErrorHandler : public QXmlDefaultHandler {
 
@@ -47,19 +24,42 @@ class UnitErrorHandler : public QXmlDefaultHandler {
 class UnitContentHandler : public QXmlDefaultHandler {
 
   public:
+    UnitContentHandler() :
+      isCDATA(false), currentUnitGroup(0), currentUnit(0)
+    {}
     bool startElement( const QString&, const QString&, const QString&, const QXmlAttributes& );
+    bool endElement( const QString&, const QString&, const QString& );
+    bool startCDATA();
+    bool endCDATA();
+    bool characters( const QString& );
 
+    QList<UnitGroup*> getUnitGroups() { return unitGroups; }
+
+  private:
+    bool isCDATA;
+    QString current;
+    QStack<QString> docTree;
+    QList<UnitGroup*> unitGroups;
+    UnitGroup *currentUnitGroup;
+    Unit *currentUnit;
 };
 
 class UnitXMLParser {
 
   public:
     UnitXMLParser( const QString& _fileName ) :
+      contentHandler(0),
+      errorHandler(0),
       fileName(_fileName)
-    { initialize(); }
+    {}
+    bool initialize();
+
+    QList<UnitGroup*> getUnitGroups() { return contentHandler->getUnitGroups(); }
+    QString getErrorMessage() { return errorHandler->errorString(); }
 
   private:
-    bool initialize();
+    UnitContentHandler *contentHandler;
+    UnitErrorHandler *errorHandler;
 
     QString fileName;
 };

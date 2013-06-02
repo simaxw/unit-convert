@@ -2,19 +2,21 @@
 #define __main_hpp
 
 #include <QScriptEngine>
-#include <QtGui>
-#include <QtWidgets>
-#include <QtXml>
+#include <QMessageBox>
+//#include <QtGui>
+//#include <QtWidgets>
+//#include <QtXml>
 
+#include "parser.hpp"
 #include "about.hpp"
 
-#include "ui_mainwindow_convert.h"
+#include "ui_mainwindow.h"
 
-class UnitConvert : public QMainWindow {
+class Convert : public QMainWindow {
   Q_OBJECT
 
   public:
-    UnitConvert();
+    bool initialize();
 
   public slots:
     void convertEditChanged( QString );
@@ -32,7 +34,7 @@ class UnitConvert : public QMainWindow {
   private:
     QScriptEngine se;
         QString calc( QString );
-    void initialize();
+    //void initialize();
     void installSlots();
         void loadDesc();
         void loadValidators();
@@ -41,7 +43,7 @@ class UnitConvert : public QMainWindow {
 
     QString getFeetInchesFormat( double );
 
-    Ui::mainwindowSxWConvert ui;
+    Ui::mainwindowConvert ui;
 
     UnitConvertAboutbox aboutBox;
 
