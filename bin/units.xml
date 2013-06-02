@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+Convert Setup XML File
+Version: 1.0.0
+
+Simon A. Wilper
+2013-03-31 - Consolidation of all settings in one XML configuration
+2006-08-23 - Initial Edit
+
+The first unit should be the SI Unit of that particular group and is
+represented by factor 1.  All factors of the subsequent units if
+multiplied by will result in the SI Unit.
+
+Use the transform attribute to perform more complex transformation of
+the values.
+-->
+<units>
+  <group id="vol" label="Volumes" icon=":/icon/icons/volume.png">
+    <unit id="qubicmetre" label="Qubic Metre [mm^3]" type="factor" value="1">
+      <info>
+        <![CDATA[The cubic metre (US spelling: cubic meter, symbol: m3)
+        is the SI derived unit of volume. It is the volume of a cube
+        with edges one metre in length. An alternative name, which
+        allowed a different usage with metric prefixes, was the stère.
+        Another alternative name, not widely used any more, is the
+        kilolitre.]]>
+      </info>
+    </unit>
+    <unit id="liter" label="Litre [l]" type="factor" value=".001">
+      <info>
+        <![CDATA[The litre (American spelling: liter; SI symbols l or
+        L[1]) is a non-SI metric system unit of volume equal to 1 cubic
+        decimetre (dm3), 1,000 cubic centimetres (cm3) or 1/1,000 cubic
+        metre.]]>
+      </info>
+    </unit>
+    <unit id="milliliter" label="Millilitre [ml]" type="factor" value=".000001">
+      <info>
+        <![CDATA[see Litre (milli = 10^-3)]]>
+      </info>
+    </unit>
+    <unit id="gallon" label="Gallon [gal]" type="factor" value=".003785412">
+      <info>
+        <![CDATA[The gallon (abbreviation "gal"), is a measure of volume
+        that was used in many parts of Western Europe and is still used
+        in the United States. Historically its value differed depending
+        on locality and commodity. In most localities it has been
+        replaced by the litre, but three variants in current use: the
+        imperial gallon (≈ 4.546 L) which since metrication is used
+        colloquially in the United Kingdom and semi-officially within
+        Canada, the United States (liquid) gallon (≈ 3.79 L), and the
+        lesser used US dry gallon (≈ 4.40 L). The gallon, be it the
+        imperial or US gallon, is sometimes found in other
+        English-speaking countries.]]>
+      </info>
+    </unit>
+    <unit id="pint" label="Pint [pt]" type="factor" value=".0004731765">
+      <info>
+        <![CDATA[The pint (abbreviated as "pt" or "p") is a unit of
+        volume or capacity that was once used across much of Europe with
+        values varying between countries from less than half a litre to
+        over one litre. Within continental Europe, the pint was replaced
+        with the metric system during the nineteenth century. However,
+        in the United States, the United Kingdom, and various other
+        Commonwealth countries, the unit has continued to be in use.
+        There is also limited use of the term in parts of France, Quebec
+        ("une pinte") and Central Europe, notably some areas in Germany
+        and Switzerland.]]>
+      </info>
+    </unit>
+  </group>
+
+  <group id="powers" label="Powers" icon=":/icon/icons/arrow_down.png">
+    <unit id="w" label="Watts" type="factor" value="1">
+      <info>
+        <![CDATA[The watt (pron.: /ˈwɒt/ WOT; symbol: W) is a derived
+        unit of power in the International System of Units (SI), named
+        after the Scottish engineer James Watt (1736–1819). The unit,
+        defined as one joule per second, measures the rate of energy
+        conversion or transfer.]]>
+      </info>
+    </unit>
+    <unit id="hp" label="Horsepower" type="factor" value="735.49875">
+      <info>
+        <![CDATA[Horsepower (hp) is the name of several units of
+        measurement of power, the rate at which work is done.  The most
+        common conversion factor, especially for electrical power, is 1
+        hp = 746 watts. The term was adopted in the late 18th century by
+        Scottish engineer James Watt to compare the output of steam
+        engines with the power of draft horses. It was later expanded to
+        include the output power of other types of piston engines, as
+        well as turbines, electric motors and other machinery.[1][2] The
+        definition of the unit varied between geographical regions. Most
+        countries now use the SI unit watt for measurement of power.
+        With the implementation of the EU Directive 80/181/EEC on
+        January 1, 2010, the use of horsepower in the EU is only
+        permitted as supplementary unit.]]>
+      </info>
+    </unit>
+  </group>
+
+  <group id="forces" label="Forces" icon=":/icon/icons/arrow_down.png">
+    <unit id="n" label="Newton" type="factor" value="1">
+      <info>
+        <![CDATA[The newton (symbol: N) is the International System of
+        Units (SI) derived unit of force. It is named after Isaac Newton
+        in recognition of his work on classical mechanics, specifically
+        Newton's second law of motion.]]>
+      </info>
+    </unit>
+    <unit id="dyne" label="Dyne" type="factor" value="1e-5">
+      <info>
+        <![CDATA[In physics, the dyne (symbol "dyn", from Greek δύναμις
+        (dynamis) meaning power, force) is a unit of force specified in
+        the centimetre-gram-second (CGS) system of units, a predecessor
+        of the modern SI. One dyne is equal to 10 µN (micronewtons).
+        Equivalently, the dyne is defined as "the force required to
+        accelerate a mass of one gram at a rate of one centimetre per
+        second squared"]]>
+      </info>
+    </unit>
+  </group>
+
+  <!-- lengths - relative to base SI unit m (meter) -->
+  <group id="len" label="Lengths" icon=":/icon/icons/cursor.png">
+    <unit id="meter" label="Meter" type="factor" value="1">
+      <info>
+        <![CDATA[The metre (meter in American English), (SI unit symbol:
+        m; SI dimension symbol: L), is the fundamental unit of length in
+        the International System of Units (SI).[1] Originally intended
+        to be one ten-millionth of the distance from the Earth's equator
+        to the North Pole (at sea level), its definition has been
+        periodically refined to reflect growing knowledge of
+        metrology.]]>
+      </info>
+    </unit>
+    <unit id="centimeter" label="Centimeter" type="factor" value=".01">
+      <info>
+        <![CDATA[see metre (1m = 100cm)]]>
+      </info>
+    </unit>
+    <unit id="millimeter" label="Millimeter" type="factor" value=".001">
+      <info>
+        <![CDATA[see metre (1m = 1000mm)]]>
+      </info>
+    </unit>
+    <unit id="kilometer" label="Kilometer" type="factor" value="1e+3">
+      <info>
+        <![CDATA[see metre (1km = 1000m)]]>
+      </info>
+    </unit>
+    <unit id="feet" label="Feet" type="factor" value=".3048">
+      <info>
+        <![CDATA[A foot (plural: feet; abbreviation or symbol: ft or ′
+        (the prime symbol) is a unit of length defined as being 0.3048 m
+        exactly and used in the imperial system of units and United
+        States customary units. It is subdivided into 12 inches.]]>
+      </info>
+    </unit>
+    <unit id="inches" label="Inches" type="factor" value=".0254">
+      <info>
+        <![CDATA[An inch (plural: inches; abbreviation or symbol: in or
+        ″ – a double prime) is a unit of length in a number of systems
+        of measurement, including the imperial and United States
+        customary systems.]]>
+      </info>
+    </unit>
+    <unit id="miles" label="Miles" type="factor" value="1609.344">
+      <info>
+        <![CDATA[A mile is a unit of length most commonly equivalent to
+        5,280 feet (1,760 yards, or about 1,609 metres).]]>
+      </info>
+    </unit>
+    <unit id="feet_inches" label="Feet-Inches" type="formatted" value=".0254" pattern="(\d+)-(\d+)">
+      <subunits>
+        <subunit value="12" />
+      </subunits>
+      <info>
+        <![CDATA[Enter a formatted feet-inch length, e.g. 2-42 (2 feet,
+        42 inches)]]>
+      </info>
+    </unit>
+  </group>
+
+  <group id="alen" label="Astronomical Lenghts">
+    <unit id="pc" label="Parsec" type="factor" value="30.856776e+15" />
+    <unit id="ae" label="Astronomical Unit" type="factor" value="149597870700" />
+    <unit id="ly" label="Lightyear" type="factor" value="9.461e+15" />
+  </group>
+
+  <!-- temperature - relative to base SI unit K (Kelvin) -->
+  <group id="temp" label="Temperatures">
+    <unit id="kelvin" label="Kelvin" type="transform" toSI="x * 1" fromSI="x * 1" />
+    <unit id="celsius" label="Celsius" type="transform" toSI="x - 273.15" fromSI="x + 273.15" />
+    <unit id="fahrenheit" label="Fahrenheit" type="transform" toSI="x * 1.8 - 459.67" fromSI="x + 459.67 / 1.8" />
+    <unit id="rankine" label="Rankine" type="transform" toSI="x * 1.8" fromSI="x / 1.8" />
+  </group>
+
+  <!-- pressure - relative to base SI unit kPa (Kilopascal) -->
+  <group id="pres" label="Pressures">
+    <unit id="kpa" label="Kilopascal" type="factor" value="1" />
+    <unit id="pa" label="Pascal" type="factor" value=".001" />
+    <unit id="inwg" label="Inch Water Gauge" type="factor" value=".24884" />
+    <unit id="mmw" label="Millimeter of Water" type="factor" value="0.009804" />
+    <unit id="atm" label="Atmosphere" type="factor" value="101.325" />
+    <unit id="bar" label="Bar" type="factor" value="100" />
+    <unit id="mbar" label="Millibar" type="factor" value=".1" />
+    <unit id="psi" label="Psi" type="factor" value="6.894757" />
+  </group>
+
+  <!-- areas - relative to base SI unit square km -->
+  <group id="area" label="Areas">
+    <unit id="squaremeter" label="Square_meter" type="factor" value="1" />
+    <unit id="squarekm" label="Square_kilometer" type="factor" value="1e+6" />
+    <unit id="acre" label="_Acre" type="factor" value="4046.9" />
+    <unit id="squareinch" label="Squareinch" type="factor" value=".00064516" />
+    <unit id="squarefoot" label="Squarefoot" type="factor" value=".09290304" />
+    <unit id="hectare" label="Hectare" type="factor" value="10000" />
+    <unit id="squareyard" label="Squareyard" type="factor" value=".8361274" />
+    <unit id="squaremile" label="Squaremile" type="factor" value="2589988" />
+  </group>
+
+  <group id="mom" label="Momentum of Intertia">
+    <unit id="kgmsquared" label="_Kilogram Meter Squared" type="factor" value="1" />
+    <unit id="poundsquarefoot" label="_Pound Square Foot" type="factor" value=".04214011" />
+  </group>
+
+  <!-- mass - relative to base SI unit kg -->
+  <group id="mass" label="Masses">
+    <unit id="kg" label="Kilogram" type="factor" value="1" />
+    <unit id="gram" label="Gram" type="factor" value=".001" />
+    <unit id="tonmetric" label="Metric Ton" type="factor" value="1000" />
+    <unit id="pound" label="Pound" type="factor" value=".45359237" />
+    <unit id="tonshort" label="Short Ton" type="factor" value="907.18474" />
+    <unit id="grain" label="Grain" type="factor" value="64.798e-6" />
+    <unit id="tonlong" label="Long Ton" type="factor" value="1016.047" />
+    <unit id="ouncetroy" label="Ounce Troy" type="factor" value="31.10348e-3" />
+    <unit id="ounceav" label="Ounce Av" type="factor" value="28.34952e-3" />
+  </group>
+
+</units>
