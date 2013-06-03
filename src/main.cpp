@@ -1,50 +1,5 @@
 #include "main.hpp"
 
-/*
-Convert::Convert() {
-
-  Unit *u = new Unit(Unit::UNDEFINED,"gen", "Generic");
-  TransformUnit *tu = new TransformUnit("tunit", "TransformUnit", "A", "B");
-  FactorUnit *fu = new FactorUnit ("funit", "FactorUnit", 42.4);
-  FormattedUnit *fmu = new FormattedUnit( "fmu", "Formatted Unit", "(\\d+)-(\\d+)");
-
-  QList<Unit*> lst;
-  lst << u << fu << tu << fmu;
-
-  foreach ( Unit *u, lst ) {
-    switch(u->type) {
-      case Unit::TRANSFORM:
-        {
-        TransformUnit *tu = (TransformUnit*)u;
-        qDebug() << "ToSI: " << tu->toString();
-        }
-        break;
-      case Unit::FACTOR:
-        {
-        FactorUnit *fu = (FactorUnit*)u;
-        qDebug() << "Factor: " << fu->toString();
-        }
-        break;
-      case Unit::FORMATTED:
-        {
-        FormattedUnit *fmu = (FormattedUnit*)u;
-        qDebug() << "Format Pattern: " << fmu->toString();
-        }
-        break;
-      case Unit::UNDEFINED:
-        qDebug() << "Undefined";
-        break;
-    }
-  }
-  //qDebug() << "INFO: " << typeid(u).name();
-
-  se.globalObject().setProperty("x",2);
-  QScriptValue val = se.evaluate("1+x*4");
-  qDebug() << val.toInteger();
-  //initialize();
-}
-*/
-
 bool Convert::initialize() {
   UnitXMLParser p( qApp->applicationDirPath() + "/units.xml" );
 
@@ -53,13 +8,24 @@ bool Convert::initialize() {
     return false;
   }
 
+  unitGroups = p.getUnitGroups();
+
   ui.setupUi( this );
+
+  unitLayout = new QStackedLayout(ui.widgetUnitList);
+  ui.widgetUnitList->setLayout(unitLayout);
+
   modelUnitGroups = new QStandardItemModel;
 
   foreach( UnitGroup* g, p.getUnitGroups() ) {
-    QWidget *widget;
+    QWidget *widgetOuter = new QWidget;
+    QVBoxLayout *layout = new QVBoxLayout;
+    widgetOuter->setLayout(layout);
+
+    QWidget *widget = new QWidget;
     QGridLayout *grid = new QGridLayout;
-    
+    widget->setLayout(grid);
+
     int r = 0;
     foreach( Unit* u, g->units ) {
       grid->addWidget( u->lblUnit, r, 0 );
@@ -67,11 +33,13 @@ bool Convert::initialize() {
       r++;
     }
 
-    unitWidgets << widget;
+    layout->addWidget(widget);
+    layout->addStretch(1);
+
+    unitLayout->addWidget( widgetOuter );
 
     QStandardItem *item = new QStandardItem( g->label );
     modelUnitGroups->appendRow( item );
-
   }
 
   ui.lstUnitGroups->setModel( modelUnitGroups );
@@ -80,9 +48,28 @@ bool Convert::initialize() {
       this,
       SLOT(lstUnitGroupsSelectionChanged( const QItemSelection&, const QItemSelection& ))
     );
+  connect( ui.actionQuit, SIGNAL(triggered()), this, SLOT(actionQuitTriggered()) );
 
   return true;
+}
 
+void Convert::lstUnitGroupsSelectionChanged( const QItemSelection& selected, const QItemSelection& ) {
+  int idx = selected.indexes().at(0).row();
+  if ( idx > unitLayout->count() ) {
+    return;
+  }
+  unitLayout->setCurrentIndex(idx);
+  ui.lblUnitGroups->setText( "&Unit Group: " + unitGroups.at(idx)->label );
+}
+
+void Convert::actionQuitTriggered() {
+  qApp->quit();
+}
+
+void Convert::applicationFocusChange( QWidget*, QWidget* now ) {
+  if ( qobject_cast<QLineEdit*>( now ) == 0 ) {
+   return;
+  }
 }
 
 void Convert::convertEditChanged( QString ) {
@@ -203,18 +190,6 @@ void Convert::quit() {
   qApp->quit();
 }
 
-
-// Focushandler
-void Convert::focusChangeHandler( QWidget*, QWidget* ) {
-  /*
-    if ( qobject_cast<QLineEdit*>( now ) == 0 ) {
-        return;
-    }
-
-    currentFocusDesc = now->objectName();
-  ui.lblDesc->setText( descList[currentFocusDesc] );
-  */
-}
 
 void Convert::closeEvent( QCloseEvent* ) {
   //saveSettings();

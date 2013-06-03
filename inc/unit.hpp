@@ -16,6 +16,7 @@ class Unit {
       type(_type), id(_id), label(_label)
     {
       lblUnit = new QLabel( _label );
+      lblUnit->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
       txtUnit = new QLineEdit;
       lblUnit->setBuddy(txtUnit);
     }

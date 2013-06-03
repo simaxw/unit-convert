@@ -17,7 +17,7 @@ the values.
 -->
 <units>
   <group id="vol" label="Volumes" icon=":/icon/icons/volume.png">
-    <unit id="qubicmetre" label="Qubic Metre [mm^3]" type="factor" value="1">
+    <unit id="qubicmetre" label="Q_ubic Metre [mm^3]" type="factor" value="1">
       <info>
         <![CDATA[The cubic metre (US spelling: cubic meter, symbol: m3)
         is the SI derived unit of volume. It is the volume of a cube

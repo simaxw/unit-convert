@@ -2,7 +2,7 @@
 #define __main_hpp
 
 #include <QScriptEngine>
-#include <QMessageBox>
+//#include <QMessageBox>
 //#include <QtGui>
 //#include <QtWidgets>
 //#include <QtXml>
@@ -18,7 +18,12 @@ class Convert : public QMainWindow {
   public:
     bool initialize();
 
-  public slots:
+  private slots:
+    void lstUnitGroupsSelectionChanged( const QItemSelection&, const QItemSelection& );
+    void actionQuitTriggered();
+    void applicationFocusChanged( QWidget*, QWidget* );
+
+    // ---
     void convertEditChanged( QString );
     void specialtxtFeetEdited( QString );
 
@@ -26,15 +31,15 @@ class Convert : public QMainWindow {
     void about();
     void quit();
 
-    void focusChangeHandler( QWidget*, QWidget* );
 
   protected:
     void closeEvent( QCloseEvent* );
 
   private:
-    QList<QWidget*> unitWidgets;
     QStandardItemModel *modelUnitGroups;
     Ui::mainwindowConvert ui;
+    QStackedLayout *unitLayout;
+    QList<UnitGroup*> unitGroups;
     
     // ---
     QScriptEngine se;

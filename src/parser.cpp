@@ -40,7 +40,7 @@ bool UnitContentHandler::startElement(
   if ( localName == "unit" ) {
     QString type = attr.value("type");
     QString id = attr.value("id");
-    QString label = attr.value("label");
+    QString label = attr.value("label").replace("_","&");
     if ( type == "factor" ) {
       FactorUnit *fu = new FactorUnit( id,label, attr.value("value").toDouble() );
       currentUnit = fu;
