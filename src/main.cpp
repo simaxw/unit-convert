@@ -53,13 +53,33 @@ bool Convert::initialize() {
     return false;
   }
 
-  int i=1;
+  ui.setupUi( this );
+  modelUnitGroups = new QStandardItemModel;
+
   foreach( UnitGroup* g, p.getUnitGroups() ) {
-    qDebug() << (i++) << g->label;
-    foreach ( Unit* u, g->units ) {
-      qDebug() << "\tUnit: " << u->label << " // " << u->info;
+    QWidget *widget;
+    QGridLayout *grid = new QGridLayout;
+    
+    int r = 0;
+    foreach( Unit* u, g->units ) {
+      grid->addWidget( u->lblUnit, r, 0 );
+      grid->addWidget( u->txtUnit, r, 1 );
+      r++;
     }
+
+    unitWidgets << widget;
+
+    QStandardItem *item = new QStandardItem( g->label );
+    modelUnitGroups->appendRow( item );
+
   }
+
+  ui.lstUnitGroups->setModel( modelUnitGroups );
+  connect( ui.lstUnitGroups->selectionModel(),
+      SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection& )),
+      this,
+      SLOT(lstUnitGroupsSelectionChanged( const QItemSelection&, const QItemSelection& ))
+    );
 
   return true;
 
@@ -456,7 +476,9 @@ int main( int argc, char *argv[] ) {
     return -1;
   }
 
-  return 0; //app.exec();
+  c.show();
+
+  return app.exec();
 
   /*
 

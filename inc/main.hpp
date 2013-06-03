@@ -32,6 +32,11 @@ class Convert : public QMainWindow {
     void closeEvent( QCloseEvent* );
 
   private:
+    QList<QWidget*> unitWidgets;
+    QStandardItemModel *modelUnitGroups;
+    Ui::mainwindowConvert ui;
+    
+    // ---
     QScriptEngine se;
         QString calc( QString );
     //void initialize();
@@ -43,7 +48,6 @@ class Convert : public QMainWindow {
 
     QString getFeetInchesFormat( double );
 
-    Ui::mainwindowConvert ui;
 
     UnitConvertAboutbox aboutBox;
 
