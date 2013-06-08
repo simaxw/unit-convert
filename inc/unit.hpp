@@ -6,37 +6,28 @@
 #include <QIcon>
 #include <QLineEdit>
 #include <QLabel>
+#include <QVBoxLayout>
+#include <QGridLayout>
 
-class Unit {
-
+class Unit : public QLineEdit {
   public:
     enum UnitType { FACTOR, TRANSFORM, FORMATTED, UNDEFINED };
+    Unit( UnitType, const QString&, const QString& );
 
-    Unit( UnitType _type, const QString& _id, const QString& _label ) :
-      type(_type), id(_id), label(_label)
-    {
-      lblUnit = new QLabel( _label );
-      lblUnit->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
-      txtUnit = new QLineEdit;
-      lblUnit->setBuddy(txtUnit);
-    }
+    void focusInEvent(QFocusEvent*);
 
     UnitType type;
+
     QString id;
     QString label;
 
-    QLineEdit *txtUnit;
     QLabel *lblUnit;
 
     QString info;
-
-    QString toString() {
-      return "Unit id=" + id + ", label=" + label;
-    }
+    QLabel *lblInfo;
 };
 
 class FactorUnit : public Unit {
-
   public:
     FactorUnit( const QString& _id, const QString& _label, const double _value ) :
       Unit(Unit::FACTOR,_id,_label), value(_value)
@@ -46,7 +37,6 @@ class FactorUnit : public Unit {
 };
 
 class TransformUnit : public Unit {
-
   public:
     TransformUnit( const QString& _id, const QString& _label, const QString& _fromSI, const QString& _toSI ) :
       Unit(Unit::TRANSFORM,_id,_label), fromSI(_fromSI), toSI(_toSI)
@@ -54,11 +44,9 @@ class TransformUnit : public Unit {
 
     QString fromSI;
     QString toSI;
-
 };
 
 class FormattedUnit : public Unit {
-
   public:
     FormattedUnit( const QString& _id, const QString& _label, const double _value, const QString& _pattern ) :
       Unit(Unit::FORMATTED,_id,_label), value(_value), pattern(_pattern)
@@ -67,22 +55,21 @@ class FormattedUnit : public Unit {
     double value;
     QString pattern;
     QList<double> subUnits;
-
 };
 
-class UnitGroup {
-
+class UnitGroup : public QWidget {
   public:
     UnitGroup( const QString& _id, const QString& _label ) :
       id(_id),
       label(_label)
     {}
+
+    void initialize( QLabel* );
+
     QString id;
     QString label;
-    QIcon *icon;
+    QIcon icon;
     QList<Unit*> units;
-
-    QString toString() { return "Unit Group: " + id + " (" + label + ")"; }
 };
 
 #endif

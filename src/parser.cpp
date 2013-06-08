@@ -33,7 +33,7 @@ bool UnitContentHandler::startElement(
     UnitGroup *g = new UnitGroup( attr.value("id"), attr.value("label") );
     QString iconPath = attr.value("icon");
     if ( !iconPath.isEmpty() ) {
-      g->icon = new QIcon( iconPath );
+      g->icon = QIcon( iconPath );
     }
     currentUnitGroup = g;
   } else
@@ -60,7 +60,9 @@ bool UnitContentHandler::startElement(
   } else
   if ( localName == "subunit" ) {
     QString val = attr.value("value");
-    ((FormattedUnit*)currentUnit)->subUnits.append(val.toDouble());
+    if ( !val.isEmpty() ) {
+      ((FormattedUnit*)currentUnit)->subUnits.append(val.toDouble());
+    }
   }
 
   return true;
@@ -76,10 +78,14 @@ bool UnitContentHandler::endElement(
   }
 
   if ( localName == "group" ) {
-    unitGroups.append(currentUnitGroup);
+    if ( currentUnitGroup ) {
+      unitGroups.append(currentUnitGroup);
+    }
   } else
   if ( localName == "unit" ) {
-    currentUnitGroup->units.append(currentUnit);
+    if ( currentUnitGroup && currentUnit ) {
+      currentUnitGroup->units.append(currentUnit);
+    }
   }
   return true;
 }

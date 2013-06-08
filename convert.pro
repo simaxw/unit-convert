@@ -25,7 +25,8 @@ mainwindow.ui
 SOURCES +=\
 main.cpp\
 about.cpp\
-parser.cpp
+parser.cpp\
+unit.cpp
 
 HEADERS +=\
 main.hpp\
