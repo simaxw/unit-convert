@@ -50,7 +50,8 @@ bool UnitContentHandler::startElement(
       currentUnit = tu;
     } else
     if ( type == "formatted" ) {
-      FormattedUnit *fu = new FormattedUnit( id,label, attr.value("value").toDouble(), attr.value("pattern") );
+      FormattedUnit *fu = new FormattedUnit( id,label, attr.value("value").toDouble(),
+          attr.value("inputpattern"), attr.value("outputpattern") );
       currentUnit = fu;
     }
   } else
@@ -61,7 +62,7 @@ bool UnitContentHandler::startElement(
   if ( localName == "subunit" ) {
     QString val = attr.value("value");
     if ( !val.isEmpty() ) {
-      ((FormattedUnit*)currentUnit)->subUnits.append(val.toDouble());
+      ((FormattedUnit*)currentUnit)->subUnits.append(val.toInt());
     }
   }
 

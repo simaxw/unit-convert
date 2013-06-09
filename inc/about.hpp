@@ -1,17 +1,15 @@
-
 #ifndef __about_hpp
 #define __about_hpp
 
-#include <QtGui>
-#include <QtWidgets>
-
+#include <QKeyEvent>
+#include <QDebug>
 #include "ui_about.h"
 
-class UnitConvertAboutbox : public QDialog {
+class ConvertAbout : public QDialog {
   Q_OBJECT
 
   public:
-    UnitConvertAboutbox();
+    ConvertAbout();
     void reset();
 
   protected:
@@ -19,7 +17,6 @@ class UnitConvertAboutbox : public QDialog {
 
   private:
     void initialize();
-
     Ui::aboutbox ui;
 };
 

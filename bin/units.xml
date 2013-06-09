@@ -71,7 +71,7 @@ the values.
     </unit>
   </group>
 
-  <group id="powers" label="Powers" icon=":/icon/icons/arrow_down.png">
+  <group id="powers" label="Powers" icon=":/icon/icons/power.png">
     <unit id="w" label="Watts" type="factor" value="1">
       <info>
         <![CDATA[The watt (pron.: /ˈwɒt/ WOT; symbol: W) is a derived
@@ -100,7 +100,7 @@ the values.
     </unit>
   </group>
 
-  <group id="forces" label="Forces" icon=":/icon/icons/arrow_down.png">
+  <group id="forces" label="Forces" icon=":/icon/icons/force.png">
     <unit id="n" label="Newton" type="factor" value="1">
       <info>
         <![CDATA[The newton (symbol: N) is the International System of
@@ -172,7 +172,8 @@ the values.
         5,280 feet (1,760 yards, or about 1,609 metres).]]>
       </info>
     </unit>
-    <unit id="feet_inches" label="Feet-Inches" type="formatted" value=".0254" pattern="(\d+)-(\d+)">
+    <unit id="feet_inches" label="Feet-Inches" type="formatted" value=".0254"
+      inputpattern="(\d+)-(\d+)" outputpattern="%1ft - %2in">
       <subunits>
         <subunit value="12" />
       </subunits>
@@ -183,14 +184,14 @@ the values.
     </unit>
   </group>
 
-  <group id="alen" label="Astronomical Lenghts">
+  <group id="alen" label="Astronomical Lenghts" icon=":icon/icons/planets.png">
     <unit id="pc" label="Parsec" type="factor" value="30.856776e+15" />
     <unit id="ae" label="Astronomical Unit" type="factor" value="149597870700" />
     <unit id="ly" label="Lightyear" type="factor" value="9.461e+15" />
   </group>
 
   <!-- temperature - relative to base SI unit K (Kelvin) -->
-  <group id="temp" label="Temperatures">
+  <group id="temp" label="Temperatures" icon=":icon/icons/temperature.png">
     <unit id="kelvin" label="Kelvin" type="transform" toSI="x * 1" fromSI="x * 1" />
     <unit id="celsius" label="Celsius" type="transform" toSI="x - 273.15" fromSI="x + 273.15" />
     <unit id="fahrenheit" label="Fahrenheit" type="transform" toSI="x * 1.8 - 459.67" fromSI="x + 459.67 / 1.8" />
@@ -198,7 +199,7 @@ the values.
   </group>
 
   <!-- pressure - relative to base SI unit kPa (Kilopascal) -->
-  <group id="pres" label="Pressures">
+  <group id="pres" label="Pressures" icon=":icon/icons/arrow_down.png">
     <unit id="kpa" label="Kilopascal" type="factor" value="1" />
     <unit id="pa" label="Pascal" type="factor" value=".001" />
     <unit id="inwg" label="Inch Water Gauge" type="factor" value=".24884" />
@@ -210,7 +211,7 @@ the values.
   </group>
 
   <!-- areas - relative to base SI unit square km -->
-  <group id="area" label="Areas">
+  <group id="area" label="Areas" icon=":icon/icons/rect.png">
     <unit id="squaremeter" label="Square_meter" type="factor" value="1" />
     <unit id="squarekm" label="Square_kilometer" type="factor" value="1e+6" />
     <unit id="acre" label="_Acre" type="factor" value="4046.9" />
@@ -221,13 +222,13 @@ the values.
     <unit id="squaremile" label="Squaremile" type="factor" value="2589988" />
   </group>
 
-  <group id="mom" label="Momentum of Intertia">
+  <group id="mom" label="Momentum of Intertia" icon=":icon/icons/inertia.png">
     <unit id="kgmsquared" label="_Kilogram Meter Squared" type="factor" value="1" />
     <unit id="poundsquarefoot" label="_Pound Square Foot" type="factor" value=".04214011" />
   </group>
 
   <!-- mass - relative to base SI unit kg -->
-  <group id="mass" label="Masses">
+  <group id="mass" label="Masses" icon=":icon/icons/weight.png">
     <unit id="kg" label="Kilogram" type="factor" value="1" />
     <unit id="gram" label="Gram" type="factor" value=".001" />
     <unit id="tonmetric" label="Metric Ton" type="factor" value="1000" />
@@ -237,6 +238,23 @@ the values.
     <unit id="tonlong" label="Long Ton" type="factor" value="1016.047" />
     <unit id="ouncetroy" label="Ounce Troy" type="factor" value="31.10348e-3" />
     <unit id="ounceav" label="Ounce Av" type="factor" value="28.34952e-3" />
+  </group>
+
+  <group id="times" label="Times" icon=":icon/icons/time.png">
+    <unit id="s" label="Second" type="factor" value="1" />
+    <unit id="min" label="Minute" type="factor" value="60" />
+    <unit id="h" label="Hour" type="factor" value="3600" />
+    <unit id="hms" label="h:m:s" type="formatted" value="1"
+      inputpattern="(\d+):(\d+):(\d+)" outputpattern="%1h %2m %3s">
+      <subunits>
+        <subunit value="3600" />
+        <subunit value="60" />
+      </subunits>
+      <info>
+        <![CDATA[Enter a formatted time string, e.g. 1:42:23 for 1 hour,
+        42 minutes, 23 seconds]]>
+      </info>
+    </unit>
   </group>
 
 </units>

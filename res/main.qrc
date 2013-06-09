@@ -12,5 +12,12 @@
         <file>icons/weight.png</file>
         <file>icons/about.png</file>
         <file>icons/quit.png</file>
+        <file>icons/down.png</file>
+        <file>icons/up.png</file>
+        <file>icons/time.png</file>
+        <file>icons/inertia.png</file>
+        <file>icons/planets.png</file>
+        <file>icons/force.png</file>
+        <file>icons/power.png</file>
     </qresource>
 </RCC>
