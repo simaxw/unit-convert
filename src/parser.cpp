@@ -31,10 +31,7 @@ bool UnitContentHandler::startElement(
 
   if ( localName == "group" ) {
     UnitGroup *g = new UnitGroup( attr.value("id"), attr.value("label") );
-    QString iconPath = attr.value("icon");
-    if ( !iconPath.isEmpty() ) {
-      g->icon = QIcon( iconPath );
-    }
+    g->icon = attr.value("icon");
     currentUnitGroup = g;
   } else
   if ( localName == "unit" ) {

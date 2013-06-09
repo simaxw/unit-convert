@@ -41,7 +41,7 @@ bool Convert::initialize() {
     }
 
     QStandardItem *item = new QStandardItem( g->label );
-    item->setIcon( g->icon );
+    item->setIcon( QIcon(g->icon) );
     modelUnitGroups->appendRow( item );
   }
 
@@ -215,9 +215,13 @@ void Convert::actionAboutTriggered() {
 }
 
 void Convert::setVisibleUnitGroup( int idx ) {
+  // switch QStackedLayout to the selected deck
   unitLayout->setCurrentIndex(idx);
-  ui.lblUnitGroups->setText( "&Unit Group: " + unitGroups.at(idx)->label );
+
+  // transfer focus to first input field
   unitGroups.at(idx)->units.at(0)->setFocus();
+
+  // set selected group private member
   selectedGroup = unitGroups.at(idx);
 }
 

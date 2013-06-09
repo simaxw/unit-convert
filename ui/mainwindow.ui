@@ -21,19 +21,6 @@
   <widget class="QWidget" name="widgetContents">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QLabel" name="lblUnitGroups">
-      <property name="styleSheet">
-       <string notr="true">font-size: 16pt; font-weight: bold;</string>
-      </property>
-      <property name="text">
-       <string>&amp;Unit Convert</string>
-      </property>
-      <property name="buddy">
-       <cstring>lstUnitGroups</cstring>
-      </property>
-     </widget>
-    </item>
-    <item>
      <widget class="QSplitter" name="splitter">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -88,7 +75,7 @@
              <x>0</x>
              <y>0</y>
              <width>148</width>
-             <height>444</height>
+             <height>475</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout">

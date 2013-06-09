@@ -87,7 +87,7 @@ class UnitGroup : public QWidget {
 
     QString id;
     QString label;
-    QIcon icon;
+    QString icon;
     QList<Unit*> units;
 };
 

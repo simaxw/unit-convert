@@ -32,7 +32,7 @@ the values.
         <![CDATA[The litre (American spelling: liter; SI symbols l or
         L[1]) is a non-SI metric system unit of volume equal to 1 cubic
         decimetre (dm3), 1,000 cubic centimetres (cm3) or 1/1,000 cubic
-        metre.]]>
+        metre. Source: <a href="http://en.wikipedia.org/wiki/Litre">Wikipedia</a>]]>
       </info>
     </unit>
     <unit id="milliliter" label="Millilitre [ml]" type="factor" value=".000001">
@@ -52,7 +52,7 @@ the values.
         Canada, the United States (liquid) gallon (≈ 3.79 L), and the
         lesser used US dry gallon (≈ 4.40 L). The gallon, be it the
         imperial or US gallon, is sometimes found in other
-        English-speaking countries.]]>
+        English-speaking countries. Source: <a href="http://en.wikipedia.org/wiki/Gallon">Wikipedia</a>]]>
       </info>
     </unit>
     <unit id="pint" label="Pint [pt]" type="factor" value=".0004731765">
@@ -66,7 +66,7 @@ the values.
         Commonwealth countries, the unit has continued to be in use.
         There is also limited use of the term in parts of France, Quebec
         ("une pinte") and Central Europe, notably some areas in Germany
-        and Switzerland.]]>
+        and Switzerland. Source: <a href="http://en.wikipedia.org/wiki/Pint">Wikipedia</a>]]>
       </info>
     </unit>
   </group>
@@ -78,7 +78,7 @@ the values.
         unit of power in the International System of Units (SI), named
         after the Scottish engineer James Watt (1736–1819). The unit,
         defined as one joule per second, measures the rate of energy
-        conversion or transfer.]]>
+        conversion or transfer. Source: <a href="http://en.wikipedia.org/wiki/Watt">Wikipedia</a>]]>
       </info>
     </unit>
     <unit id="hp" label="Horsepower" type="factor" value="735.49875">
@@ -95,7 +95,7 @@ the values.
         countries now use the SI unit watt for measurement of power.
         With the implementation of the EU Directive 80/181/EEC on
         January 1, 2010, the use of horsepower in the EU is only
-        permitted as supplementary unit.]]>
+        permitted as supplementary unit. Source: <a href="http://en.wikipedia.org/wiki/Horsepower">Wikipedia</a>]]>
       </info>
     </unit>
   </group>
@@ -106,7 +106,7 @@ the values.
         <![CDATA[The newton (symbol: N) is the International System of
         Units (SI) derived unit of force. It is named after Isaac Newton
         in recognition of his work on classical mechanics, specifically
-        Newton's second law of motion.]]>
+        Newton's second law of motion. Source: <a href="http://en.wikipedia.org/wiki/Newton_%28unit%29">Wikipedia</a>]]>
       </info>
     </unit>
     <unit id="dyne" label="Dyne" type="factor" value="1e-5">
@@ -117,7 +117,7 @@ the values.
         of the modern SI. One dyne is equal to 10 µN (micronewtons).
         Equivalently, the dyne is defined as "the force required to
         accelerate a mass of one gram at a rate of one centimetre per
-        second squared"]]>
+        second squared" Source: <a href="http://en.wikipedia.org/wiki/Dyne">Wikipedia</a>]]>
       </info>
     </unit>
   </group>
@@ -132,7 +132,7 @@ the values.
         to be one ten-millionth of the distance from the Earth's equator
         to the North Pole (at sea level), its definition has been
         periodically refined to reflect growing knowledge of
-        metrology.]]>
+        metrology. Source: <a href="http://en.wikipedia.org/wiki/Meter">Wikipedia</a>]]>
       </info>
     </unit>
     <unit id="centimeter" label="Centimeter" type="factor" value=".01">
@@ -155,7 +155,7 @@ the values.
         <![CDATA[A foot (plural: feet; abbreviation or symbol: ft or ′
         (the prime symbol) is a unit of length defined as being 0.3048 m
         exactly and used in the imperial system of units and United
-        States customary units. It is subdivided into 12 inches.]]>
+        States customary units. It is subdivided into 12 inches. Source: <a href="http://en.wikipedia.org/wiki/Foot_%28unit%29">Wikipedia</a>]]>
       </info>
     </unit>
     <unit id="inches" label="Inches" type="factor" value=".0254">
@@ -163,13 +163,13 @@ the values.
         <![CDATA[An inch (plural: inches; abbreviation or symbol: in or
         ″ – a double prime) is a unit of length in a number of systems
         of measurement, including the imperial and United States
-        customary systems.]]>
+        customary systems. Source: <a href="http://en.wikipedia.org/wiki/Inch">Wikipedia</a>]]>
       </info>
     </unit>
     <unit id="miles" label="Miles" type="factor" value="1609.344">
       <info>
         <![CDATA[A mile is a unit of length most commonly equivalent to
-        5,280 feet (1,760 yards, or about 1,609 metres).]]>
+        5,280 feet (1,760 yards, or about 1,609 metres). Source: <a href="http://en.wikipedia.org/wiki/Mile">Wikipedia</a>]]>
       </info>
     </unit>
     <unit id="feet_inches" label="Feet-Inches" type="formatted" value=".0254"
@@ -185,65 +185,397 @@ the values.
   </group>
 
   <group id="alen" label="Astronomical Lenghts" icon=":icon/icons/planets.png">
-    <unit id="pc" label="Parsec" type="factor" value="30.856776e+15" />
-    <unit id="ae" label="Astronomical Unit" type="factor" value="149597870700" />
-    <unit id="ly" label="Lightyear" type="factor" value="9.461e+15" />
+    <unit id="pc" label="Parsec" type="factor" value="30.856776e+15">
+      <info>
+        <![CDATA[The parsec (symbol: pc) is a unit of length used in astronomy,
+        equal to about 30.9 trillion kilometres (19.2 trillion miles) or 3.26
+        light-years. The name parsec is "an abbreviated form of 'a distance
+        corresponding to a parallax of one arcsecond'."[1] It was coined in
+        1913 at the suggestion of British astronomer Herbert Hall Turner. A
+        parsec is the distance from the Sun to an astronomical object which has
+        a parallax angle of one arcsecond (1⁄3,600 of a degree).
+        Source: <a href="http://en.wikipedia.org/wiki/Parsec">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="ae" label="Astronomical Unit" type="factor" value="149597870700">
+      <info>
+        <![CDATA[An astronomical unit (abbreviated as au;[1] other
+        abbreviations that are sometimes used include a.u. and ua[2]) is a
+        unit of length now defined as exactly 149,597,870,700 m (92,955,807.3
+        mi),[3] or roughly the mean Earth–Sun distance.
+        Source: <a href="http://en.wikipedia.org/wiki/Astronomical_unit">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="ly" label="Lightyear" type="factor" value="9.461e+15">
+      <info>
+        <![CDATA[A light-year, also light year or lightyear (symbol: ly), is an
+        astronomical unit of length equal to just under 10 trillion kilometres
+        (or about 6 trillion miles).[note 1] As defined by the International
+        Astronomical Union (IAU), a light-year is the distance that light
+        travels in a vacuum in one Julian year.[1]
+        Source: <a href="http://en.wikipedia.org/wiki/Lightyear">Wikipedia</a>]]>
+      </info>
+    </unit>
   </group>
 
   <!-- temperature - relative to base SI unit K (Kelvin) -->
   <group id="temp" label="Temperatures" icon=":icon/icons/temperature.png">
-    <unit id="kelvin" label="Kelvin" type="transform" toSI="x * 1" fromSI="x * 1" />
-    <unit id="celsius" label="Celsius" type="transform" toSI="x - 273.15" fromSI="x + 273.15" />
-    <unit id="fahrenheit" label="Fahrenheit" type="transform" toSI="x * 1.8 - 459.67" fromSI="x + 459.67 / 1.8" />
-    <unit id="rankine" label="Rankine" type="transform" toSI="x * 1.8" fromSI="x / 1.8" />
+    <unit id="kelvin" label="Kelvin" type="transform" toSI="x * 1" fromSI="x * 1">
+      <info>
+        <![CDATA[The kelvin is a unit of measurement for temperature. It is one
+        of the seven base units in the International System of Units (SI) and
+        is assigned the unit symbol K. The Kelvin scale is an absolute,
+        thermodynamic temperature scale using as its null point absolute zero,
+        the temperature at which all thermal motion ceases in the classical
+        description of thermodynamics. Source: <a
+          href="http://en.wikipedia.org/wiki/Kelvin">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="celsius" label="Celsius" type="transform" toSI="x - 273.15" fromSI="x + 273.15">
+      <info>
+        <![CDATA[Celsius, also known as centigrade,[1] is a scale and unit of
+        measurement for temperature. It is named after the Swedish astronomer
+        Anders Celsius (1701–1744), who developed a similar temperature scale.
+        The degree Celsius (°C) can refer to a specific temperature on the
+        Celsius scale as well as a unit to indicate a temperature interval, a
+        difference between two temperatures or an uncertainty. The unit was
+        known until 1948 as "centigrade" from the Latin centum translated as
+        100 and gradus translated as "steps". Source: <a
+          href="http://en.wikipedia.org/wiki/Celsius">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="fahrenheit" label="Fahrenheit" type="transform" toSI="x * 1.8 - 459.67" fromSI="x + 459.67 / 1.8">
+      <info>
+        <![CDATA[Fahrenheit (symbol °F) is a temperature scale based on one
+        proposed in 1724 by the physicist Daniel Gabriel Fahrenheit
+        (1686–1736), after whom the scale is named.[1] Within this scale, the
+        freezing of water into ice is defined at 32 degrees, while the boiling
+        point of water is defined to be 212 degrees—on Fahrenheit's original
+        scale the freezing point of brine was zero degrees. Source: <a
+          href="http://en.wikipedia.org/wiki/Fahrenheit">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="rankine" label="Rankine" type="transform" toSI="x * 1.8" fromSI="x / 1.8">
+      <info>
+        <![CDATA[Rankine is a thermodynamic (absolute) temperature scale named
+        after the Glasgow University engineer and physicist William John
+        Macquorn Rankine, who proposed it in 1859. (The Kelvin scale was first
+        proposed in 1848.) Source: <a
+          href="http://en.wikipedia.org/wiki/Rankine_scale">Wikipedia</a>]]>
+      </info>
+    </unit>
   </group>
 
   <!-- pressure - relative to base SI unit kPa (Kilopascal) -->
   <group id="pres" label="Pressures" icon=":icon/icons/arrow_down.png">
-    <unit id="kpa" label="Kilopascal" type="factor" value="1" />
-    <unit id="pa" label="Pascal" type="factor" value=".001" />
-    <unit id="inwg" label="Inch Water Gauge" type="factor" value=".24884" />
-    <unit id="mmw" label="Millimeter of Water" type="factor" value="0.009804" />
-    <unit id="atm" label="Atmosphere" type="factor" value="101.325" />
-    <unit id="bar" label="Bar" type="factor" value="100" />
-    <unit id="mbar" label="Millibar" type="factor" value=".1" />
-    <unit id="psi" label="Psi" type="factor" value="6.894757" />
+    <unit id="kpa" label="Kilopascal" type="factor" value="1">
+      <info>
+        <![CDATA[The pascal (symbol: Pa) is the SI derived unit of pressure,
+        internal pressure, stress, Young's modulus and tensile strength,[1]
+        named after the French mathematician, physicist, inventor, writer, and
+        philosopher Blaise Pascal. It is a measure of force per unit area,
+        defined as one newton per square meter.  Source: <a
+          href="http://en.wikipedia.org/wiki/Kilopascal">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="pa" label="Pascal" type="factor" value=".001">
+      <info>
+        <![CDATA[see Kilopascal (1kPa = 1000Pa)]]>
+      </info>
+    </unit>
+    <unit id="inwg" label="Inch Water Gauge" type="factor" value=".24884">
+      <info>
+        <![CDATA[Inches of water, wc, inch water column (inch WC), inAq, Aq, or
+        inH2O is a non-SI unit for pressure. The units are by convention and
+        due to the historical measurement of certain pressure differentials. It
+        is used for measuring small pressure differences across an orifice, or
+        in a pipeline or shaft.[1] Inches of water can be converted to a
+        pressure unit using the formula for pressure head. Source: <a
+          href="http://en.wikipedia.org/wiki/Inch_of_water">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="mmw" label="Millimeter of Water" type="factor" value="0.009804">
+      <info>
+        <![CDATA[mmWG is widely used in industrial descriptions and many of
+        technical specifications as the unit of pressure or pressure drop.
+        mm.Wg means millimeters, water gauge. It is the pressure required to
+        support a water column of the specified height (sometimes called 'head'
+        of water). Source: <a
+          href="http://en.wikipedia.org/wiki/Millimeters,_water_gauge">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="atm" label="Atmosphere" type="factor" value="101.325">
+      <info>
+        <![CDATA[The standard atmosphere (symbol: atm) is an international
+        reference pressure defined as 101325 Pa and formerly used as a unit of
+        pressure.[1] For practical purposes it has been replaced by the bar
+        which is 100 kPa.[1] The difference of about 1% is not significant for
+        many applications, and is within the error range of common pressure
+        gauges. Source: <a
+          href="http://en.wikipedia.org/wiki/Atmosphere_%28unit%29">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="bar" label="Bar" type="factor" value="100">
+      <info>
+        <![CDATA[The bar is a non-SI unit of pressure, defined by the IUPAC as
+        exactly equal to 100,000 Pa.[1] It is about equal to the atmospheric
+        pressure on Earth at sea level, and since 1982 the IUPAC has
+        recommended that the standard for atmospheric pressure should be
+        harmonized to 100,000 Pa = 1 bar ≈ 750.0616827 Torr. Source: <a
+          href="http://en.wikipedia.org/wiki/Bar_%28unit%29">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="mbar" label="Millibar" type="factor" value=".1">
+      <info>
+        <![CDATA[see Bar (1bar = 1000mbar)]]>
+      </info>
+    </unit>
+    <unit id="psi" label="Psi" type="factor" value="6.894757">
+      <info>
+        <![CDATA[The pound per square inch or, more accurately, pound-force per
+        square inch (symbol: psi or lbf/in2 or lbf/in2 or lbf/sq in or lbf/sq
+        in)/ pressure per square inch is a unit of pressure or of stress based
+        on avoirdupois units. It is the pressure resulting from a force of one
+        pound-force applied to an area of one square inch Source: <a
+          href="http://en.wikipedia.org/wiki/Pounds_per_square_inch">Wikipedia</a>]]>
+      </info>
+    </unit>
   </group>
 
   <!-- areas - relative to base SI unit square km -->
   <group id="area" label="Areas" icon=":icon/icons/rect.png">
-    <unit id="squaremeter" label="Square_meter" type="factor" value="1" />
-    <unit id="squarekm" label="Square_kilometer" type="factor" value="1e+6" />
-    <unit id="acre" label="_Acre" type="factor" value="4046.9" />
-    <unit id="squareinch" label="Squareinch" type="factor" value=".00064516" />
-    <unit id="squarefoot" label="Squarefoot" type="factor" value=".09290304" />
-    <unit id="hectare" label="Hectare" type="factor" value="10000" />
-    <unit id="squareyard" label="Squareyard" type="factor" value=".8361274" />
-    <unit id="squaremile" label="Squaremile" type="factor" value="2589988" />
+    <unit id="squaremeter" label="Square_meter" type="factor" value="1">
+      <info>
+        <![CDATA[The square metre (British spelling) or square meter (American
+        spelling) is the SI derived unit of area, with symbol m2 (33A1 in
+        Unicode[1]). It is defined as the area of a square whose sides measure
+        exactly one metre. The square metre is derived from the SI base unit of
+        the metre, which itself is defined as the length of the path travelled
+        by light in absolute vacuum during a time interval of 1/299,792,458 of
+        a second. Source: <a
+          href="http://en.wikipedia.org/wiki/Square_meter">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="squarekm" label="Square_kilometer" type="factor" value="1e+6">
+      <info>
+        <![CDATA[see square meter (1square kilometer = 1e+6square meter)]]>
+      </info>
+    </unit>
+    <unit id="acre" label="_Acre" type="factor" value="4046.9">
+      <info>
+        <![CDATA[The acre is a unit of area used in the imperial and U.S.
+        customary systems. An acre is about 40% of a hectare – slightly smaller
+        than an American football field. The acre is no longer commonly used in
+        most countries, although a few notable exceptions include the United
+        States, Australia, India, Burma and the United Kingdom (as of 2010, the
+        acre is no longer officially used in the United Kingdom, though is
+        still used in real estate descriptions). It is still used, to some
+        extent, in Canada. Source: <a
+          href="http://en.wikipedia.org/wiki/Acre">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="squareinch" label="Square_inch" type="factor" value=".00064516">
+      <info>
+        <![CDATA[A square inch (plural: square inches) is a unit of area, equal
+        to the area of a square with sides of one inch. Source: <a
+          href="http://en.wikipedia.org/wiki/Square_inch">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="squarefoot" label="Square_foot" type="factor" value=".09290304">
+      <info>
+        <![CDATA[The square foot (plural square feet; abbreviated ft² or sq ft)
+        is an imperial unit and U.S. customary unit (non-SI non-metric) of
+        area, used mainly in the United States, Canada, United Kingdom, Hong
+        Kong[citation needed], Bangladesh, India, Pakistan and
+        Afghanistan[citation needed]. It is defined as the area of a square
+        with sides of 1 foot (0.333... yards, 12 inches, or 0.3048 metres) in
+        length. For comparison, the average new one-family house in the United
+        States in 2007 had a total floor area of approximately 2500 square feet
+        (232 square meters). Source: <a
+          href="http://en.wikipedia.org/wiki/Square_foot">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="hectare" label="_Hectare" type="factor" value="10000">
+      <info>
+        <![CDATA[The hectare (/ˈhɛktɛər/ or /ˈhɛktɑr/; symbol ha) is a metric
+        unit of area defined as 10,000 square metres (100 m by 100 m), and
+        primarily used in the measurement of land. In 1795, when the metric
+        system was introduced, the 'are' was defined as 100 square metres and
+        the hectare ('hecto-' + 'are') was thus 100 'ares' or 1/100 km2. A
+        hectare of land is about 2.471 acres. Source: <a
+          href="http://en.wikipedia.org/wiki/Hectare">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="squareyard" label="Square_yard" type="factor" value=".8361274">
+      <info>
+        <![CDATA[The square yard is an imperial/US customary (non-metric) unit
+        of area, formerly used in most of the English-speaking world but now
+        generally replaced by the square metre outside of the U.S., Canada and
+        the U.K. It is defined as the area of a square with sides of one yard
+        (three feet, thirty-six inches, 0.9144 metres) in length. (Gaj in
+        Hindi) Source: <a
+          href="http://en.wikipedia.org/wiki/Square_yard">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="squaremile" label="Squa_remile" type="factor" value="2589988">
+      <info>
+        <![CDATA[The square mile (abbreviated as sq mi and sometimes as mi2)[1]
+        is an imperial and US unit of measure for an area equal to the area of
+        a square of one statute mile.[2] It should not be confused with miles
+        square, which refers to the number of miles on each side squared. For
+        instance, 20 miles square (20 × 20 miles) is equal to 400 square miles;
+        an area of 10 × 40 miles is likewise 400 square miles, but it is not 20
+        miles square. Source: <a
+          href="http://en.wikipedia.org/wiki/Square_mile">Wikipedia</a>]]>
+      </info>
+    </unit>
   </group>
 
   <group id="mom" label="Momentum of Intertia" icon=":icon/icons/inertia.png">
-    <unit id="kgmsquared" label="_Kilogram Meter Squared" type="factor" value="1" />
-    <unit id="poundsquarefoot" label="_Pound Square Foot" type="factor" value=".04214011" />
+    <unit id="kgmsquared" label="_Kilogram Meter Squared" type="factor" value="1">
+      <info>
+        <![CDATA[]]>
+      </info>
+    </unit>
+    <unit id="poundsquarefoot" label="_Pound Square Foot" type="factor" value=".04214011">
+      <info>
+        <![CDATA[]]>
+      </info>
+    </unit>
   </group>
 
   <!-- mass - relative to base SI unit kg -->
   <group id="mass" label="Masses" icon=":icon/icons/weight.png">
-    <unit id="kg" label="Kilogram" type="factor" value="1" />
-    <unit id="gram" label="Gram" type="factor" value=".001" />
-    <unit id="tonmetric" label="Metric Ton" type="factor" value="1000" />
-    <unit id="pound" label="Pound" type="factor" value=".45359237" />
-    <unit id="tonshort" label="Short Ton" type="factor" value="907.18474" />
-    <unit id="grain" label="Grain" type="factor" value="64.798e-6" />
-    <unit id="tonlong" label="Long Ton" type="factor" value="1016.047" />
-    <unit id="ouncetroy" label="Ounce Troy" type="factor" value="31.10348e-3" />
-    <unit id="ounceav" label="Ounce Av" type="factor" value="28.34952e-3" />
+    <unit id="kg" label="Kilogram" type="factor" value="1">
+      <info>
+        <![CDATA[The kilogram or kilogramme (SI unit symbol: kg; SI dimension
+        symbol: M), is the base unit of mass in the International System of
+        Units and is defined as being equal to the mass of the International
+        Prototype of the Kilogram (IPK).[2] The avoirdupois (or international)
+        pound, used in both the Imperial system and U.S. customary units, is
+        defined as exactly 0.45359237 kg, making one kilogram approximately
+        equal to 2.2046 avoirdupois pounds. Source: <a
+          href="http://en.wikipedia.org/wiki/Kilogram">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="gram" label="Gram" type="factor" value=".001">
+      <info>
+        <![CDATA[see kilogram (1kg=1000g)]]>
+      </info>
+    </unit>
+    <unit id="tonmetric" label="Metric Ton" type="factor" value="1000">
+      <info>
+        <![CDATA[see kilogram (1t=1000kg)]]>
+      </info>
+    </unit>
+    <unit id="pound" label="Pound" type="factor" value=".45359237">
+      <info>
+        <![CDATA[The pound or pound-mass (abbreviations: lb, lbm, lbm, ℔[1]) is
+        a unit of mass used in the imperial, United States customary and other
+        systems of measurement. A number of different definitions have been
+        used, the most common today being the international avoirdupois pound
+        which is legally defined as exactly 0.45359237 kilograms. Source: <a
+          href="http://en.wikipedia.org/wiki/Pound_%28mass%29">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="tonshort" label="Short Ton" type="factor" value="907.18474">
+      <info>
+        <![CDATA[The short ton is a unit of mass equal to 2,000 pounds
+        (907.18474 kg), that is most commonly used in the United States – known
+        there simply as the ton. Source: <a
+          href="http://en.wikipedia.org/wiki/Short_ton">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="grain" label="Grain" type="factor" value="64.798e-6">
+      <info>
+        <![CDATA[A grain is a unit of measurement of mass that is nominally
+        based upon the mass of a single seed of a cereal. From the Bronze Age
+        into the Renaissance the average masses of wheat and barley grains were
+        part of the legal definition of units of mass. However, there is no
+        evidence of any country ever having used actual seeds or cereal grains.
+        Rather, expressions such as "thirty-two grains of wheat, taken from the
+        middle of the ear" appear to have been ritualistic formulas,
+        essentially the premodern equivalent of legal boilerplate. Source: <a
+          href="http://en.wikipedia.org/wiki/Grain_%28unit%29">Wikipedia</a>
+        ]]>
+      </info>
+    </unit>
+    <unit id="tonlong" label="Long Ton" type="factor" value="1016.047">
+      <info>
+        <![CDATA[Long ton (weight ton or Imperial ton) is the name for the unit
+        called the "ton" in the avoirdupois or Imperial system of measurements
+        that was used in the United Kingdom and several other Commonwealth
+        countries before metrication. One long ton is equal to 2,240 pounds
+        (1,016 kg), 1.12 times as much as a short ton and slightly (1.59%)
+        larger than the 1,000 kilograms (2,205 lb) metric tonne, or 35 cubic
+        feet (0.9911 m3) of salt water with a density of 64 lb/cu ft (1.025
+        g/ml).[1] It has some limited use in the United States, most commonly
+        in measuring the displacement of ships, and was the unit prescribed for
+        warships by the Washington Naval Treaty 1922—for example battleships
+        were limited to a mass of 35,000 long tons (36,000 t; 39,000 short
+        tons). Source: <a
+          href="http://en.wikipedia.org/wiki/Long_ton">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="ouncetroy" label="Ounce Troy" type="factor" value="31.10348e-3">
+      <info>
+        <![CDATA[The troy ounce (oz t) is a unit of imperial measure. In the
+        present day it is most commonly used to gauge the mass of precious
+        metals. One troy ounce is currently defined as exactly 0.0311034768 kg
+        or 31.1034768 g. There are approximately 32.15 troy oz in 1 kg. One
+        troy ounce is equivalent to approximately 1.09714 avoirdupois ounces.
+        Source <a href="">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="ounceav" label="Ounce Av" type="factor" value="28.34952e-3">
+      <info>
+        <![CDATA[The avoirdupois ounce is the most commonly used ounce today.
+        It is defined to be one sixteenth of an avoirdupois pound. The
+        avoirdupois pound is defined as 7000 grains; one ounce is therefore
+        equal to 437.5 grains. Source: <a
+          href="http://en.wikipedia.org/wiki/Avoirdupois_ounce#International_avoirdupois_ounce">Wikipedia</a>]]>
+      </info>
+    </unit>
   </group>
 
   <group id="times" label="Times" icon=":icon/icons/time.png">
-    <unit id="s" label="Second" type="factor" value="1" />
-    <unit id="min" label="Minute" type="factor" value="60" />
-    <unit id="h" label="Hour" type="factor" value="3600" />
+    <unit id="s" label="Second" type="factor" value="1">
+      <info>
+        <![CDATA[The second (symbol: s) is the base unit of time in the
+        International System of Units (SI)[1] and is also a unit of time in
+        other systems of measurement (abbreviated s or sec;[2]) it is the
+        second division of the hour by sixty, the first division by 60 being
+        the minute.[3] Between 1000 (when al-Biruni used seconds) and 1960 the
+        second was defined as 1/86,400 of a mean solar day (that definition
+        still applies in some astronomical and legal contexts).[4][5] Between
+        1960 and 1967, it was defined in terms of the period of the Earth's
+        orbit around the Sun in 1900,[6] but it is now defined more precisely
+        in atomic terms. Seconds may be measured using mechanical, electric or
+        atomic clocks. Source: <a
+          href="http://en.wikipedia.org/wiki/Second">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="min" label="Minute" type="factor" value="60">
+      <info>
+        <![CDATA[A minute is a unit of measurement of time or of angle. The
+        minute is a unit of time equal to 1⁄60 (the first sexagesimal
+        fraction[1]) of an hour or 60 seconds. In the UTC time standard, a
+        minute on rare occasions has 59 or 61 seconds, a consequence of leap
+        seconds. Although not an SI unit, the minute is accepted for use with
+        SI units.[2] The SI symbol for minute or minutes is min (for time
+        measurement) or the prime symbol after a number, e.g. 5′ (for angle
+        measurement, even if it is informally used for time). Source: <a
+          href="http://en.wikipedia.org/wiki/Minute">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="h" label="Hour" type="factor" value="3600">
+      <info>
+        <![CDATA[The hour (common symbol: h or hr) is a unit of measurement of
+        time. In modern usage, an hour comprises 60 minutes, or 3,600 seconds.
+        It is approximately 1/24 of a mean solar day. Source: <a
+          href="http://en.wikipedia.org/wiki/Hour">Wikipedia</a>]]>
+      </info>
+    </unit>
     <unit id="hms" label="h:m:s" type="formatted" value="1"
       inputpattern="(\d+):(\d+):(\d+)" outputpattern="%1h %2m %3s">
       <subunits>
