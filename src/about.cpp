@@ -3,7 +3,6 @@
 /** Default Constructor
  */
 ConvertAbout::ConvertAbout() {
-  initialize();
 }
 
 /** Reset About Box
@@ -12,7 +11,7 @@ void ConvertAbout::reset() {
   resize( 350,200 );
   ui.lblAbout->setPixmap( QPixmap() );
   QByteArray aboutText64("PGgxPkNvbnZlcnQ8L2gxPjxwPlVuaXQgQ29udmVyc2lvbiBUb29sPC9wPjxwPlZlcnNpb24gJTEgLSAlMjwvcD48Y2VudGVyPjxwPjxiPlNpbW9uIFdpbHBlcjwvYj48L3A+IDxwPjxiPlV3ZSBFc2NoZW5ob3JzdDwvYj48L3A+PC9jZW50ZXI+Cg==");
-  QString aboutText = QString(QByteArray::fromBase64(aboutText64)).arg("2.0.0").arg("Jun 9 2013");
+  QString aboutText = QString(QByteArray::fromBase64(aboutText64)).arg(strVersion).arg(strDate);
   ui.lblAbout->setText(aboutText);
 }
 

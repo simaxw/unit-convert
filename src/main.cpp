@@ -80,6 +80,15 @@ bool Convert::initialize() {
     restoreState( settings->value( "mainwindow.state" ).toByteArray() );
     ui.splitter->restoreState( settings->value( "splitter.size" ).toByteArray() );
   }
+
+  strVersion = QString( "%1.%2.%3" ).arg(CONVERT_VERSION_MAJOR).
+    arg(CONVERT_VERSION_MINOR).arg(CONVERT_VERSION_REVISION);
+
+  setWindowTitle( "Convert " + strVersion );
+  about.strDate = "Jun 10 2013";
+  about.strVersion = strVersion;
+  about.initialize();
+
   return true;
 }
 

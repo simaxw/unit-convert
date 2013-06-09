@@ -11,12 +11,15 @@ class ConvertAbout : public QDialog {
   public:
     ConvertAbout();
     void reset();
+    void initialize();
+
+    QString strVersion;
+    QString strDate;
 
   protected:
     void keyPressEvent( QKeyEvent* );
 
   private:
-    void initialize();
     Ui::aboutbox ui;
 };
 
