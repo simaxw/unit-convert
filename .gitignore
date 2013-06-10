@@ -1,4 +1,6 @@
 *.swp
+*.exe
+Makefile*
 /.obj/
-Makefile
 /bin/convert
+/bin/settings.ini
