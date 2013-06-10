@@ -2,3 +2,4 @@
 /.obj/
 Makefile
 /bin/convert
+/bin/settings.ini
