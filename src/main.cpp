@@ -81,11 +81,9 @@ bool Convert::initialize() {
     ui.splitter->restoreState( settings->value( "splitter.size" ).toByteArray() );
   }
 
-  strVersion = QString( "%1.%2.%3" ).arg(CONVERT_VERSION_MAJOR).
-    arg(CONVERT_VERSION_MINOR).arg(CONVERT_VERSION_REVISION);
-
+  strVersion = QString( CONVERT_VERSION );
   setWindowTitle( "Convert " + strVersion );
-  about.strDate = "Jun 10 2013";
+  about.strDate = CONVERT_DATE;
   about.strVersion = strVersion;
   about.initialize();
 

@@ -14,6 +14,9 @@
 
 #include <cmath>
 
+#define CONVERT_VERSION "2.0.2"
+#define CONVERT_DATE "Jun 11 2013"
+
 class Convert : public QMainWindow {
   Q_OBJECT
 
