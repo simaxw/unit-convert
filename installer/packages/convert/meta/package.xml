@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+  <DisplayName>Convert</DisplayName>
+  <Description>Unit Conversion Tool</Description>
+  <Version>2.0.3</Version>
+  <ReleaseDate>2013-06-25</ReleaseDate>
+  <Name>convert</Name>
+  <Licenses>
+    <License name="GPL" file="license.txt" />
+  </Licenses>
+  <ForcedInstallation>true</ForcedInstallation>
+  <Script>installshortcut.qs</Script>
+</Package>
