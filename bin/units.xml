@@ -244,7 +244,7 @@ the values.
           href="http://en.wikipedia.org/wiki/Celsius">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="fahrenheit" label="Fahrenheit" type="transform" toSI="x * 1.8 - 459.67" fromSI="x + 459.67 / 1.8">
+    <unit id="fahrenheit" label="Fahrenheit" type="transform" toSI="x * 1.8 - 459.67" fromSI="(x + 459.67) * (5/9)">
       <info>
         <![CDATA[Fahrenheit (symbol °F) is a temperature scale based on one
         proposed in 1724 by the physicist Daniel Gabriel Fahrenheit
