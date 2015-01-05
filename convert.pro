@@ -23,6 +23,7 @@ about.ui\
 mainwindow.ui
 
 SOURCES +=\
+app.cpp\
 main.cpp\
 about.cpp\
 parser.cpp\

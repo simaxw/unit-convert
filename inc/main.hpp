@@ -38,7 +38,11 @@ class Convert : public QMainWindow {
     void actionNextTriggered();
     void actionAboutTriggered();
 
+#ifdef IS_TESTCASE
+  public:
+#else
   private:
+#endif
     void setVisibleUnitGroup( int );
     QStandardItemModel *modelUnitGroups;
     Ui::mainwindowConvert ui;

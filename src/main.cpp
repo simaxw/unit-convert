@@ -4,6 +4,7 @@ bool Convert::initialize() {
 
   bool rc = QResource::registerResource( qApp->applicationDirPath() + "/data.rcc" );
   if ( !rc ) {
+    QMessageBox::critical( this, tr("Error"), tr("Data file data.rcc missing"));
     return false;
   }
 
@@ -232,20 +233,3 @@ void Convert::setVisibleUnitGroup( int idx ) {
   selectedGroup = unitGroups.at(idx);
 }
 
-/** Main
- * @param argc argument count
- * @param argv argument values
- * @return int returnvalue of app.exec();
- */
-int main( int argc, char *argv[] ) {
-  QApplication app( argc, argv );
-
-  Convert c;
-  if ( !c.initialize() ) {
-    return -1;
-  }
-
-  c.show();
-
-  return app.exec();
-}

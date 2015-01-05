@@ -3,4 +3,8 @@
 Makefile*
 /.obj/
 /bin/convert
+/bin/t
 /bin/settings.ini
+moc*
+*.moc
+*.o
