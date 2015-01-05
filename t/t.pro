@@ -2,21 +2,18 @@
 #2015-01-05
 
 TARGET = ../bin/t
-DEFINES += IS_TESTCASE
-INCLUDEPATH += ../inc ../.obj
+INCLUDEPATH += ../inc
 
-QT += testlib xml widgets script
+QT = core gui widgets testlib xml script
 CONFIG += testcase
 
 SOURCES +=\
-../src/main.cpp\
-../src/about.cpp\
+../src/ccore.cpp\
 ../src/parser.cpp\
 ../src/unit.cpp\
 testsuite.cpp
 
 HEADERS +=\
-../inc/about.hpp\
-../inc/main.hpp\
+../inc/ccore.hpp\
 ../inc/parser.hpp\
 ../inc/unit.hpp

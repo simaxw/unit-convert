@@ -1,7 +1,7 @@
 *.swp
 *.exe
 Makefile*
-/.obj/
+/obj/
 /bin/convert
 /bin/t
 /bin/settings.ini

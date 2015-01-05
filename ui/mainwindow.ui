@@ -74,7 +74,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>148</width>
+             <width>129</width>
              <height>475</height>
             </rect>
            </property>
@@ -152,6 +152,8 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionQuit"/>
+   <addaction name="actionSortAsc"/>
+   <addaction name="actionSortDesc"/>
    <addaction name="actionPrevious"/>
    <addaction name="actionNext"/>
    <addaction name="actionAbout"/>
@@ -224,6 +226,36 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Down</string>
+   </property>
+  </action>
+  <action name="actionSortAsc">
+   <property name="icon">
+    <iconset resource="../res/main.qrc">
+     <normaloff>:/icon/icons/a_to_z.png</normaloff>:/icon/icons/a_to_z.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Sort Asc.</string>
+   </property>
+   <property name="toolTip">
+    <string>Sort Ascending Order</string>
+   </property>
+   <property name="statusTip">
+    <string>Go to next Group (Ctrl+Down)</string>
+   </property>
+  </action>
+  <action name="actionSortDesc">
+   <property name="icon">
+    <iconset resource="../res/main.qrc">
+     <normaloff>:/icon/icons/a_to_z.png</normaloff>:/icon/icons/a_to_z.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Sort Desc.</string>
+   </property>
+   <property name="toolTip">
+    <string>Sort Descending Order</string>
+   </property>
+   <property name="statusTip">
+    <string>Go to next Group (Ctrl+Down)</string>
    </property>
   </action>
  </widget>

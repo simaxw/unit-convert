@@ -8,29 +8,30 @@ TEMPLATE = app
 
 TARGET = bin/convert
 
-VPATH += .obj src inc ui res
 INCLUDEPATH += inc
 
-OBJECTS_DIR = .obj
-MOC_DIR = .obj
-UI_DIR = .obj
-RCC_DIR = .obj
+OBJECTS_DIR = obj
+MOC_DIR = obj
+UI_DIR = obj
+RCC_DIR = obj
 
 QT += xml widgets script
 
 FORMS +=\
-about.ui\
-mainwindow.ui
+ui/about.ui\
+ui/mainwindow.ui
 
 SOURCES +=\
-app.cpp\
-main.cpp\
-about.cpp\
-parser.cpp\
-unit.cpp
+src/app.cpp\
+src/ccore.cpp\
+src/main.cpp\
+src/about.cpp\
+src/parser.cpp\
+src/unit.cpp
 
 HEADERS +=\
-main.hpp\
-about.hpp\
-parser.hpp\
-unit.hpp
+inc/ccore.hpp\
+inc/main.hpp\
+inc/about.hpp\
+inc/parser.hpp\
+inc/unit.hpp

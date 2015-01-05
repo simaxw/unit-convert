@@ -1,13 +1,15 @@
 #include <QtTest/QtTest>
 
-#include <parser.hpp>
-#include <main.hpp>
+#include "unit.hpp"
+#include "ccore.hpp"
+#include "parser.hpp"
 
 class TestSuiteConvert : public QObject {
   Q_OBJECT
 
   private:
     UnitXMLParser *p;
+    CCore cc;
 
   private slots:
     void initTestCase() {
@@ -19,16 +21,21 @@ class TestSuiteConvert : public QObject {
       QVERIFY( p->getUnitGroups().size() == 12 );
     }
 
-    void guiTests() {
-      Convert C;
-      QVERIFY( C.initialize() == true );
-      for ( int i=0; i<p->getUnitGroups().size(); i++ )
-        QTest::keyClick( &C, Qt::Key_Up, Qt::ControlModifier );
+    void checkVolumes() {
+      UnitGroup *g = p->getUnitGroups().at(0);
+      g->units.at(0)->setText("1");
+      QVERIFY( cc.convertUnits( g, g->units.at(0) ) == true );
+      QVERIFY( g->units.at(1)->text() == "1000" );
+      QVERIFY( g->units.at(3)->text() == "264.172" );
+      QVERIFY( g->units.at(4)->text() == "2113.38" );
+    }
 
-      QTest::keyClicks( C.selectedGroup->units.at(0), "1" );
-      QVERIFY( C.selectedGroup->units.at(1)->text() == "1000" );
-      QVERIFY( C.selectedGroup->units.at(3)->text() == "264.172" );
-
+    void checkTemperatures() {
+      UnitGroup *g = p->getUnitGroups().at(5);
+      g->units.at(0)->setText("0");
+      QVERIFY( cc.convertUnits( g, g->units.at(0) ) == true );
+      QVERIFY( g->units.at(1)->text() == "-273.15" );
+      QVERIFY( g->units.at(2)->text() == "-459.67" );
     }
 
     void cleanupTestCase() {

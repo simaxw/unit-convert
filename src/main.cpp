@@ -32,6 +32,7 @@ bool Convert::initialize() {
   modelUnitGroups = new QStandardItemModel;
 
   // iterate over the unit groups and add them to the stacked layout.
+  unsigned int originalIndex = 0;
   foreach( UnitGroup* g, p.getUnitGroups() ) {
     g->initialize(ui.lblInfo);
     unitLayout->addWidget( g );
@@ -42,8 +43,11 @@ bool Convert::initialize() {
     }
 
     QStandardItem *item = new QStandardItem( g->label );
+    item->setData( QVariant( originalIndex ) );
     item->setIcon( QIcon(g->icon) );
     modelUnitGroups->appendRow( item );
+
+    originalIndex++;
   }
 
   ui.lstUnitGroups->setModel( modelUnitGroups );
@@ -62,6 +66,8 @@ bool Convert::initialize() {
   connect( ui.actionPrevious, SIGNAL(triggered()), this, SLOT(actionPreviousTriggered()) );
   connect( ui.actionNext, SIGNAL(triggered()), this, SLOT(actionNextTriggered()) );
   connect( ui.actionAbout, SIGNAL(triggered()), this, SLOT(actionAboutTriggered()) );
+  connect( ui.actionSortAsc, SIGNAL(triggered()), this, SLOT(actionSortAscTriggered()) );
+  connect( ui.actionSortDesc, SIGNAL(triggered()), this, SLOT(actionSortDescTriggered()) );
 
   if ( unitLayout->count() > 0 ) {
     int lastIdx = settings->value( "last.group", 0 ).toInt();
@@ -96,82 +102,20 @@ void Convert::lstUnitGroupsSelectionChanged( const QItemSelection& selected, con
   if ( idx > unitLayout->count() ) {
     return;
   }
-  setVisibleUnitGroup(idx);
+  QVariant voriginalIndex = modelUnitGroups->itemFromIndex(selected.indexes().at(0))->data();
+  setVisibleUnitGroup(voriginalIndex.toInt());
 }
 
 void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
-  if ( !selectedGroup ) {
+  if ( !selectedGroup || txtInput.isEmpty() ) {
     return;
   }
 
   Unit *u = qobject_cast<Unit*>(sender());
-  double siUnitValue = 0;
-  double inputValue = u->text().toDouble();
-  switch( u->type ) {
-    case Unit::FACTOR:
-      siUnitValue = inputValue * ((FactorUnit*)u)->value;
-      break;
-    case Unit::TRANSFORM:
-      qse.globalObject().setProperty( "x", inputValue );
-      siUnitValue = qse.evaluate( ((TransformUnit*)u)->fromSI ).toNumber();
-      break;
-    case Unit::FORMATTED:
-      {
-        FormattedUnit *fu = (FormattedUnit*)u;
-        QRegExp r = ((QRegExpValidator*)fu->validator())->regExp();
-        r.indexIn( txtInput );
-
-        int i = 1;
-        inputValue = 0;
-        foreach ( double subUnit, fu->subUnits ) {
-          inputValue += subUnit * r.cap(i).toDouble();
-          i++;
-        }
-        inputValue += r.cap(i).toDouble();
-        siUnitValue = inputValue * fu->value;
-      }
-      break;
-    default:
-      break;
+  if ( !cc.convertUnits( selectedGroup, u ) ) {
+    ui.statusBar->showMessage( tr("Error in Converter Core"), 2000 );
   }
 
-  foreach ( Unit *tu, selectedGroup->units ) {
-    if ( tu == u ) {
-      continue;
-    }
-    switch( tu->type ) {
-      case Unit::FACTOR:
-        tu->setText( QString::number(siUnitValue / ((FactorUnit*)tu)->value) );
-        break;
-      case Unit::TRANSFORM:
-        qse.globalObject().setProperty( "x", siUnitValue );
-        tu->setText( qse.evaluate(((TransformUnit*)tu)->toSI).toString() );
-        break;
-      case Unit::FORMATTED:
-        {
-          FormattedUnit *fu = (FormattedUnit*)tu;
-          int result = round(siUnitValue / fu->value);
-
-          QList<int> lstPatternValues;
-          int subResult = 0;
-          foreach ( int subUnit, fu->subUnits ) {
-            subResult = result / subUnit;
-            lstPatternValues << subResult;
-            result -= (subResult * subUnit);
-          }
-          lstPatternValues << result;
-
-          QString strRes = fu->outputpattern;
-          foreach ( int val, lstPatternValues ) {
-            strRes = strRes.arg(val);
-          }
-          fu->setText(strRes);
-        }
-        break;
-      default:
-        break;
-    }
-  }
 }
 
 void Convert::lblInfoLinkHovered( const QString& url ) {
@@ -231,5 +175,13 @@ void Convert::setVisibleUnitGroup( int idx ) {
 
   // set selected group private member
   selectedGroup = unitGroups.at(idx);
+}
+
+void Convert::actionSortAscTriggered() {
+  modelUnitGroups->invisibleRootItem()->sortChildren( 0, Qt::AscendingOrder );
+}
+
+void Convert::actionSortDescTriggered() {
+  modelUnitGroups->invisibleRootItem()->sortChildren( 0, Qt::DescendingOrder );
 }
 

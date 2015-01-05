@@ -1,23 +1,24 @@
 <RCC>
-    <qresource prefix="/icon">
-        <file>icons/wdysr.png</file>
-        <file>icons/arrow_down.png</file>
-        <file>icons/light_bulb.png</file>
-        <file>icons/rect.png</file>
-        <file>icons/volume.png</file>
-        <file>icons/convert.png</file>
-        <file>icons/fill.png</file>
-        <file>icons/cursor.png</file>
-        <file>icons/temperature.png</file>
-        <file>icons/weight.png</file>
-        <file>icons/about.png</file>
-        <file>icons/quit.png</file>
-        <file>icons/down.png</file>
-        <file>icons/up.png</file>
-        <file>icons/time.png</file>
-        <file>icons/inertia.png</file>
-        <file>icons/planets.png</file>
-        <file>icons/force.png</file>
-        <file>icons/power.png</file>
-    </qresource>
+  <qresource prefix="/icon">
+    <file>icons/a_to_z.png</file>
+    <file>icons/wdysr.png</file>
+    <file>icons/arrow_down.png</file>
+    <file>icons/light_bulb.png</file>
+    <file>icons/rect.png</file>
+    <file>icons/volume.png</file>
+    <file>icons/convert.png</file>
+    <file>icons/fill.png</file>
+    <file>icons/cursor.png</file>
+    <file>icons/temperature.png</file>
+    <file>icons/weight.png</file>
+    <file>icons/about.png</file>
+    <file>icons/quit.png</file>
+    <file>icons/down.png</file>
+    <file>icons/up.png</file>
+    <file>icons/time.png</file>
+    <file>icons/inertia.png</file>
+    <file>icons/planets.png</file>
+    <file>icons/force.png</file>
+    <file>icons/power.png</file>
+  </qresource>
 </RCC>

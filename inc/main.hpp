@@ -7,15 +7,15 @@
 #include <QStandardItemModel>
 #include <QStackedLayout>
 #include <QMessageBox>
-#include <QScriptEngine>
+#include "ccore.hpp"
 #include "about.hpp"
 #include "parser.hpp"
 #include "ui_mainwindow.h"
 
 #include <cmath>
 
-#define CONVERT_VERSION "2.0.2"
-#define CONVERT_DATE "Jun 11 2013"
+#define CONVERT_VERSION "2.0.3"
+#define CONVERT_DATE "2015-01-05"
 
 class Convert : public QMainWindow {
   Q_OBJECT
@@ -37,12 +37,10 @@ class Convert : public QMainWindow {
     void actionPreviousTriggered();
     void actionNextTriggered();
     void actionAboutTriggered();
+    void actionSortAscTriggered();
+    void actionSortDescTriggered();
 
-#ifdef IS_TESTCASE
-  public:
-#else
   private:
-#endif
     void setVisibleUnitGroup( int );
     QStandardItemModel *modelUnitGroups;
     Ui::mainwindowConvert ui;
@@ -50,9 +48,9 @@ class Convert : public QMainWindow {
     QList<UnitGroup*> unitGroups;
     QSettings *settings;
     UnitGroup *selectedGroup;
-    QScriptEngine qse;
     ConvertAbout about;
     QString strVersion;
+    CCore cc;
 };
 
 #endif
