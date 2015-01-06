@@ -12,3 +12,6 @@ be set to one of the types:
 
 All units may be given a info section to supply further mathematical
 background information to the specific unit.
+
+* Simon Wilper 2015-01-06
+    - unit groups now sortable
