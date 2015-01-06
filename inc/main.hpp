@@ -12,8 +12,6 @@
 #include "parser.hpp"
 #include "ui_mainwindow.h"
 
-#include <cmath>
-
 #define CONVERT_VERSION "2.0.3"
 #define CONVERT_DATE "2015-01-05"
 

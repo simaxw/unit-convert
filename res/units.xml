@@ -52,8 +52,8 @@ the values.
 
   <unit id="registerton" label="Register Ton [rt]" type="factor" value="2.831685">
       <info>
-        <![CDATA[The register ton is a unit of volume used to express the capacitz of a ship.
-		For example, a 20 000 ton freighter has a capacitz of approximatelz 57 000 m<sup>3</sup>,
+        <![CDATA[The register ton is a unit of volume used to express the capacity of a ship.
+		For example, a 20 000 ton freighter has a capacity of approximately 57 000 m<sup>3</sup>,
 		measured in accordance with established procedures.]]>
       </info>
     </unit>

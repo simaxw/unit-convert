@@ -8,9 +8,9 @@ bool Convert::initialize() {
     return false;
   }
 
-  // initialize XML parser with units.xml file contained in the same
-  // directory the binary resides in
-  UnitXMLParser p( qApp->applicationDirPath() + "/units.xml" );
+  // Simon Wilper
+  // initialize XML parser with units.xml file now (2015-01-06) contained in the data.rcc
+  UnitXMLParser p( ":data/units.xml" );
   if ( !p.initialize()) {
     QMessageBox::critical( this, tr("Error"), p.getErrorMessage() );
     return false;
@@ -93,6 +93,8 @@ bool Convert::initialize() {
   about.strDate = CONVERT_DATE;
   about.strVersion = strVersion;
   about.initialize();
+
+  modelUnitGroups->invisibleRootItem()->sortChildren( 0, Qt::AscendingOrder );
 
   return true;
 }

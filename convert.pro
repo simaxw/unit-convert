@@ -16,6 +16,10 @@ MOC_DIR = obj
 UI_DIR = obj
 RCC_DIR = obj
 
+# 2015-01-06 - Simon Wilper
+# Create data.rcc automatically after linking stage
+QMAKE_POST_LINK = rcc --verbose --compress 9 --binary -o bin/data.rcc res/main.qrc
+
 QT += xml widgets script
 
 FORMS +=\

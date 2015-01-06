@@ -21,4 +21,7 @@
     <file>icons/force.png</file>
     <file>icons/power.png</file>
   </qresource>
+  <qresource prefix="/data">
+    <file>units.xml</file>
+  </qresource>
 </RCC>
