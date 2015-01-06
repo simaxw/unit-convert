@@ -4,7 +4,8 @@
 Convert Setup XML File
 Version: 1.0.0
 
-Simon A. Wilper
+Simon A. Wilper/Uwe Eschenhorst
+2014-12-26 - Update
 2013-03-31 - Consolidation of all settings in one XML configuration
 2006-08-23 - Initial Edit
 
@@ -17,7 +18,7 @@ the values.
 -->
 <units>
   <group id="vol" label="Volumes" icon=":/icon/icons/volume.png">
-    <unit id="qubicmetre" label="Q_ubic Metre [mm^3]" type="factor" value="1">
+    <unit id="qubicmetre" label="Qubic Metre [m^3]" type="factor" value="1">
       <info>
         <![CDATA[The cubic metre (US spelling: cubic meter, symbol: m3)
         is the SI derived unit of volume. It is the volume of a cube
@@ -27,7 +28,7 @@ the values.
         kilolitre. Source: <a href="http://en.wikipedia.org/wiki/Cubic_metre">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="liter" label="Litre [l]" type="factor" value=".001">
+    <unit id="liter" label="Litre [l] or [dm^3]" type="factor" value=".001">
       <info>
         <![CDATA[The litre (American spelling: liter; SI symbols l or
         L[1]) is a non-SI metric system unit of volume equal to 1 cubic
@@ -35,6 +36,61 @@ the values.
         metre. Source: <a href="http://en.wikipedia.org/wiki/Litre">Wikipedia</a>]]>
       </info>
     </unit>
+    <unit id="cubicfoot" label="Cubic Foot [cft or ft^3]" type="factor" value=".02831685">
+      <info>
+        <![CDATA[The term cubic foot is an Imperial and US customary (non-metric) unit of 
+		volume, used in the United States and the United Kingdom. It is defined as the volume 
+		of a cube with sides of one foot (0.3048 m) in length. Its volume is 28.3168 liters or
+		about one 35th (1/35.3147248277) of a cubic meter. Source: <a href="http://en.wikipedia.org/wiki/Cubic_foot">Wikipedia</a>]]>
+      </info>
+    </unit>
+  <unit id="cubicinch" label="Cubic Inch [cin or inch^3]" type="factor" value=".00001638706">
+      <info>
+        <![CDATA[]]>
+      </info>
+    </unit>
+
+  <unit id="registerton" label="Register Ton [rt]" type="factor" value="2.831685">
+      <info>
+        <![CDATA[The register ton is a unit of volume used to express the capacitz of a ship.
+		For example, a 20 000 ton freighter has a capacitz of approximatelz 57 000 m<sup>3</sup>,
+		measured in accordance with established procedures.]]>
+      </info>
+    </unit>
+<unit id="bushel" label="Bushel [bsh or bu]" type="factor" value="0.03523907">
+      <info>
+        <![CDATA[Agricultural products that are sold by the bushel in the United States are 
+		often sold by weight in other countries. There can be a considerable variation in the 
+		weight per unit volume due to differences in variety, size, or condition of the commodity, 
+		tightness of pack, degree to which the container is heaped, etc. The following conversion 
+		factors are used by the U.S. Department of Agriculture for statistical purposes:
+		<br>
+		barley = 21.9 kg per bushel<br>
+		corn, shelled = 25.4 kg per bushel<br>
+		oats = 14.5 kg per bushel<br>
+		potatoes, soybeans, wheat = 27.2 kg per bushel]]>
+      </info>
+    </unit>
+
+<unit id="fluidounce" label="Fluid Ounce (US) [fl. oz.]" type="factor" value=".00002957353">
+      <info>
+        <![CDATA[In the United States, the cup, tablespoon, and teaspoon are defined as 8, 1/2, and 1/6
+		fluid ounces, respectively. for pratical usage the metric equivalents are 250 mL, 15 mL, and 5 mL.]]>
+      </info>
+    </unit>	
+	
+<unit id="quart" label="Quart (liquid) [qr]" type="factor" value=".0009463529">
+      <info>
+        <![CDATA[The quart is a unit of volume (for either the imperial or United States 
+		customary units) equal to a quarter of a gallon (hence the name quart), two pints, 
+		or four cups. Since gallons of various sizes have historically been in use, quarts 
+		of various sizes have also existed; see gallon for further discussion. Three of these 
+		kinds of quarts remain in current use, all approximately equal to one litre. Its proper 
+		abbreviation is qt. Source: <a href="https://en.wikipedia.org/wiki/Quart">Wikipedia</a>]]>
+      </info>
+    </unit>
+	
+	
     <unit id="milliliter" label="Millilitre [ml]" type="factor" value=".000001">
       <info>
         <![CDATA[see Litre (milli = 10^-3)]]>
@@ -72,7 +128,7 @@ the values.
   </group>
 
   <group id="powers" label="Powers" icon=":/icon/icons/power.png">
-    <unit id="w" label="Watts" type="factor" value="1">
+    <unit id="w" label="Watt [W]" type="factor" value="1">
       <info>
         <![CDATA[The watt (pron.: /ˈwɒt/ WOT; symbol: W) is a derived
         unit of power in the International System of Units (SI), named
@@ -81,7 +137,8 @@ the values.
         conversion or transfer. Source: <a href="http://en.wikipedia.org/wiki/Watt">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="hp" label="Horsepower" type="factor" value="735.49875">
+    <unit id="w" label="Kilo-Watt [kW]" type="factor" value="1000"></unit>	
+    <unit id="hp" label="Horsepower (metric) [HP]" type="factor" value="735.49875">
       <info>
         <![CDATA[Horsepower (hp) is the name of several units of
         measurement of power, the rate at which work is done.  The most
@@ -98,6 +155,11 @@ the values.
         permitted as supplementary unit. Source: <a href="http://en.wikipedia.org/wiki/Horsepower">Wikipedia</a>]]>
       </info>
     </unit>
+    <unit id="hp" label="Horsepower (imperial mechanical) [HP]" type="factor" value="745.69987158227022">
+      <info>
+        <![CDATA[Horsepower (hp) imperial mechanical. Source: <a href="http://en.wikipedia.org/wiki/Horsepower">Wikipedia</a>]]>
+      </info>
+    </unit>	
   </group>
 
   <group id="forces" label="Forces" icon=":/icon/icons/force.png">
@@ -122,9 +184,9 @@ the values.
     </unit>
   </group>
 
-  <!-- lengths - relative to base SI unit m (meter) -->
-  <group id="len" label="Lengths" icon=":/icon/icons/cursor.png">
-    <unit id="meter" label="Meter" type="factor" value="1">
+  <!-- lengths/distance - relative to base SI unit m (meter) -->
+  <group id="len" label="Distance" icon=":/icon/icons/cursor.png">
+    <unit id="meter" label="Meter [m]" type="factor" value="1">
       <info>
         <![CDATA[The metre (meter in American English), (SI unit symbol:
         m; SI dimension symbol: L), is the fundamental unit of length in
@@ -135,22 +197,22 @@ the values.
         metrology. Source: <a href="http://en.wikipedia.org/wiki/Meter">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="centimeter" label="Centimeter" type="factor" value=".01">
+    <unit id="centimeter" label="Centimeter [cm]" type="factor" value=".01">
       <info>
         <![CDATA[see metre (1m = 100cm)]]>
       </info>
     </unit>
-    <unit id="millimeter" label="Millimeter" type="factor" value=".001">
+    <unit id="millimeter" label="Millimeter [mm]" type="factor" value=".001">
       <info>
         <![CDATA[see metre (1m = 1000mm)]]>
       </info>
     </unit>
-    <unit id="kilometer" label="Kilometer" type="factor" value="1e+3">
+    <unit id="kilometer" label="Kilometer [km]" type="factor" value="1e+3">
       <info>
         <![CDATA[see metre (1km = 1000m)]]>
       </info>
     </unit>
-    <unit id="feet" label="Feet" type="factor" value=".3048">
+    <unit id="foot" label="Foot [ft]" type="factor" value=".3048006">
       <info>
         <![CDATA[A foot (plural: feet; abbreviation or symbol: ft or ′
         (the prime symbol) is a unit of length defined as being 0.3048 m
@@ -158,7 +220,7 @@ the values.
         States customary units. It is subdivided into 12 inches. Source: <a href="http://en.wikipedia.org/wiki/Foot_%28unit%29">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="inches" label="Inches" type="factor" value=".0254">
+    <unit id="inch" label="Inch [in]" type="factor" value=".0254">
       <info>
         <![CDATA[An inch (plural: inches; abbreviation or symbol: in or
         ″ – a double prime) is a unit of length in a number of systems
@@ -166,13 +228,7 @@ the values.
         customary systems. Source: <a href="http://en.wikipedia.org/wiki/Inch">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="miles" label="Miles" type="factor" value="1609.344">
-      <info>
-        <![CDATA[A mile is a unit of length most commonly equivalent to
-        5,280 feet (1,760 yards, or about 1,609 metres). Source: <a href="http://en.wikipedia.org/wiki/Mile">Wikipedia</a>]]>
-      </info>
-    </unit>
-    <unit id="feet_inches" label="Feet-Inches" type="formatted" value=".0254"
+    <unit id="feet_inches" label="Feet-Inches [ft-in]" type="formatted" value=".0254"
       inputpattern="(\d+)-(\d+)" outputpattern="%1ft - %2in">
       <subunits>
         <subunit value="12" />
@@ -182,7 +238,25 @@ the values.
         42 inches)]]>
       </info>
     </unit>
-  </group>
+	<unit id="mile" label="Mile [mi]" type="factor" value="1609.344">
+      <info>
+        <![CDATA[A mile is a unit of length most commonly equivalent to
+        5,280 feet (1,760 yards, or about 1,609 metres). Source: <a href="http://en.wikipedia.org/wiki/Mile">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="yard" label="Yard [yd]" type="factor" value=".9144">
+      <info>
+        <![CDATA[A yard (abbreviation: yd) is a unit of length in the imperial 
+		and United States customary systems of measurement. Historically a yard was 
+		also used in other systems of units. The yard is equal to 3 feet or 36 inches. 
+		Under an agreement in 1959 between Australia, Canada, New Zealand, South Africa, 
+		the United Kingdom and the United States, the yard (known as the "international yard" 
+		in the United States) was legally defined to be exactly 0.9144 metres. Prior to 
+		that date, the legal definition of the yard when expressed in terms of metric units 
+		varied slightly from country to country. Source: <a href="http://en.wikipedia.org/wiki/Yard">Wikipedia</a>]]>
+      </info>	
+	</unit>
+	</group>
 
   <group id="alen" label="Astronomical Lenghts" icon=":icon/icons/planets.png">
     <unit id="pc" label="Parsec" type="factor" value="30.856776e+15">
@@ -220,7 +294,7 @@ the values.
 
   <!-- temperature - relative to base SI unit K (Kelvin) -->
   <group id="temp" label="Temperatures" icon=":icon/icons/temperature.png">
-    <unit id="kelvin" label="Kelvin" type="transform" toSI="x * 1" fromSI="x * 1">
+    <unit id="kelvin" label="Kelvin [K]" type="transform" toSI="x * 1" fromSI="x * 1">
       <info>
         <![CDATA[The kelvin is a unit of measurement for temperature. It is one
         of the seven base units in the International System of Units (SI) and
@@ -231,7 +305,7 @@ the values.
           href="http://en.wikipedia.org/wiki/Kelvin">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="celsius" label="Celsius" type="transform" toSI="x - 273.15" fromSI="x + 273.15">
+    <unit id="celsius" label="Celsius [°C]" type="transform" toSI="x - 273.15" fromSI="x + 273.15">
       <info>
         <![CDATA[Celsius, also known as centigrade,[1] is a scale and unit of
         measurement for temperature. It is named after the Swedish astronomer
@@ -244,7 +318,7 @@ the values.
           href="http://en.wikipedia.org/wiki/Celsius">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="fahrenheit" label="Fahrenheit" type="transform" toSI="x * 1.8 - 459.67" fromSI="(x + 459.67) * (5/9)">
+    <unit id="fahrenheit" label="Fahrenheit [°F]" type="transform" toSI="(9/5*(x-273.15)+32)" fromSI="5/9*(x - 32)+273.15">
       <info>
         <![CDATA[Fahrenheit (symbol °F) is a temperature scale based on one
         proposed in 1724 by the physicist Daniel Gabriel Fahrenheit
@@ -255,7 +329,7 @@ the values.
           href="http://en.wikipedia.org/wiki/Fahrenheit">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="rankine" label="Rankine" type="transform" toSI="x * 1.8" fromSI="x / 1.8">
+    <unit id="rankine" label="Rankine [°R]" type="transform" toSI="x * 1.8" fromSI="x / 1.8">
       <info>
         <![CDATA[Rankine is a thermodynamic (absolute) temperature scale named
         after the Glasgow University engineer and physicist William John
@@ -268,7 +342,7 @@ the values.
 
   <!-- pressure - relative to base SI unit kPa (Kilopascal) -->
   <group id="pres" label="Pressures" icon=":icon/icons/arrow_down.png">
-    <unit id="kpa" label="Kilopascal" type="factor" value="1">
+    <unit id="kpa" label="Kilopascal [kPa]" type="factor" value="1">
       <info>
         <![CDATA[The pascal (symbol: Pa) is the SI derived unit of pressure,
         internal pressure, stress, Young's modulus and tensile strength,[1]
@@ -278,12 +352,12 @@ the values.
           href="http://en.wikipedia.org/wiki/Kilopascal">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="pa" label="Pascal" type="factor" value=".001">
+    <unit id="pa" label="Pascal [Pa]" type="factor" value=".001">
       <info>
         <![CDATA[see Kilopascal (1kPa = 1000Pa)]]>
       </info>
     </unit>
-    <unit id="inwg" label="Inch Water Gauge" type="factor" value=".24884">
+    <unit id="inwg" label="Inch Water Gauge [inch WG]" type="factor" value=".24884">
       <info>
         <![CDATA[Inches of water, wc, inch water column (inch WC), inAq, Aq, or
         inH2O is a non-SI unit for pressure. The units are by convention and
@@ -294,7 +368,7 @@ the values.
           href="http://en.wikipedia.org/wiki/Inch_of_water">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="mmw" label="Millimeter of Water" type="factor" value="0.009804">
+    <unit id="mmw" label="Millimeter of Water [mm H2O]" type="factor" value="0.009804">
       <info>
         <![CDATA[mmWG is widely used in industrial descriptions and many of
         technical specifications as the unit of pressure or pressure drop.
@@ -304,7 +378,7 @@ the values.
           href="http://en.wikipedia.org/wiki/Millimeters,_water_gauge">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="atm" label="Atmosphere" type="factor" value="101.325">
+    <unit id="atm" label="Atmosphere [atm]" type="factor" value="101.325">
       <info>
         <![CDATA[The standard atmosphere (symbol: atm) is an international
         reference pressure defined as 101325 Pa and formerly used as a unit of
@@ -315,7 +389,7 @@ the values.
           href="http://en.wikipedia.org/wiki/Atmosphere_%28unit%29">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="bar" label="Bar" type="factor" value="100">
+    <unit id="bar" label="Bar [bar]" type="factor" value="100">
       <info>
         <![CDATA[The bar is a non-SI unit of pressure, defined by the IUPAC as
         exactly equal to 100,000 Pa.[1] It is about equal to the atmospheric
@@ -325,12 +399,12 @@ the values.
           href="http://en.wikipedia.org/wiki/Bar_%28unit%29">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="mbar" label="Millibar" type="factor" value=".1">
+    <unit id="mbar" label="Millibar [mm bar] or [hPa]" type="factor" value=".1">
       <info>
         <![CDATA[see Bar (1bar = 1000mbar)]]>
       </info>
     </unit>
-    <unit id="psi" label="Psi" type="factor" value="6.894757">
+    <unit id="psi" label="PSI [psi]" type="factor" value="6.894757">
       <info>
         <![CDATA[The pound per square inch or, more accurately, pound-force per
         square inch (symbol: psi or lbf/in2 or lbf/in2 or lbf/sq in or lbf/sq
@@ -340,7 +414,27 @@ the values.
           href="http://en.wikipedia.org/wiki/Pounds_per_square_inch">Wikipedia</a>]]>
       </info>
     </unit>
-  </group>
+    <unit id="inchhg" label="Inch of Mercury [inHg]" type="factor" value="3.386389">
+      <info>
+        <![CDATA[ Inches of mercury, (inHg and "Hg) is a unit of measurement for pressure. 
+		It is still used for barometric pressure in weather reports, refrigeration and aviation 
+		in the United States. It is defined as the pressure exerted by a circular column of
+		mercury of 1 inch in height at 32 °F (0 °C) at the standard acceleration of gravity.
+		Source: <a href="http://en.wikipedia.org/wiki/Inch_of_mercury">Wikipedia</a>]]>
+      </info>
+    </unit>
+   <unit id="mmhg" label="Millimeter of Mercury [mm Hg]" type="factor" value=".1333224">
+      <info>
+        <![CDATA[ A millimeter of mercury is a manometric unit of pressure, formerly defined as 
+		the extra pressure generated by a column of mercury one millimetre high. It is now defined 
+		precisely as 13.5951 × 9.80665 = 133.322387415 pascals.[1] It is denoted by the symbol "mmHg".
+		Although not an SI unit, the millimeter of mercury is still routinely used in medicine, 
+		meteorology and many other scientific fields.
+		One millimeter of mercury is approximately 1 Torr, or 1/760 of standard atmospheric pressure. The two units are not exactly equal; however, the difference (less than 0.000015%) is negligible for most practical uses.
+		Source: <a href="https://en.wikipedia.org/wiki/Millimeter_of_mercury">Wikipedia</a>]]>
+      </info>
+    </unit>
+   </group>
 
   <!-- areas - relative to base SI unit square km -->
   <group id="area" label="Areas" icon=":icon/icons/rect.png">
