@@ -20,7 +20,7 @@ the values.
   <group id="vol" label="Volumes" icon=":/icon/icons/volume.png">
     <unit id="qubicmetre" label="Qubic Metre [m^3]" type="factor" value="1">
       <info>
-        <![CDATA[The cubic metre (US spelling: cubic meter, symbol: m3)
+        <![CDATA[The cubic metre (US spelling: cubic meter, symbol: m<sup>3</sup>)
         is the SI derived unit of volume. It is the volume of a cube
         with edges one metre in length. An alternative name, which
         allowed a different usage with metric prefixes, was the stère.

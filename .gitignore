@@ -8,3 +8,6 @@ Makefile*
 moc*
 *.moc
 *.o
+*.pro.user
+/debug/
+/release/
