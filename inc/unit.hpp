@@ -42,6 +42,14 @@ class FactorUnit : public Unit {
     }
 
     double value;
+
+    FactorUnit *clone() {
+      FactorUnit *fu = new FactorUnit( id, label, value );
+      fu->info = this->info;
+      fu->lblInfo = this->lblInfo;
+      fu->lblUnit = this->lblUnit;
+      return fu;
+    }
 };
 
 class TransformUnit : public Unit {
@@ -56,6 +64,14 @@ class TransformUnit : public Unit {
 
     QString fromSI;
     QString toSI;
+
+    TransformUnit *clone() {
+      TransformUnit *tu = new TransformUnit( id, label, fromSI, toSI );
+      tu->info = this->info;
+      tu->lblInfo = this->lblInfo;
+      tu->lblUnit = this->lblUnit;
+      return tu;
+    }
 };
 
 class FormattedUnit : public Unit {
@@ -72,6 +88,15 @@ class FormattedUnit : public Unit {
     QString inputpattern;
     QString outputpattern;
     QList<int> subUnits;
+
+    FormattedUnit *clone() {
+      FormattedUnit *fu = new FormattedUnit( id, label, value, inputpattern, outputpattern );
+      fu->info = this->info;
+      fu->lblInfo = this->lblInfo;
+      fu->lblUnit = this->lblUnit;
+      fu->subUnits = this->subUnits;
+      return fu;
+    }
 };
 
 class UnitGroup : public QWidget {
@@ -89,6 +114,9 @@ class UnitGroup : public QWidget {
     QString label;
     QString icon;
     QList<Unit*> units;
+
+    QGridLayout *gridUnitFields;
+    QList<Unit*> clone();
 };
 
 #endif

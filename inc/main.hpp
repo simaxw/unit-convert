@@ -37,6 +37,8 @@ class Convert : public QMainWindow {
     void actionAboutTriggered();
     void actionSortAscTriggered();
     void actionSortDescTriggered();
+    void actionAddSplit();
+    void actionRemoveSplit();
 
   private:
     void setVisibleUnitGroup( int );

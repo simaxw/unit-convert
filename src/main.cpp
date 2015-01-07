@@ -68,6 +68,8 @@ bool Convert::initialize() {
   connect( ui.actionAbout, SIGNAL(triggered()), this, SLOT(actionAboutTriggered()) );
   connect( ui.actionSortAsc, SIGNAL(triggered()), this, SLOT(actionSortAscTriggered()) );
   connect( ui.actionSortDesc, SIGNAL(triggered()), this, SLOT(actionSortDescTriggered()) );
+  connect( ui.actionSplit, SIGNAL(triggered()), this, SLOT(actionAddSplit()) );
+  connect( ui.actionUnsplit, SIGNAL(triggered()), this, SLOT(actionRemoveSplit()) );
 
   if ( unitLayout->count() > 0 ) {
     int lastIdx = settings->value( "last.group", 0 ).toInt();
@@ -187,3 +189,12 @@ void Convert::actionSortDescTriggered() {
   modelUnitGroups->invisibleRootItem()->sortChildren( 0, Qt::DescendingOrder );
 }
 
+void Convert::actionAddSplit() {
+  QList<Unit*> lstUnits = selectedGroup->clone();
+  foreach( Unit* u, lstUnits ) {
+    connect( u, SIGNAL(textEdited(const QString&)), this, SLOT(txtUnitsTextEdited(const QString&)) );
+  }
+}
+
+void Convert::actionRemoveSplit() {
+}

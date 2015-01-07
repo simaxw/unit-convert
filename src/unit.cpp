@@ -22,7 +22,7 @@ void UnitGroup::initialize( QLabel *_lblInfo ) {
   setLayout(layout);
 
   QWidget *widgetUnitFields = new QWidget;
-  QGridLayout *gridUnitFields = new QGridLayout;
+  gridUnitFields = new QGridLayout;
   widgetUnitFields->setLayout(gridUnitFields);
 
   int r = 0;
@@ -35,4 +35,38 @@ void UnitGroup::initialize( QLabel *_lblInfo ) {
 
   layout->addWidget(widgetUnitFields);
   layout->addStretch(1);
+}
+
+QList<Unit*> UnitGroup::clone() {
+  QList<Unit*> lstUnits;
+  int r = 0;
+  foreach( Unit* u, units ) {
+    switch( u->type ) {
+      case Unit::FACTOR: {
+        FactorUnit *fu = ((FactorUnit*)u)->clone();
+        lstUnits << fu;
+        gridUnitFields->addWidget( fu, r, 2 );
+        break;
+                         }
+      case Unit::TRANSFORM: {
+        TransformUnit *tu = ((TransformUnit*)u)->clone();
+        lstUnits << tu;
+        gridUnitFields->addWidget( tu, r, 2 );
+        break;
+                            }
+      case Unit::FORMATTED: {
+        FormattedUnit *fu = ((FormattedUnit*)u)->clone();
+        lstUnits << fu;
+        gridUnitFields->addWidget( fu, r, 2 );
+        break;
+                            }
+      default:
+        break;
+    }
+    r++;
+  }
+
+  return lstUnits;
+
+
 }
