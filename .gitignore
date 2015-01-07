@@ -11,3 +11,4 @@ moc*
 *.pro.user
 /debug/
 /release/
+/bin/

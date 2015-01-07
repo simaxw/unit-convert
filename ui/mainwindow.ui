@@ -7,7 +7,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>630</width>
+    <width>652</width>
     <height>576</height>
    </rect>
   </property>
@@ -79,7 +79,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>129</width>
+             <width>134</width>
              <height>475</height>
             </rect>
            </property>
@@ -162,6 +162,8 @@
    <addaction name="actionPrevious"/>
    <addaction name="actionNext"/>
    <addaction name="actionAbout"/>
+   <addaction name="actionSplit"/>
+   <addaction name="actionUnsplit"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionAbout">
@@ -261,6 +263,24 @@
    </property>
    <property name="statusTip">
     <string>Go to next Group (Ctrl+Down)</string>
+   </property>
+  </action>
+  <action name="actionSplit">
+   <property name="icon">
+    <iconset resource="../res/main.qrc">
+     <normaloff>:/icon/icons/left.png</normaloff>:/icon/icons/left.png</iconset>
+   </property>
+   <property name="text">
+    <string>Split</string>
+   </property>
+  </action>
+  <action name="actionUnsplit">
+   <property name="icon">
+    <iconset resource="../res/main.qrc">
+     <normaloff>:/icon/icons/right.png</normaloff>:/icon/icons/right.png</iconset>
+   </property>
+   <property name="text">
+    <string>Unsplit</string>
    </property>
   </action>
  </widget>
