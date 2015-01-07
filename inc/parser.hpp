@@ -1,6 +1,7 @@
 #ifndef __parser_hpp
 #define __parser_hpp
 
+#include <QDebug>
 #include <QFile>
 #include <QXmlInputSource>
 #include <QXmlDefaultHandler>

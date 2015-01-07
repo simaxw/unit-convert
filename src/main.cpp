@@ -130,8 +130,8 @@ void Convert::lblInfoLinkHovered( const QString& url ) {
 
 void Convert::actionQuitTriggered() {
   if ( settings ) {
-    int idx = ui.lstUnitGroups->selectionModel()->selectedIndexes().at(0).row();
-    settings->setValue( "last.group", idx );
+    QVariant voriginalIndex = modelUnitGroups->itemFromIndex(ui.lstUnitGroups->selectionModel()->selectedIndexes().at(0))->data();
+    settings->setValue( "last.group", voriginalIndex.toInt() );
 
     if ( selectedGroup ) {
       Unit *u = (Unit*)qApp->focusWidget();
