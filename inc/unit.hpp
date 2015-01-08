@@ -10,6 +10,11 @@
 #include <QGridLayout>
 #include <QDoubleValidator>
 #include <QRegExpValidator>
+#include <QPainter>
+#include <QPaintEvent>
+#include <QScriptEngine>
+#include <QColor>
+#include <QFontMetrics>
 
 class Unit : public QLineEdit {
   Q_OBJECT
@@ -31,6 +36,14 @@ class Unit : public QLineEdit {
     QLabel *lblInfo;
 
     unsigned int column;
+    bool paintResult;
+    QString result;
+
+  protected:
+    void paintEvent( QPaintEvent* );
+
+  private:
+    QScriptEngine qse;
 };
 
 class FactorUnit : public Unit {
@@ -40,7 +53,7 @@ class FactorUnit : public Unit {
     FactorUnit( const QString& _id, const QString& _label, const double _value ) :
       Unit(Unit::FACTOR,_id,_label), value(_value)
     {
-      setValidator( new QDoubleValidator );
+      //setValidator( new QDoubleValidator );
     }
 
     double value;
@@ -61,7 +74,7 @@ class TransformUnit : public Unit {
     TransformUnit( const QString& _id, const QString& _label, const QString& _fromSI, const QString& _toSI ) :
       Unit(Unit::TRANSFORM,_id,_label), fromSI(_fromSI), toSI(_toSI)
     {
-      setValidator( new QDoubleValidator );
+      //setValidator( new QDoubleValidator );
     }
 
     QString fromSI;

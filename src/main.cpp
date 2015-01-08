@@ -116,6 +116,8 @@ void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
   }
 
   Unit *u = qobject_cast<Unit*>(sender());
+  u->paintResult = true;
+
   QList<Unit*> lstUnits;
 
   if ( u->column == 1 ) {

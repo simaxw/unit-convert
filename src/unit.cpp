@@ -1,11 +1,26 @@
 #include <unit.hpp>
 
 Unit::Unit( UnitType _type, const QString& _id, const QString& _label ) :
-  type(_type), id(_id), label(_label), lblInfo(0), column(1) {
+  type(_type), id(_id), label(_label), lblInfo(0), column(1), paintResult(false) {
 
   lblUnit = new QLabel( label );
   lblUnit->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
   lblUnit->setBuddy(this);
+}
+
+void Unit::paintEvent(QPaintEvent *e) {
+  QLineEdit::paintEvent(e);
+
+  if ( !paintResult ) return;
+
+  QPainter painter(this);
+  QRect r = e->rect();
+  painter.setPen( QColor(150,150,150) );
+  QFontMetrics fm(font());
+  int endPos = fm.width(text());
+  result = qse.evaluate(text()).toString();
+  painter.drawText( endPos+10, r.height()-(fm.height()/2), "= " + result );
+  paintResult = false;
 }
 
 void Unit::focusInEvent( QFocusEvent* e ) {

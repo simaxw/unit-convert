@@ -11,7 +11,7 @@
 #include "parser.hpp"
 #include "ui_mainwindow.h"
 
-#define CONVERT_VERSION "2.0.4"
+#define CONVERT_VERSION "2.0.5"
 #define CONVERT_DATE "2015-01-08"
 
 class Convert : public QMainWindow {

@@ -1,6 +1,7 @@
 #ifndef __ccore_hpp
 #define __ccore_hpp
 
+#include <QDebug>
 #include <QRegExp>
 #include <QRegExpValidator>
 #include <QScriptEngine>

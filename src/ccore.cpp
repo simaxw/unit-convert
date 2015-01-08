@@ -7,7 +7,7 @@ bool CCore::convertUnits( QList<Unit*> lstUnits, Unit *u ) {
 
   QString txtInput = u->text();
   double siUnitValue = 0;
-  double inputValue = u->text().toDouble();
+  double inputValue = qse.evaluate( u->text() ).toNumber();
   switch( u->type ) {
     case Unit::FACTOR:
       siUnitValue = inputValue * ((FactorUnit*)u)->value;
