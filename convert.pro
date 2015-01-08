@@ -16,6 +16,8 @@ MOC_DIR = obj
 UI_DIR = obj
 RCC_DIR = obj
 
+win32:DEFINES += COFFSET=2
+unix:DEFINES += COFFSET=0
 win32:DATA_OUT = release/bin/data.rcc
 unix:DATA_OUT = bin/data.rcc
 

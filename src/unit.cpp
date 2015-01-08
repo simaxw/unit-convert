@@ -25,7 +25,7 @@ void Unit::paintEvent(QPaintEvent *e) {
   QFontMetrics fm(font());
   int endPos = fm.width(text());
   result = qse.evaluate(text()).toString();
-  painter.drawText( endPos+10, r.height()-(fm.height()/2), "= " + result );
+  painter.drawText( endPos+10, r.height()-(fm.height()/2) + COFFSET, "= " + result );
 }
 
 void Unit::focusInEvent( QFocusEvent* e ) {

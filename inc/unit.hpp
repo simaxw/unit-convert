@@ -1,6 +1,7 @@
 #ifndef __unit_hpp
 #define __unit_hpp
 
+#include <QDebug>
 #include <QString>
 #include <QList>
 #include <QIcon>
