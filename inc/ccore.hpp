@@ -4,13 +4,14 @@
 #include <QRegExp>
 #include <QRegExpValidator>
 #include <QScriptEngine>
+#include <QList>
 #include <cmath>
 #include "unit.hpp"
 
 class CCore {
   public:
     CCore() {}
-    bool convertUnits( UnitGroup*, Unit* );
+    bool convertUnits( QList<Unit*>, Unit* );
 
   private:
     QScriptEngine qse;

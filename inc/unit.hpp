@@ -29,6 +29,8 @@ class Unit : public QLineEdit {
 
     QString info;
     QLabel *lblInfo;
+
+    unsigned int column;
 };
 
 class FactorUnit : public Unit {
@@ -105,7 +107,8 @@ class UnitGroup : public QWidget {
   public:
     UnitGroup( const QString& _id, const QString& _label ) :
       id(_id),
-      label(_label)
+      label(_label),
+      columns(1)
     {}
 
     void initialize( QLabel* );
@@ -116,7 +119,10 @@ class UnitGroup : public QWidget {
     QList<Unit*> units;
 
     QGridLayout *gridUnitFields;
+
     QList<Unit*> clone();
+    unsigned int columns;
+    QList< QList<Unit*> > additionalUnits;
 };
 
 #endif

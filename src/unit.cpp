@@ -1,7 +1,7 @@
 #include <unit.hpp>
 
 Unit::Unit( UnitType _type, const QString& _id, const QString& _label ) :
-  type(_type), id(_id), label(_label), lblInfo(0) {
+  type(_type), id(_id), label(_label), lblInfo(0), column(1) {
 
   lblUnit = new QLabel( label );
   lblUnit->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
@@ -38,35 +38,37 @@ void UnitGroup::initialize( QLabel *_lblInfo ) {
 }
 
 QList<Unit*> UnitGroup::clone() {
+  columns++;
   QList<Unit*> lstUnits;
   int r = 0;
   foreach( Unit* u, units ) {
     switch( u->type ) {
       case Unit::FACTOR: {
         FactorUnit *fu = ((FactorUnit*)u)->clone();
+        fu->column = columns;
         lstUnits << fu;
-        gridUnitFields->addWidget( fu, r, 2 );
+        gridUnitFields->addWidget( fu, r, columns );
         break;
-                         }
+        }
       case Unit::TRANSFORM: {
         TransformUnit *tu = ((TransformUnit*)u)->clone();
+        tu->column = columns;
         lstUnits << tu;
-        gridUnitFields->addWidget( tu, r, 2 );
+        gridUnitFields->addWidget( tu, r, columns );
         break;
-                            }
+        }
       case Unit::FORMATTED: {
         FormattedUnit *fu = ((FormattedUnit*)u)->clone();
+        fu->column = columns;
         lstUnits << fu;
-        gridUnitFields->addWidget( fu, r, 2 );
+        gridUnitFields->addWidget( fu, r, columns );
         break;
-                            }
+        }
       default:
         break;
     }
     r++;
   }
-
+  additionalUnits << lstUnits;
   return lstUnits;
-
-
 }

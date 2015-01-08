@@ -1,7 +1,6 @@
 #ifndef __main_hpp
 #define __main_hpp
 
-#include <QDebug>
 #include <QSettings>
 #include <QResource>
 #include <QStandardItemModel>

@@ -116,7 +116,16 @@ void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
   }
 
   Unit *u = qobject_cast<Unit*>(sender());
-  if ( !cc.convertUnits( selectedGroup, u ) ) {
+  QList<Unit*> lstUnits;
+
+  if ( u->column == 1 ) {
+    lstUnits = selectedGroup->units;
+  } else
+  if ( u->column > 1 ) {
+    lstUnits = selectedGroup->additionalUnits.at(u->column-2);
+  }
+
+  if ( !cc.convertUnits( lstUnits, u ) ) {
     ui.statusBar->showMessage( tr("Error in Converter Core"), 2000 );
   }
 
@@ -190,6 +199,10 @@ void Convert::actionSortDescTriggered() {
 }
 
 void Convert::actionAddSplit() {
+  if ( selectedGroup->columns == 5 ) {
+    ui.statusBar->showMessage( tr("Maximum of 5 additional unit sets allowed"), 3000 );
+    return;
+  }
   QList<Unit*> lstUnits = selectedGroup->clone();
   foreach( Unit* u, lstUnits ) {
     connect( u, SIGNAL(textEdited(const QString&)), this, SLOT(txtUnitsTextEdited(const QString&)) );
@@ -197,4 +210,12 @@ void Convert::actionAddSplit() {
 }
 
 void Convert::actionRemoveSplit() {
+  if ( selectedGroup->additionalUnits.size() > 0 ) {
+    qDeleteAll(
+        selectedGroup->additionalUnits.last().begin(),
+        selectedGroup->additionalUnits.last().end()
+        );
+    selectedGroup->additionalUnits.removeLast();
+    selectedGroup->columns--;
+  }
 }

@@ -1,12 +1,11 @@
 #include "ccore.hpp"
 
-bool CCore::convertUnits( UnitGroup *selectedGroup, Unit *u ) {
-  if ( !selectedGroup || !u ) {
+bool CCore::convertUnits( QList<Unit*> lstUnits, Unit *u ) {
+  if ( lstUnits.size() < 1 || !u ) {
     return false;
   }
 
   QString txtInput = u->text();
-  //Unit *u = qobject_cast<Unit*>(sender());
   double siUnitValue = 0;
   double inputValue = u->text().toDouble();
   switch( u->type ) {
@@ -37,7 +36,7 @@ bool CCore::convertUnits( UnitGroup *selectedGroup, Unit *u ) {
       break;
   }
 
-  foreach ( Unit *tu, selectedGroup->units ) {
+  foreach ( Unit *tu, lstUnits ) {
     if ( tu == u ) {
       continue;
     }
