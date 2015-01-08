@@ -12,6 +12,11 @@ void Unit::paintEvent(QPaintEvent *e) {
   QLineEdit::paintEvent(e);
 
   if ( type == FORMATTED ) return;
+
+  bool ok = false;
+  text().toDouble(&ok);
+  if ( ok ) return;
+
   if ( !paintResult ) return;
 
   QPainter painter(this);
