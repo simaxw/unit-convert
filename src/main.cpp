@@ -72,40 +72,50 @@ bool Convert::initialize() {
 
   addToolBar( Qt::TopToolBarArea, tbMain );
 
-  // Main UI
+  // ***
+  // *** Initialize Main UI Elements
+  // ***
+
+  // main splitter
   splitter = new QSplitter( this );
 
   // initialize the unit group list
   lstUnitGroups = new QListView;
-  lstUnitGroups->setStyleSheet("font-size: 12pt;");
+  lstUnitGroups->setStyleSheet("font-size: 12pt; font-family: monospace;");
   lstUnitGroups->setEditTriggers(QAbstractItemView::NoEditTriggers);
   splitter->addWidget(lstUnitGroups);
 
-  // assign the QStackedLayout to the unit list widget
+  // initialize widget with VBoxLayout
   QWidget *unitStackInfo = new QWidget;
-  splitter->addWidget(unitStackInfo);
-
   QVBoxLayout *vboxUnitStackInfo = new QVBoxLayout;
   unitStackInfo->setLayout(vboxUnitStackInfo);
+  splitter->addWidget(unitStackInfo);
 
+  // assign the StackedLayout to the unit list widget
   widgetUnitList = new QWidget;
   unitLayout = new QStackedLayout;
   widgetUnitList->setLayout(unitLayout);
-  
+
+  scrInfo = new QScrollArea;
   lblInfo = new QLabel;
   lblInfo->setWordWrap(true);
+  lblInfo->setStyleSheet("background:white;color:black;font-size:12pt;line-height:150%;padding:10px;");
   connect( lblInfo, SIGNAL(linkHovered(const QString& )), this, SLOT(lblInfoLinkHovered(const QString&)) );
   if ( unitGroups.size() == 0 ) {
     lblInfo->setText( "<html>No Units configured</html>" );
   }
+  scrInfo->setWidget(lblInfo);
 
+  // add the widgets to the VBoxLayout
   vboxUnitStackInfo->addWidget(widgetUnitList);
-  vboxUnitStackInfo->addWidget(lblInfo);
+  vboxUnitStackInfo->addWidget(scrInfo);
 
   // initialize the list model for the unit groups
   modelUnitGroups = new QStandardItemModel;
 
-  // iterate over the unit groups and add them to the stacked layout.
+  // Iterate over the unit groups and add them to the stacked layout.
+  // Then create a StandardItem and add this to the StandardItemModel.
+  // Finally assign the model to the ListView
   unsigned int originalIndex = 0;
   foreach( UnitGroup* g, p.getUnitGroups() ) {
     g->initialize(lblInfo);
@@ -125,6 +135,7 @@ bool Convert::initialize() {
   }
 
   lstUnitGroups->setModel( modelUnitGroups );
+
   connect( lstUnitGroups->selectionModel(),
       SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection& )),
       this,
@@ -206,7 +217,7 @@ void Convert::lblInfoLinkHovered( const QString& url ) {
 
 void Convert::actionQuitTriggered() {
   if ( settings ) {
-    QVariant voriginalIndex; // = modelUnitGroups->itemFromIndex(ui.lstUnitGroups->selectionModel()->selectedIndexes().at(0))->data();
+    QVariant voriginalIndex = modelUnitGroups->itemFromIndex(lstUnitGroups->selectionModel()->selectedIndexes().at(0))->data();
     settings->setValue( "last.group", voriginalIndex.toInt() );
 
     if ( selectedGroup ) {
@@ -217,25 +228,25 @@ void Convert::actionQuitTriggered() {
 
     settings->setValue( "mainwindow.geom", saveGeometry() );
     settings->setValue( "mainwindow.state", saveState() );
-    //settings->setValue( "splitter.size", ui.splitter->saveState() );
+    settings->setValue( "splitter.size", splitter->saveState() );
 
   }
   qApp->quit();
 }
 
 void Convert::actionPreviousTriggered() {
-  int idx = 0;//ui.lstUnitGroups->selectionModel()->selectedIndexes().at(0).row();
+  int idx = lstUnitGroups->selectionModel()->selectedIndexes().at(0).row();
   if ( idx != 0 ) {
     QModelIndex index = modelUnitGroups->index( idx-1, 0 );
-    //ui.lstUnitGroups->selectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
+    lstUnitGroups->selectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
   }
 }
 
 void Convert::actionNextTriggered() {
-  int idx = 0;//ui.lstUnitGroups->selectionModel()->selectedIndexes().at(0).row();
+  int idx = lstUnitGroups->selectionModel()->selectedIndexes().at(0).row();
   if ( idx < unitGroups.size()-1 ) {
     QModelIndex index = modelUnitGroups->index( idx+1, 0 );
-    //ui.lstUnitGroups->selectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
+    lstUnitGroups->selectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
   }
 }
 
@@ -286,9 +297,4 @@ void Convert::actionRemoveSplit() {
 }
 
 void Convert::actionShowDiffTriggered() {
-  /*
-  p->setPen( QColor(255,0,0) );
-  p->drawRect( 0,0, 100,100 );
-  */
-
 }

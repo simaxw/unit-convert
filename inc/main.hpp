@@ -18,6 +18,7 @@
 #include <QSplitter>
 #include <QListView>
 #include <QVBoxLayout>
+#include <QScrollArea>
 #include "ccore.hpp"
 #include "about.hpp"
 #include "parser.hpp"
@@ -80,6 +81,7 @@ class Convert : public QMainWindow {
     QListView *lstUnitGroups;
     QSplitter *splitter;
     QWidget *widgetUnitList;
+    QScrollArea *scrInfo;
 };
 
 #endif
