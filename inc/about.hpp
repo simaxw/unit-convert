@@ -1,9 +1,9 @@
 #ifndef __about_hpp
 #define __about_hpp
 
+#include <QDialog>
 #include <QKeyEvent>
 #include <QDebug>
-#include "ui_about.h"
 
 class ConvertAbout : public QDialog {
   Q_OBJECT
@@ -20,7 +20,6 @@ class ConvertAbout : public QDialog {
     void keyPressEvent( QKeyEvent* );
 
   private:
-    Ui::aboutbox ui;
 };
 
 #endif

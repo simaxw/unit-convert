@@ -2,9 +2,11 @@
 
 bool Convert::initialize() {
 
+  // the data.rcc gets compiled as a binary file via rcc. It is expected
+  // in the same path as the executable
   bool rc = QResource::registerResource( qApp->applicationDirPath() + "/data.rcc" );
   if ( !rc ) {
-    QMessageBox::critical( this, tr("Error"), tr("Data file data.rcc missing"));
+    QMessageBox::critical( this, tr("Error"), tr("Data file data.rcc missing."));
     return false;
   }
 
@@ -15,18 +17,90 @@ bool Convert::initialize() {
     QMessageBox::critical( this, tr("Error"), p.getErrorMessage() );
     return false;
   }
-
-  settings = new QSettings( qApp->applicationDirPath() + "/settings.ini", QSettings::IniFormat, this );
-
   // the parser holds the unit groups (widgets)
   unitGroups = p.getUnitGroups();
 
-  // initialize this main window UI
-  ui.setupUi( this );
+  // initialize settings object from settings.ini stored in the same
+  // path as the executable in INI format
+  settings = new QSettings( qApp->applicationDirPath() + "/settings.ini", QSettings::IniFormat, this );
 
-  // assign the widget on the right the StackedLayout
-  unitLayout = new QStackedLayout(ui.widgetUnitList);
-  ui.widgetUnitList->setLayout(unitLayout);
+  // UI
+  // Status Bar
+  statusbar = new QStatusBar(this);
+  setStatusBar(statusbar);
+
+  // Main Toolbar
+  tbMain = new QToolBar(this);
+  tbMain->setObjectName("main");
+  tbMain->setMovable(true);
+  tbMain->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
+  tbMain->setIconSize( QSize( 16, 16 ) );
+  tbMain->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+
+  // Actions
+  actionQuit =      new QAction( QIcon(":/icon/icons/quit.png"),   tr("&Quit"),      this );
+  actionPrevious =  new QAction( QIcon(":/icon/icons/up.png"),     tr("&Previous"),  this );
+  actionNext =      new QAction( QIcon(":/icon/icons/down.png"),   tr("&Next"),      this );
+  actionSortAsc =   new QAction( QIcon(":/icon/icons/a_to_z.png"), tr("Sort &Asc"),  this );
+  actionSortDesc =  new QAction( QIcon(":/icon/icons/a_to_z.png"), tr("Sort Des&c"), this);
+  actionSplit =     new QAction( QIcon(":/icon/icons/left.png"),   tr("&Split"),     this);
+  actionUnsplit =   new QAction( QIcon(":/icon/icons/right.png"),  tr("&Unsplit"),   this);
+  actionShowDiff =  new QAction( QIcon(":/icon/icons/arrows.png"), tr("D&iff"),      this);
+  actionAbout =     new QAction( QIcon(":/icon/icons/about.png"),  tr("&About"),     this);
+
+  // Signals connected to Slots
+  connect( actionQuit,     SIGNAL(triggered()), this, SLOT(actionQuitTriggered()) );
+  connect( actionPrevious, SIGNAL(triggered()), this, SLOT(actionPreviousTriggered()) );
+  connect( actionNext,     SIGNAL(triggered()), this, SLOT(actionNextTriggered()) );
+  connect( actionSortAsc,  SIGNAL(triggered()), this, SLOT(actionSortAscTriggered()) );
+  connect( actionSortDesc, SIGNAL(triggered()), this, SLOT(actionSortDescTriggered()) );
+  connect( actionSplit,    SIGNAL(triggered()), this, SLOT(actionAddSplit()) );
+  connect( actionUnsplit,  SIGNAL(triggered()), this, SLOT(actionRemoveSplit()) );
+  connect( actionShowDiff, SIGNAL(triggered()), this, SLOT(actionShowDiffTriggered()) );
+  connect( actionAbout,    SIGNAL(triggered()), this, SLOT(actionAboutTriggered()) );
+
+  // add all actions to the main toolbar. Re-order here:
+  tbMain->addAction(actionQuit);
+  tbMain->addAction(actionSortAsc);
+  tbMain->addAction(actionSortDesc);
+  tbMain->addAction(actionPrevious);
+  tbMain->addAction(actionNext);
+  tbMain->addAction(actionSplit);
+  tbMain->addAction(actionUnsplit);
+  tbMain->addAction(actionShowDiff);
+  tbMain->addAction(actionAbout);
+
+  addToolBar( Qt::TopToolBarArea, tbMain );
+
+  // Main UI
+  splitter = new QSplitter( this );
+
+  // initialize the unit group list
+  lstUnitGroups = new QListView;
+  lstUnitGroups->setStyleSheet("font-size: 12pt;");
+  lstUnitGroups->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  splitter->addWidget(lstUnitGroups);
+
+  // assign the QStackedLayout to the unit list widget
+  QWidget *unitStackInfo = new QWidget;
+  splitter->addWidget(unitStackInfo);
+
+  QVBoxLayout *vboxUnitStackInfo = new QVBoxLayout;
+  unitStackInfo->setLayout(vboxUnitStackInfo);
+
+  widgetUnitList = new QWidget;
+  unitLayout = new QStackedLayout;
+  widgetUnitList->setLayout(unitLayout);
+  
+  lblInfo = new QLabel;
+  lblInfo->setWordWrap(true);
+  connect( lblInfo, SIGNAL(linkHovered(const QString& )), this, SLOT(lblInfoLinkHovered(const QString&)) );
+  if ( unitGroups.size() == 0 ) {
+    lblInfo->setText( "<html>No Units configured</html>" );
+  }
+
+  vboxUnitStackInfo->addWidget(widgetUnitList);
+  vboxUnitStackInfo->addWidget(lblInfo);
 
   // initialize the list model for the unit groups
   modelUnitGroups = new QStandardItemModel;
@@ -34,7 +108,7 @@ bool Convert::initialize() {
   // iterate over the unit groups and add them to the stacked layout.
   unsigned int originalIndex = 0;
   foreach( UnitGroup* g, p.getUnitGroups() ) {
-    g->initialize(ui.lblInfo);
+    g->initialize(lblInfo);
     unitLayout->addWidget( g );
 
     foreach ( Unit *u, g->units ) {
@@ -50,31 +124,19 @@ bool Convert::initialize() {
     originalIndex++;
   }
 
-  ui.lstUnitGroups->setModel( modelUnitGroups );
-  connect( ui.lstUnitGroups->selectionModel(),
+  lstUnitGroups->setModel( modelUnitGroups );
+  connect( lstUnitGroups->selectionModel(),
       SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection& )),
       this,
       SLOT(lstUnitGroupsSelectionChanged( const QItemSelection&, const QItemSelection& ))
     );
 
-  if ( unitGroups.size() == 0 ) {
-    ui.lblInfo->setText( "<html>No Units configured</html>" );
-  }
-
-  connect( ui.actionQuit, SIGNAL(triggered()), this, SLOT(actionQuitTriggered()) );
-  connect( ui.lblInfo, SIGNAL(linkHovered(const QString& )), this, SLOT(lblInfoLinkHovered(const QString&)));
-  connect( ui.actionPrevious, SIGNAL(triggered()), this, SLOT(actionPreviousTriggered()) );
-  connect( ui.actionNext, SIGNAL(triggered()), this, SLOT(actionNextTriggered()) );
-  connect( ui.actionAbout, SIGNAL(triggered()), this, SLOT(actionAboutTriggered()) );
-  connect( ui.actionSortAsc, SIGNAL(triggered()), this, SLOT(actionSortAscTriggered()) );
-  connect( ui.actionSortDesc, SIGNAL(triggered()), this, SLOT(actionSortDescTriggered()) );
-  connect( ui.actionSplit, SIGNAL(triggered()), this, SLOT(actionAddSplit()) );
-  connect( ui.actionUnsplit, SIGNAL(triggered()), this, SLOT(actionRemoveSplit()) );
+  setCentralWidget(splitter);
 
   if ( unitLayout->count() > 0 ) {
     int lastIdx = settings->value( "last.group", 0 ).toInt();
     QModelIndex index = modelUnitGroups->index( lastIdx, 0 );
-    ui.lstUnitGroups->selectionModel()->select( index, QItemSelectionModel::Select );
+    lstUnitGroups->selectionModel()->select( index, QItemSelectionModel::Select );
 
     if ( selectedGroup ) {
       int lastFocusedIdx = settings->value( "last.focused", 0 ).toInt();
@@ -87,14 +149,15 @@ bool Convert::initialize() {
   if ( settings ) {
     restoreGeometry( settings->value( "mainwindow.geom" ).toByteArray() );
     restoreState( settings->value( "mainwindow.state" ).toByteArray() );
-    ui.splitter->restoreState( settings->value( "splitter.size" ).toByteArray() );
+    splitter->restoreState( settings->value( "splitter.size" ).toByteArray() );
   }
 
+  //about.strDate = CONVERT_DATE;
+  //about.strVersion = strVersion;
+  //about.initialize();
   strVersion = QString( CONVERT_VERSION );
-  setWindowTitle( "Convert " + strVersion );
-  about.strDate = CONVERT_DATE;
-  about.strVersion = strVersion;
-  about.initialize();
+  setWindowTitle( "SUConvert " + strVersion );
+  setWindowIcon( QIcon( ":/icon/icons/convert.png" ) );
 
   modelUnitGroups->invisibleRootItem()->sortChildren( 0, Qt::AscendingOrder );
 
@@ -128,22 +191,22 @@ void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
   }
 
   if ( !cc.convertUnits( lstUnits, u ) ) {
-    ui.statusBar->showMessage( tr("Error in Converter Core"), 2000 );
+    statusbar->showMessage( tr("Error in Converter Core"), 2000 );
   }
 
 }
 
 void Convert::lblInfoLinkHovered( const QString& url ) {
   if ( !url.isEmpty() ) {
-    ui.statusBar->showMessage( QString(tr("Navigate to URL: %1")).arg(url) );
+    statusbar->showMessage( QString(tr("Navigate to URL: %1")).arg(url) );
   } else {
-    ui.statusBar->clearMessage();
+    statusbar->clearMessage();
   }
 }
 
 void Convert::actionQuitTriggered() {
   if ( settings ) {
-    QVariant voriginalIndex = modelUnitGroups->itemFromIndex(ui.lstUnitGroups->selectionModel()->selectedIndexes().at(0))->data();
+    QVariant voriginalIndex; // = modelUnitGroups->itemFromIndex(ui.lstUnitGroups->selectionModel()->selectedIndexes().at(0))->data();
     settings->setValue( "last.group", voriginalIndex.toInt() );
 
     if ( selectedGroup ) {
@@ -154,25 +217,25 @@ void Convert::actionQuitTriggered() {
 
     settings->setValue( "mainwindow.geom", saveGeometry() );
     settings->setValue( "mainwindow.state", saveState() );
-    settings->setValue( "splitter.size", ui.splitter->saveState() );
+    //settings->setValue( "splitter.size", ui.splitter->saveState() );
 
   }
   qApp->quit();
 }
 
 void Convert::actionPreviousTriggered() {
-  int idx = ui.lstUnitGroups->selectionModel()->selectedIndexes().at(0).row();
+  int idx = 0;//ui.lstUnitGroups->selectionModel()->selectedIndexes().at(0).row();
   if ( idx != 0 ) {
     QModelIndex index = modelUnitGroups->index( idx-1, 0 );
-    ui.lstUnitGroups->selectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
+    //ui.lstUnitGroups->selectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
   }
 }
 
 void Convert::actionNextTriggered() {
-  int idx = ui.lstUnitGroups->selectionModel()->selectedIndexes().at(0).row();
+  int idx = 0;//ui.lstUnitGroups->selectionModel()->selectedIndexes().at(0).row();
   if ( idx < unitGroups.size()-1 ) {
     QModelIndex index = modelUnitGroups->index( idx+1, 0 );
-    ui.lstUnitGroups->selectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
+    //ui.lstUnitGroups->selectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
   }
 }
 
@@ -202,7 +265,7 @@ void Convert::actionSortDescTriggered() {
 
 void Convert::actionAddSplit() {
   if ( selectedGroup->columns == 5 ) {
-    ui.statusBar->showMessage( tr("Maximum of 5 additional unit sets allowed"), 3000 );
+    statusbar->showMessage( tr("Maximum of 5 additional unit sets allowed"), 3000 );
     return;
   }
   QList<Unit*> lstUnits = selectedGroup->clone();
@@ -220,4 +283,12 @@ void Convert::actionRemoveSplit() {
     selectedGroup->additionalUnits.removeLast();
     selectedGroup->columns--;
   }
+}
+
+void Convert::actionShowDiffTriggered() {
+  /*
+  p->setPen( QColor(255,0,0) );
+  p->drawRect( 0,0, 100,100 );
+  */
+
 }

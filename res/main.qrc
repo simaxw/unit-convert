@@ -22,6 +22,8 @@
     <file>icons/planets.png</file>
     <file>icons/force.png</file>
     <file>icons/power.png</file>
+    <file>icons/settings.png</file>
+    <file>icons/arrows.png</file>
   </qresource>
   <qresource prefix="/data">
     <file>units.xml</file>

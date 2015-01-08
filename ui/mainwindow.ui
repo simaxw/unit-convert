@@ -163,6 +163,7 @@
    <addaction name="actionNext"/>
    <addaction name="actionSplit"/>
    <addaction name="actionUnsplit"/>
+   <addaction name="actionShowDiff"/>
    <addaction name="actionAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -281,6 +282,18 @@
    </property>
    <property name="text">
     <string>Unsplit</string>
+   </property>
+  </action>
+  <action name="actionShowDiff">
+   <property name="icon">
+    <iconset resource="../res/main.qrc">
+     <normaloff>:/icon/icons/about.png</normaloff>:/icon/icons/about.png</iconset>
+   </property>
+   <property name="text">
+    <string>Diff</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Diff</string>
    </property>
   </action>
  </widget>

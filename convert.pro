@@ -27,10 +27,6 @@ QMAKE_POST_LINK = rcc --verbose --compress 9 --binary -o $$DATA_OUT res/main.qrc
 
 QT += xml widgets script
 
-FORMS +=\
-ui/about.ui\
-ui/mainwindow.ui
-
 SOURCES +=\
 src/app.cpp\
 src/ccore.cpp\
