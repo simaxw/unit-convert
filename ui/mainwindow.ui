@@ -161,9 +161,9 @@
    <addaction name="actionSortDesc"/>
    <addaction name="actionPrevious"/>
    <addaction name="actionNext"/>
-   <addaction name="actionAbout"/>
    <addaction name="actionSplit"/>
    <addaction name="actionUnsplit"/>
+   <addaction name="actionAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionAbout">

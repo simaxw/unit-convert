@@ -40,6 +40,7 @@ bool CCore::convertUnits( QList<Unit*> lstUnits, Unit *u ) {
     if ( tu == u ) {
       continue;
     }
+    tu->paintResult = false;
     switch( tu->type ) {
       case Unit::FACTOR:
         tu->setText( QString::number(siUnitValue / ((FactorUnit*)tu)->value) );

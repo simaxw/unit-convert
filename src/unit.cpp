@@ -21,7 +21,6 @@ void Unit::paintEvent(QPaintEvent *e) {
   int endPos = fm.width(text());
   result = qse.evaluate(text()).toString();
   painter.drawText( endPos+10, r.height()-(fm.height()/2), "= " + result );
-  paintResult = false;
 }
 
 void Unit::focusInEvent( QFocusEvent* e ) {
