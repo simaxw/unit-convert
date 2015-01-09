@@ -74,7 +74,7 @@ bool Convert::initialize() {
   tbMain->addAction(actionNext);
   tbMain->addAction(actionSplit);
   tbMain->addAction(actionUnsplit);
-  tbMain->addAction(actionShowDiff);
+  //tbMain->addAction(actionShowDiff);
   tbMain->addAction(actionAbout);
 
   addToolBar( Qt::TopToolBarArea, tbMain );
