@@ -1,6 +1,7 @@
 #ifndef __main_hpp
 #define __main_hpp
 
+#include <QDebug>
 #include <QApplication>
 #include <QMainWindow>
 #include <QDialog>
@@ -22,10 +23,18 @@
 #include "ccore.hpp"
 #include "about.hpp"
 #include "parser.hpp"
-//#include "ui_mainwindow.h"
 
 #define CONVERT_VERSION "2.0.5"
 #define CONVERT_DATE "2015-01-08"
+
+class DynamicStackedLayout : public QStackedLayout {
+  public:
+    DynamicStackedLayout() : QStackedLayout() {}
+
+    QSize sizeHint() const {
+      return QSize( 0,100 );
+    }
+};
 
 class Convert : public QMainWindow {
   Q_OBJECT
@@ -56,7 +65,6 @@ class Convert : public QMainWindow {
   private:
     void setVisibleUnitGroup( int );
     QStandardItemModel *modelUnitGroups;
-    //Ui::mainwindowConvert ui;
     QStackedLayout *unitLayout;
     QList<UnitGroup*> unitGroups;
     QSettings *settings;

@@ -43,8 +43,8 @@ bool Convert::initialize() {
   actionNext =      new QAction( QIcon(":/icon/icons/down.png"),   tr("&Next"),      this );
   actionSortAsc =   new QAction( QIcon(":/icon/icons/a_to_z.png"), tr("Sort &Asc"),  this );
   actionSortDesc =  new QAction( QIcon(":/icon/icons/a_to_z.png"), tr("Sort Des&c"), this);
-  actionSplit =     new QAction( QIcon(":/icon/icons/left.png"),   tr("&Split"),     this);
-  actionUnsplit =   new QAction( QIcon(":/icon/icons/right.png"),  tr("&Unsplit"),   this);
+  actionSplit =     new QAction( QIcon(":/icon/icons/add-new-tab.png"),   tr("&Split"),     this);
+  actionUnsplit =   new QAction( QIcon(":/icon/icons/window-close.png"),  tr("&Unsplit"),   this);
   actionShowDiff =  new QAction( QIcon(":/icon/icons/arrows.png"), tr("D&iff"),      this);
   actionAbout =     new QAction( QIcon(":/icon/icons/about.png"),  tr("&About"),     this);
 
@@ -81,7 +81,7 @@ bool Convert::initialize() {
 
   // initialize the unit group list
   lstUnitGroups = new QListView;
-  lstUnitGroups->setStyleSheet("font-size: 12pt; font-family: monospace;");
+  lstUnitGroups->setStyleSheet("font-size: 12pt; font-family:sans; margin:10px;");
   lstUnitGroups->setEditTriggers(QAbstractItemView::NoEditTriggers);
   splitter->addWidget(lstUnitGroups);
 
@@ -99,11 +99,15 @@ bool Convert::initialize() {
   scrInfo = new QScrollArea;
   lblInfo = new QLabel;
   lblInfo->setWordWrap(true);
+  lblInfo->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
   lblInfo->setStyleSheet("background:white;color:black;font-size:12pt;line-height:150%;padding:10px;");
+  lblInfo->setOpenExternalLinks(true);
+  lblInfo->setTextInteractionFlags(Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse|Qt::TextBrowserInteraction|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
   connect( lblInfo, SIGNAL(linkHovered(const QString& )), this, SLOT(lblInfoLinkHovered(const QString&)) );
   if ( unitGroups.size() == 0 ) {
     lblInfo->setText( "<html>No Units configured</html>" );
   }
+  scrInfo->setWidgetResizable(true);
   scrInfo->setWidget(lblInfo);
 
   // add the widgets to the VBoxLayout
@@ -118,20 +122,20 @@ bool Convert::initialize() {
   // Finally assign the model to the ListView
   unsigned int originalIndex = 0;
   foreach( UnitGroup* g, p.getUnitGroups() ) {
-    g->initialize(lblInfo);
-    unitLayout->addWidget( g );
+      g->initialize(lblInfo);
+      unitLayout->addWidget(g);
 
-    foreach ( Unit *u, g->units ) {
-      connect( u, SIGNAL(textEdited(const QString&)),
-          this, SLOT(txtUnitsTextEdited(const QString&)));
-    }
+      foreach ( Unit *u, g->units ) {
+        connect( u, SIGNAL(textEdited(const QString&)),
+            this, SLOT(txtUnitsTextEdited(const QString&)));
+      }
 
-    QStandardItem *item = new QStandardItem( g->label );
-    item->setData( QVariant( originalIndex ) );
-    item->setIcon( QIcon(g->icon) );
-    modelUnitGroups->appendRow( item );
+      QStandardItem *item = new QStandardItem( g->label );
+      item->setData( QVariant( originalIndex ) );
+      item->setIcon( QIcon(g->icon) );
+      modelUnitGroups->appendRow( item );
 
-    originalIndex++;
+      originalIndex++;
   }
 
   lstUnitGroups->setModel( modelUnitGroups );
@@ -256,7 +260,7 @@ void Convert::actionAboutTriggered() {
 }
 
 void Convert::setVisibleUnitGroup( int idx ) {
-  // switch QStackedLayout to the selected deck
+  // switch DynamicStackedLayout to the selected deck
   unitLayout->setCurrentIndex(idx);
 
   // transfer focus to first input field
