@@ -23,18 +23,10 @@
 #include "ccore.hpp"
 #include "about.hpp"
 #include "parser.hpp"
+#include "help.hpp"
 
-#define CONVERT_VERSION "2.0.5"
-#define CONVERT_DATE "2015-01-08"
-
-class DynamicStackedLayout : public QStackedLayout {
-  public:
-    DynamicStackedLayout() : QStackedLayout() {}
-
-    QSize sizeHint() const {
-      return QSize( 0,100 );
-    }
-};
+#define CONVERT_VERSION "2.0.6"
+#define CONVERT_DATE "2015-01-10"
 
 class Convert : public QMainWindow {
   Q_OBJECT
@@ -60,7 +52,6 @@ class Convert : public QMainWindow {
     void actionSortDescTriggered();
     void actionAddSplit();
     void actionRemoveSplit();
-    void actionShowDiffTriggered();
 
   private:
     void setVisibleUnitGroup( int );
@@ -70,6 +61,7 @@ class Convert : public QMainWindow {
     QSettings *settings;
     UnitGroup *selectedGroup;
     ConvertAbout *about;
+    ConvertHelp *help;
     QString strVersion;
     CCore cc;
     QStatusBar *statusbar;
@@ -81,7 +73,7 @@ class Convert : public QMainWindow {
     QAction *actionSortDesc;
     QAction *actionSplit;
     QAction *actionUnsplit;
-    QAction *actionShowDiff;
+    QAction *actionHelp;
     QAction *actionAbout;
 
     QLabel *lblInfo;

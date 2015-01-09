@@ -29,5 +29,10 @@
   </qresource>
   <qresource prefix="/data">
     <file>units.xml</file>
+    <file>help.html</file>
+    <file>convert-01.png</file>
+    <file>toolbar.png</file>
+    <file>split.png</file>
+    <file>enter-math.png</file>
   </qresource>
 </RCC>

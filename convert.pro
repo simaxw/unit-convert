@@ -33,11 +33,13 @@ src/ccore.cpp\
 src/main.cpp\
 src/about.cpp\
 src/parser.cpp\
-src/unit.cpp
+src/unit.cpp\
+src/help.cpp
 
 HEADERS +=\
 inc/ccore.hpp\
 inc/main.hpp\
 inc/about.hpp\
 inc/parser.hpp\
-inc/unit.hpp
+inc/unit.hpp\
+inc/help.hpp

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SUConvert Help</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+body {
+  font-size: 12pt;
+  margin: 20px;
+}
+
+img {
+  margin: 0;
+  padding: 0;
+}
+
+h1,h2 {
+  margin-top: 50px;
+}
+
+p {
+  line-height: 130%;
+}
+    </style>
+  </head>
+  <body>
+    <!--
+      Convert Help File
+      Simon Wilper
+      2015-01-10
+    -->
+    <h1>Overview</h1>
+    <p>The <em>SUConvert</em> desktop application is used for converting
+    different type of units into others while typing.</p>
+
+    <p><img src=":/data/convert-01.png"></p>
+
+    <p>This screenshot shows a list of different unit groups on the
+    left. If one of the groups gets selected the panel on the right will
+    change to that one containing all unit input fields assigned to that
+    particular group.</p>
+
+    <p>The toolbar located at the top of the main window contains the
+    following commands:</p>
+
+    <ul>
+      <li><b>Quit</b>: Terminates the application. Settings are saved to
+        the file <code>settings.ini</code> in the same directory where
+        the executable is located. Shortcut: Ctrl+Q</li>
+      <li><b>Sort Asc/Desc</b>: Sort the unit groups by name.</li>
+      <li><b>Previous/Next</b>: Turn to the next/previous unit group
+        respectiveley. Shortcut Ctrl+Up/Down</li>
+      <li><b>Split/Unsplit</b>: Splits the unit fields and adds another
+        set so that you can convert different values and see the results
+        side by side. Unsplit removes the last set from the right.</p>
+    </ul>
+
+    <h2>Splitting Units</h2>
+    <p>This screenshot shows a splitted unit list. You can compare the
+    results side by side:</p>
+
+    <p><img src=":/data/split.png"></p>
+
+    <h2>Enter Math</h2>
+    <p><img src=":/data/enter-math.png"></p>
+    <p>You can also enter simple mathematical expressions like
+    <code>1+2</code>. The result is computed and printed in light gray
+    next to your input.</p>
+
+    <p>Since this tool makes use of the JavaScript-like engine QtScript,
+    you can also use the <code>Math</code> object like you would in
+    normal JavaScript.</p>
+
+    <p>Example: <code>Math.sin(30*Math.PI/180)</code> calculates the
+    sine of 30 what sould be ~0.5</p>
+
+    <p>Also, declaring variables is possible:
+    <code>var x=9; Math.sqrt(x)</code>
+    </p>
+
+  </body>
+</html>
