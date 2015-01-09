@@ -11,6 +11,7 @@ Unit::Unit( UnitType _type, const QString& _id, const QString& _label ) :
 void Unit::paintEvent(QPaintEvent *e) {
   QLineEdit::paintEvent(e);
 
+  if ( text().isEmpty() ) return;
   if ( type == FORMATTED ) return;
 
   bool ok = false;

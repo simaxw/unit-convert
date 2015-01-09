@@ -1,6 +1,10 @@
 #ifndef __about_hpp
 #define __about_hpp
 
+#include <QPushButton>
+#include <QLabel>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QDialog>
 #include <QKeyEvent>
 #include <QDebug>
@@ -20,6 +24,8 @@ class ConvertAbout : public QDialog {
     void keyPressEvent( QKeyEvent* );
 
   private:
+    QLabel *lblAbout;
+    QPushButton *btnClose;
 };
 
 #endif

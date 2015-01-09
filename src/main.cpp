@@ -38,15 +38,22 @@ bool Convert::initialize() {
   tbMain->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
   // Actions
-  actionQuit =      new QAction( QIcon(":/icon/icons/quit.png"),   tr("&Quit"),      this );
-  actionPrevious =  new QAction( QIcon(":/icon/icons/up.png"),     tr("&Previous"),  this );
-  actionNext =      new QAction( QIcon(":/icon/icons/down.png"),   tr("&Next"),      this );
-  actionSortAsc =   new QAction( QIcon(":/icon/icons/a_to_z.png"), tr("Sort &Asc"),  this );
-  actionSortDesc =  new QAction( QIcon(":/icon/icons/a_to_z.png"), tr("Sort Des&c"), this);
-  actionSplit =     new QAction( QIcon(":/icon/icons/add-new-tab.png"),   tr("&Split"),     this);
-  actionUnsplit =   new QAction( QIcon(":/icon/icons/window-close.png"),  tr("&Unsplit"),   this);
-  actionShowDiff =  new QAction( QIcon(":/icon/icons/arrows.png"), tr("D&iff"),      this);
-  actionAbout =     new QAction( QIcon(":/icon/icons/about.png"),  tr("&About"),     this);
+  actionQuit     = new QAction( QIcon(":/icon/icons/quit.png"),          tr("&Quit"),      this );
+  actionPrevious = new QAction( QIcon(":/icon/icons/up.png"),            tr("&Previous"),  this );
+  actionNext     = new QAction( QIcon(":/icon/icons/down.png"),          tr("&Next"),      this );
+  actionSortAsc  = new QAction( QIcon(":/icon/icons/a_to_z.png"),        tr("Sort &Asc"),  this );
+  actionSortDesc = new QAction( QIcon(":/icon/icons/a_to_z.png"),        tr("Sort Des&c"), this);
+  actionSplit    = new QAction( QIcon(":/icon/icons/add-new-tab.png"),   tr("&Split"),     this);
+  actionUnsplit  = new QAction( QIcon(":/icon/icons/window-close.png"),  tr("&Unsplit"),   this);
+  actionShowDiff = new QAction( QIcon(":/icon/icons/arrows.png"),        tr("D&iff"),      this);
+  actionAbout    = new QAction( QIcon(":/icon/icons/about.png"),         tr("&About"),     this);
+
+  actionQuit->setShortcut( QKeySequence( tr("Ctrl+Q") ) );
+  actionPrevious->setShortcut( QKeySequence( "Ctrl+Up" ) );
+  actionNext->setShortcut( QKeySequence( "Ctrl+Down" ) );
+  actionSplit->setShortcut( QKeySequence( "F2" ) );
+  actionUnsplit->setShortcut( QKeySequence( "F3" ) );
+  actionAbout->setShortcut( QKeySequence( "F1" ) );
 
   // Signals connected to Slots
   connect( actionQuit,     SIGNAL(triggered()), this, SLOT(actionQuitTriggered()) );
@@ -167,11 +174,14 @@ bool Convert::initialize() {
     splitter->restoreState( settings->value( "splitter.size" ).toByteArray() );
   }
 
-  //about.strDate = CONVERT_DATE;
-  //about.strVersion = strVersion;
-  //about.initialize();
+  about = new ConvertAbout;
+  about->setWindowIcon( QIcon( ":/icon/icons/about.png" ) );
+  about->strDate = CONVERT_DATE;
+  about->strVersion = strVersion;
+  about->initialize();
   strVersion = QString( CONVERT_VERSION );
   setWindowTitle( "SUConvert " + strVersion );
+  about->setWindowTitle(tr("About") + " " + windowTitle());
   setWindowIcon( QIcon( ":/icon/icons/convert.png" ) );
 
   modelUnitGroups->invisibleRootItem()->sortChildren( 0, Qt::AscendingOrder );
@@ -255,8 +265,8 @@ void Convert::actionNextTriggered() {
 }
 
 void Convert::actionAboutTriggered() {
-  about.reset();
-  about.show();
+  about->reset();
+  about->show();
 }
 
 void Convert::setVisibleUnitGroup( int idx ) {

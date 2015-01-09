@@ -69,7 +69,7 @@ class Convert : public QMainWindow {
     QList<UnitGroup*> unitGroups;
     QSettings *settings;
     UnitGroup *selectedGroup;
-    ConvertAbout about;
+    ConvertAbout *about;
     QString strVersion;
     CCore cc;
     QStatusBar *statusbar;
