@@ -37,7 +37,7 @@ bool UnitContentHandler::startElement(
   if ( localName == "unit" ) {
     QString type = attr.value("type");
     QString id = attr.value("id");
-    QString label = attr.value("label").replace("_","&").replace(QRegularExpression("(\\^(\\d+))"),"<sup>\\2</sup>");
+    QString label = attr.value("label").replace("_","&").replace(QRegularExpression("(\\^(\\-?\\d+))"),"<sup>\\2</sup>");
 
     if ( type == "factor" ) {
       FactorUnit *fu = new FactorUnit( id,label, attr.value("value").toDouble() );
