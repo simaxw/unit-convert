@@ -12,3 +12,4 @@ moc*
 /debug/
 /release/
 /bin/
+object_script*
