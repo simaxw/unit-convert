@@ -5,6 +5,7 @@ Convert Setup XML File
 Version: 1.0.0
 
 Simon A. Wilper/Uwe Eschenhorst
+2015-01-06 - Corrections and additions
 2014-12-26 - Update
 2013-03-31 - Consolidation of all settings in one XML configuration
 2006-08-23 - Initial Edit
@@ -32,11 +33,16 @@ the values.
       <info>
         <![CDATA[The litre (American spelling: liter; SI symbols l or
         L[1]) is a non-SI metric system unit of volume equal to 1 cubic
-        decimetre (dm3), 1,000 cubic centimetres (cm3) or 1/1,000 cubic
+        decimetre (dm<sup>3</sup>), 1,000 cubic centimetres (cm<sup>3</sup>) or 1/1,000 cubic
         metre. Source: <a href="http://en.wikipedia.org/wiki/Litre">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="cubicfoot" label="Cubic Foot [cft or ft^3]" type="factor" value=".02831685">
+    <unit id="milliliter" label="Millilitre [ml]" type="factor" value=".000001">
+      <info>
+        <![CDATA[see Litre (milli = 10^-3)]]>
+      </info>
+    </unit>
+    <unit id="cubicfoot" label="Cubic Foot [cft] or [ft^3]" type="factor" value=".02831685">
       <info>
         <![CDATA[The term cubic foot is an Imperial and US customary (non-metric) unit of 
 		volume, used in the United States and the United Kingdom. It is defined as the volume 
@@ -44,20 +50,20 @@ the values.
 		about one 35th (1/35.3147248277) of a cubic meter. Source: <a href="http://en.wikipedia.org/wiki/Cubic_foot">Wikipedia</a>]]>
       </info>
     </unit>
-  <unit id="cubicinch" label="Cubic Inch [cin or inch^3]" type="factor" value=".00001638706">
+	<unit id="cubicinch" label="Cubic Inch [cin] or [inch^3]" type="factor" value=".00001638706">
       <info>
         <![CDATA[]]>
       </info>
     </unit>
 
-  <unit id="registerton" label="Register Ton [rt]" type="factor" value="2.831685">
+	<unit id="registerton" label="Register Ton [rt]" type="factor" value="2.831685">
       <info>
-        <![CDATA[The register ton is a unit of volume used to express the capacity of a ship.
-		For example, a 20 000 ton freighter has a capacity of approximately 57 000 m<sup>3</sup>,
+        <![CDATA[The register ton is a unit of volume used to express the capacitz of a ship.
+		For example, a 20 000 ton freighter has a capacitz of approximatelz 57 000 m<sup>3</sup>,
 		measured in accordance with established procedures.]]>
       </info>
     </unit>
-<unit id="bushel" label="Bushel [bsh or bu]" type="factor" value="0.03523907">
+	<unit id="bushel" label="Bushel [bsh] or [bu]" type="factor" value="0.03523907">
       <info>
         <![CDATA[Agricultural products that are sold by the bushel in the United States are 
 		often sold by weight in other countries. There can be a considerable variation in the 
@@ -71,15 +77,13 @@ the values.
 		potatoes, soybeans, wheat = 27.2 kg per bushel]]>
       </info>
     </unit>
-
-<unit id="fluidounce" label="Fluid Ounce (US) [fl. oz.]" type="factor" value=".00002957353">
+	<unit id="fluidounce" label="Fluid Ounce (US) [fl. oz.]" type="factor" value=".00002957353">
       <info>
         <![CDATA[In the United States, the cup, tablespoon, and teaspoon are defined as 8, 1/2, and 1/6
 		fluid ounces, respectively. for pratical usage the metric equivalents are 250 mL, 15 mL, and 5 mL.]]>
       </info>
     </unit>	
-	
-<unit id="quart" label="Quart (liquid) [qr]" type="factor" value=".0009463529">
+	<unit id="quart" label="Quart (liquid) [qr]" type="factor" value=".0009463529">
       <info>
         <![CDATA[The quart is a unit of volume (for either the imperial or United States 
 		customary units) equal to a quarter of a gallon (hence the name quart), two pints, 
@@ -89,14 +93,7 @@ the values.
 		abbreviation is qt. Source: <a href="https://en.wikipedia.org/wiki/Quart">Wikipedia</a>]]>
       </info>
     </unit>
-	
-	
-    <unit id="milliliter" label="Millilitre [ml]" type="factor" value=".000001">
-      <info>
-        <![CDATA[see Litre (milli = 10^-3)]]>
-      </info>
-    </unit>
-    <unit id="gallon" label="Gallon [gal]" type="factor" value=".003785412">
+    <unit id="gallon" label="Gallon (U.S.) [gal]" type="factor" value=".003785412">
       <info>
         <![CDATA[The gallon (abbreviation "gal"), is a measure of volume
         that was used in many parts of Western Europe and is still used
@@ -125,16 +122,51 @@ the values.
         and Switzerland. Source: <a href="http://en.wikipedia.org/wiki/Pint">Wikipedia</a>]]>
       </info>
     </unit>
+    <unit id="barreloil" label="Barrel (U.S., oil) [bbl]" type="factor" value=".1589873">
+      <info>
+        <![CDATA[An oil barrel (abbreviated as bbl) is a unit of volume whose 
+		definition has not been universally standardized. In the United States 
+		and Canada, an oil barrel is defined as 42 US gallons, which is about 
+		159 liters [9] or 35 imperial gallons,[10] and it can also be defined 
+		in those units, depending on the context. Oil companies that are listed 
+		on American stock exchanges typically report their production in terms 
+		of volume and use the units of bbl, Mbbl (one thousand barrels), or 
+		MMbbl (one million barrels). It's important to mention that there is a 
+		conflict concerning the units for oil barrels (see below, the 
+		section "Definitions and units). For all other physical quantities, 
+		according to the International System of Units, the uppercase letter "M" 
+		means "one million", for example: Mm (one million metres), 
+		MHz (one million hertz, or megahertz), MW (one million watts, or megawatt), 
+		MeV (one million electronvolt, or megaelectronvolt), Mbyte (one million bytes, 
+		or megabyte). But due to tradition, the Mbbl acronym is used today meaning 
+		"one thousand bbl", as a heritage of the roman number "M" meaning "one thousand". 
+		On the other hand, there are efforts to avoid this ambiguity, and most of the 
+		barrel dealers today prefer to use bbl, instead of Mbbl, mbbl, MMbbl or mmbbl.
+		
+		Outside the United States and Canada, volumes of oil are usually reported in 
+		cubic metres (m3) instead of oil barrels. Cubic metre is the International System. 
+		More commonly, companies on the European stock exchanges report the mass of oil in 
+		metric tonnes. Since different varieties of petroleum have different densities, 
+		however, there is not a single conversion between mass and volume. For example, 
+		one tonne of heavy distillates might occupy a volume of 256 US gallons (6.1 bbl). 
+		In contrast, one tonne of crude oil might occupy 272 gallons (6.5 bbl) and one 
+		tonne of gasoline will require 333 gallons (7.9 bbl).[11] Overall, the conversion 
+		is usually between 6 and 8 bbl per tonne. 
+		Source: <a href="http://en.wikipedia.org/wiki/Barrel_%28unit%29">Wikipedia</a>]]>
+      </info>
+    </unit>	
+	
   </group>
 
   <group id="powers" label="Powers" icon=":/icon/icons/power.png">
     <unit id="w" label="Watt [W]" type="factor" value="1">
       <info>
-        <![CDATA[The watt (pron.: /ˈwɒt/ WOT; symbol: W) is a derived
-        unit of power in the International System of Units (SI), named
-        after the Scottish engineer James Watt (1736–1819). The unit,
-        defined as one joule per second, measures the rate of energy
-        conversion or transfer. Source: <a href="http://en.wikipedia.org/wiki/Watt">Wikipedia</a>]]>
+        <![CDATA[The watt (symbol: W) is a derived unit of power in the 
+		International System of Units (SI), named after the Scottish engineer 
+		James Watt (1736–1819). The unit is defined as joule per second and 
+		can be used to express the rate of energy conversion or transfer with 
+		respect to time.
+		Source: <a href="http://en.wikipedia.org/wiki/Watt">Wikipedia</a>]]>
       </info>
     </unit>
     <unit id="w" label="Kilo-Watt [kW]" type="factor" value="1000"></unit>	
@@ -157,11 +189,30 @@ the values.
     </unit>
     <unit id="hp" label="Horsepower (imperial mechanical) [HP]" type="factor" value="745.69987158227022">
       <info>
-        <![CDATA[Horsepower (hp) imperial mechanical. Source: <a href="http://en.wikipedia.org/wiki/Horsepower">Wikipedia</a>]]>
+        <![CDATA[550 foot pounds-force per second = 1.0 Horsepower (imperial mechanical). Source: <a href="http://en.wikipedia.org/wiki/Horsepower">Wikipedia</a>]]>
       </info>
     </unit>	
+   <unit id="btuhour" label="BTU per hour [Btu/h]" type="factor" value=".2930711">
+      <info>
+        <![CDATA[In physics, power is the rate of doing work. It is equivalent to an 
+		amount of energy consumed per unit time. 
+		Source: <a href="https://en.wikipedia.org/wiki/Power_%28physics%29">Wikipedia</a>]]>
+      </info>
+    </unit>	
+    <unit id="btusec" label="BTU per second [Btu/sec]" type="factor" value="1055.056">
+      <info>
+        <![CDATA[In physics, power is the rate of doing work. It is equivalent to an 
+		amount of energy consumed per unit time. 
+		Source: <a href="https://en.wikipedia.org/wiki/Power_%28physics%29">Wikipedia</a>]]>
+      </info>
+    </unit>		
   </group>
-
+    <unit id="ftlbfps" label="Foot Pound-Force per Second [ft-lb/sec]" type="factor" value="1.355818">
+      <info>
+        <![CDATA[550 foot pounds-force per second = 1.0 Horsepower (imperial mechanical). Source: <a href="http://en.wikipedia.org/wiki/Horsepower">Wikipedia</a>]]>
+      </info>
+    </unit>	
+	
   <group id="forces" label="Forces" icon=":/icon/icons/force.png">
     <unit id="n" label="Newton" type="factor" value="1">
       <info>
@@ -430,19 +481,35 @@ the values.
 		precisely as 13.5951 × 9.80665 = 133.322387415 pascals.[1] It is denoted by the symbol "mmHg".
 		Although not an SI unit, the millimeter of mercury is still routinely used in medicine, 
 		meteorology and many other scientific fields.
-		One millimeter of mercury is approximately 1 Torr, or 1/760 of standard atmospheric pressure. The two units are not exactly equal; however, the difference (less than 0.000015%) is negligible for most practical uses.
+		One millimeter of mercury is approximately 1 Torr, or 1/760 of standard atmospheric pressure. 
+		The two units are not exactly equal; however, the difference (less than 0.000015%) is negligible 
+		for most practical uses.
 		Source: <a href="https://en.wikipedia.org/wiki/Millimeter_of_mercury">Wikipedia</a>]]>
+      </info>
+    </unit>
+   <unit id="torr" label="Torr [Torr]" type="factor" value=".1333224">
+      <info>
+        <![CDATA[The torr (symbol: Torr) is a unit of pressure, now defined as exactly 1⁄760 of a 
+		standard atmosphere. Thus one torr is exactly 101325⁄760 pascals (~133.3 Pa).
+		Historically, one torr was intended to be the same as one "millimetre of mercury". However, 
+		subsequent redefinitions of the two units made them slightly different (by less than 0.000015%). 
+		The torr is not part of the International System of Units (SI), but it is often combined with 
+		the metric prefix milli to name one millitorr (mTorr) or 0.001 Torr. The unit was named after 
+		Evangelista Torricelli, an Italian physicist and mathematician who discovered the principle 
+		of the barometer in 1644. 
+		Source: <a href="https://en.wikipedia.org/wiki/Torr">Wikipedia</a>]]>
       </info>
     </unit>
    </group>
 
   <!-- areas - relative to base SI unit square km -->
   <group id="area" label="Areas" icon=":icon/icons/rect.png">
-    <unit id="squaremeter" label="Square_meter" type="factor" value="1">
+  <unit id="squarecentimeter" label="Square_centimeter [cm^2]" type="factor" value="1e-4"></unit>	
+  <unit id="squaremeter" label="Square_meter [m^2]" type="factor" value="1">
       <info>
         <![CDATA[The square metre (British spelling) or square meter (American
-        spelling) is the SI derived unit of area, with symbol m2 (33A1 in
-        Unicode[1]). It is defined as the area of a square whose sides measure
+        spelling) is the SI derived unit of area, with symbol m<sup>2</sup> (33A1 in
+        Unicode). It is defined as the area of a square whose sides measure
         exactly one metre. The square metre is derived from the SI base unit of
         the metre, which itself is defined as the length of the path travelled
         by light in absolute vacuum during a time interval of 1/299,792,458 of
@@ -450,12 +517,23 @@ the values.
           href="http://en.wikipedia.org/wiki/Square_meter">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="squarekm" label="Square_kilometer" type="factor" value="1e+6">
+    <unit id="squarekm" label="Square_kilometer [km^2]" type="factor" value="1e+6">
       <info>
-        <![CDATA[see square meter (1square kilometer = 1e+6square meter)]]>
+        <![CDATA[see square meter (1 square kilometer = 1e+6 square meter)]]>
       </info>
     </unit>
-    <unit id="acre" label="_Acre" type="factor" value="4046.9">
+    <unit id="hectare" label="_Hectare [ha]" type="factor" value="10000">
+      <info>
+        <![CDATA[The hectare (/ˈhɛktɛər/ or /ˈhɛktɑr/; symbol ha) is a metric
+        unit of area defined as 10,000 square metres (100 m by 100 m), and
+        primarily used in the measurement of land. In 1795, when the metric
+        system was introduced, the 'are' was defined as 100 square metres and
+        the hectare ('hecto-' + 'are') was thus 100 'ares' or 1/100 km<sup>2</sup>. A
+        hectare of land is about 2.471 acres. Source: <a
+          href="http://en.wikipedia.org/wiki/Hectare">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="acre" label="_Acre [ac]" type="factor" value="4046.9">
       <info>
         <![CDATA[The acre is a unit of area used in the imperial and U.S.
         customary systems. An acre is about 40% of a hectare – slightly smaller
@@ -468,14 +546,14 @@ the values.
           href="http://en.wikipedia.org/wiki/Acre">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="squareinch" label="Square_inch" type="factor" value=".00064516">
+     <unit id="squareinch" label="Square_inch [inch^2] or [sq in]" type="factor" value=".00064516">
       <info>
         <![CDATA[A square inch (plural: square inches) is a unit of area, equal
         to the area of a square with sides of one inch. Source: <a
           href="http://en.wikipedia.org/wiki/Square_inch">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="squarefoot" label="Square_foot" type="factor" value=".09290304">
+    <unit id="squarefoot" label="Square_foot [ft^2] or [sq ft]" type="factor" value=".09290304">
       <info>
         <![CDATA[The square foot (plural square feet; abbreviated ft² or sq ft)
         is an imperial unit and U.S. customary unit (non-SI non-metric) of
@@ -489,18 +567,7 @@ the values.
           href="http://en.wikipedia.org/wiki/Square_foot">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="hectare" label="_Hectare" type="factor" value="10000">
-      <info>
-        <![CDATA[The hectare (/ˈhɛktɛər/ or /ˈhɛktɑr/; symbol ha) is a metric
-        unit of area defined as 10,000 square metres (100 m by 100 m), and
-        primarily used in the measurement of land. In 1795, when the metric
-        system was introduced, the 'are' was defined as 100 square metres and
-        the hectare ('hecto-' + 'are') was thus 100 'ares' or 1/100 km2. A
-        hectare of land is about 2.471 acres. Source: <a
-          href="http://en.wikipedia.org/wiki/Hectare">Wikipedia</a>]]>
-      </info>
-    </unit>
-    <unit id="squareyard" label="Square_yard" type="factor" value=".8361274">
+    <unit id="squareyard" label="Square_yard [yd^2] or [sq yd]" type="factor" value=".8361274">
       <info>
         <![CDATA[The square yard is an imperial/US customary (non-metric) unit
         of area, formerly used in most of the English-speaking world but now
@@ -511,11 +578,11 @@ the values.
           href="http://en.wikipedia.org/wiki/Square_yard">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="squaremile" label="Squa_remile" type="factor" value="2589988">
+    <unit id="squaremile" label="Squa_remile [mi^2] or [sq mi]" type="factor" value="2589988">
       <info>
-        <![CDATA[The square mile (abbreviated as sq mi and sometimes as mi2)[1]
+        <![CDATA[The square mile (abbreviated as sq mi and sometimes as mi<sup>2</sup>)
         is an imperial and US unit of measure for an area equal to the area of
-        a square of one statute mile.[2] It should not be confused with miles
+        a square of one statute mile. It should not be confused with miles
         square, which refers to the number of miles on each side squared. For
         instance, 20 miles square (20 × 20 miles) is equal to 400 square miles;
         an area of 10 × 40 miles is likewise 400 square miles, but it is not 20
@@ -602,7 +669,7 @@ the values.
         countries before metrication. One long ton is equal to 2,240 pounds
         (1,016 kg), 1.12 times as much as a short ton and slightly (1.59%)
         larger than the 1,000 kilograms (2,205 lb) metric tonne, or 35 cubic
-        feet (0.9911 m3) of salt water with a density of 64 lb/cu ft (1.025
+        feet (0.9911 m<sup>3</sup>) of salt water with a density of 64 lb/cu ft (1.025
         g/ml).[1] It has some limited use in the United States, most commonly
         in measuring the displacement of ships, and was the unit prescribed for
         warships by the Washington Naval Treaty 1922—for example battleships
@@ -683,6 +750,45 @@ the values.
     </unit>
   </group>
 
+  <!-- specific energy - relative to base SI unit kJ/kg -->
+  <group id="energypermass" label="Energy per mass" icon=":icon/icons/power.png">
+    <unit id="kjkg" label="kilojoule per kilogram [kJ/kg]" type="factor" value="1">
+      <info>
+        <![CDATA[Source: <a href="http://en.wikipedia.org/wiki/Specific_energy">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="mjkg" label="Megajoule per kilogram [MJ/kg]" type="factor" value="1000">
+      <info>
+        <![CDATA[Source: <a href="http://en.wikipedia.org/wiki/Specific_energy">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="gjkg" label="Gigajoule per kilogram [GJ/kg]" type="factor" value="1000000">
+      <info>
+        <![CDATA[Source: <a href="http://en.wikipedia.org/wiki/Specific_energy">Wikipedia</a>]]>
+      </info>
+    </unit>	
+    <unit id="btukg" label="BTU per kilogram [BTU/kg]" type="factor" value="1.055056">
+      <info>
+        <![CDATA[Source: <a href="http://en.wikipedia.org/wiki/Specific_energy">Wikipedia</a>]]>
+      </info>
+    </unit>		
+    <unit id="btulb" label="BTU per pound [BTU/lb]" type="factor" value="2.326000171">
+      <info>
+        <![CDATA[Source: <a href="http://en.wikipedia.org/wiki/Specific_energy">Wikipedia</a>]]>
+      </info>
+    </unit>		
+    <unit id="kcalkg" label="Kilocalorie per kilogram [kcal/kg]" type="factor" value="4.1868">
+      <info>
+        <![CDATA[Source: <a href="http://en.wikipedia.org/wiki/Specific_energy">Wikipedia</a>]]>
+      </info>
+    </unit>		
+    <unit id="kwhkg" label="Kilowatt-hour per kilogram [kWh/kg]" type="factor" value="3600">
+      <info>
+        <![CDATA[Source: <a href="http://en.wikipedia.org/wiki/Specific_energy">Wikipedia</a>]]>
+      </info>
+    </unit>		
+  </group>  
+  
   <group id="" label="Mass Flows" icon=":icon/icons/weight.png">
     <unit id="kgpersecond" label="Kilograms per Second" type="transform"
       toSI="x" fromSI="x"/>

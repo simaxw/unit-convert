@@ -1,0 +1,13 @@
+INPUT(
+./obj\app.o
+./obj\ccore.o
+./obj\main.o
+./obj\about.o
+./obj\parser.o
+./obj\unit.o
+./obj\help.o
+./obj\moc_main.o
+./obj\moc_about.o
+./obj\moc_unit.o
+./obj\moc_help.o
+);
