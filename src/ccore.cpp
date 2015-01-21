@@ -22,14 +22,25 @@ bool CCore::convertUnits( QList<Unit*> lstUnits, Unit *u ) {
         QRegExp r = ((QRegExpValidator*)fu->validator())->regExp();
         r.indexIn( txtInput );
 
-        int i = 1;
-        inputValue = 0;
-        foreach ( double subUnit, fu->subUnits ) {
-          inputValue += subUnit * r.cap(i).toDouble();
-          i++;
+        if ( fu->isExtendedInput ) {
+
+          QString eval = r.cap(1) + " * " + QString::number(fu->subUnits[0]) + " + " + r.cap(2);
+          if ( !r.cap(3).isEmpty() ) {
+            eval += " + (" + r.cap(3) + ")";
+          }
+          siUnitValue = qse.evaluate(eval).toNumber() * fu->value;
+
+        } else {
+
+          int i = 1;
+          inputValue = 0;
+          foreach ( double subUnit, fu->subUnits ) {
+            inputValue += subUnit * r.cap(i).toDouble();
+            i++;
+          }
+          inputValue += r.cap(i).toDouble();
+          siUnitValue = inputValue * fu->value;
         }
-        inputValue += r.cap(i).toDouble();
-        siUnitValue = inputValue * fu->value;
       }
       break;
     default:

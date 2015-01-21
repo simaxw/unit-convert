@@ -279,14 +279,15 @@ the values.
         customary systems. Source: <a href="http://en.wikipedia.org/wiki/Inch">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="feet_inches" label="Feet-Inches [ft-in]" type="formatted" value=".0254"
-      inputpattern="(\d+)-(\d+)" outputpattern="%1ft - %2in">
+    <unit id="feet_inches" label="Feet-Inches [ft-in]" type="formatted" extendedinput="true" value=".0254"
+      inputpattern="(\d+)-(\d+)( \d+/\d+)?" outputpattern="%1ft - %2in">
       <subunits>
         <subunit value="12" />
       </subunits>
       <info>
         <![CDATA[Enter a formatted feet-inch length, e.g. 2-42 (2 feet,
-        42 inches)]]>
+        42 inches) This field supports extended input like 1-2 3/4 what evaluates
+        as 1*12 + 2 + 3/4 inches.]]>
       </info>
     </unit>
 	<unit id="mile" label="Mile [mi]" type="factor" value="1609.344">

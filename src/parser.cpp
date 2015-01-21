@@ -50,6 +50,9 @@ bool UnitContentHandler::startElement(
     if ( type == "formatted" ) {
       FormattedUnit *fu = new FormattedUnit( id,label, attr.value("value").toDouble(),
           attr.value("inputpattern"), attr.value("outputpattern") );
+      if ( attr.value("extendedinput") == "true" ) {
+        fu->isExtendedInput = true;
+      }
       currentUnit = fu;
     }
   } else

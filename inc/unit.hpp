@@ -39,11 +39,10 @@ class Unit : public QLineEdit {
     unsigned int column;
     bool paintResult;
     QString result;
+    bool isExtendedInput;
 
   protected:
     void paintEvent( QPaintEvent* );
-
-  private:
     QScriptEngine qse;
 };
 
@@ -104,6 +103,8 @@ class FormattedUnit : public Unit {
     QString inputpattern;
     QString outputpattern;
     QList<int> subUnits;
+
+    void paintEvent(QPaintEvent*);
 
     FormattedUnit *clone() {
       FormattedUnit *fu = new FormattedUnit( id, label, value, inputpattern, outputpattern );

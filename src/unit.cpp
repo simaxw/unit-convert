@@ -1,7 +1,7 @@
 #include <unit.hpp>
 
 Unit::Unit( UnitType _type, const QString& _id, const QString& _label ) :
-  type(_type), id(_id), label(_label), lblInfo(0), column(1), paintResult(false) {
+  type(_type), id(_id), label(_label), lblInfo(0), column(1), paintResult(false), isExtendedInput(false) {
 
   lblUnit = new QLabel( label );
   lblUnit->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
@@ -92,4 +92,32 @@ QList<Unit*> UnitGroup::clone() {
   }
   additionalUnits << lstUnits;
   return lstUnits;
+}
+
+void FormattedUnit::paintEvent(QPaintEvent *e) {
+  QLineEdit::paintEvent(e);
+
+  if ( text().isEmpty() ) return;
+  if ( !isExtendedInput ) return;
+
+  QRegExp r(inputpattern);
+  r.indexIn(text());
+
+  QString eval = r.cap(1) + " * " + QString::number(subUnits[0]) + " + " + r.cap(2);
+  if ( !r.cap(3).isEmpty() ) {
+    eval += " + (" + r.cap(3) + ")";
+  }
+
+  if ( !paintResult ) return;
+
+  QPainter painter(this);
+  QRect rect = e->rect();
+  painter.setPen( QColor(150,150,150) );
+  QFontMetrics fm(font());
+  int endPos = fm.width(text());
+  result = qse.evaluate(eval).toString();
+  painter.drawText( endPos+10, rect.height()-(fm.height()/2) + COFFSET, "= " + result );
+ 
+
+  
 }
