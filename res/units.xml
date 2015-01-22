@@ -280,7 +280,7 @@ the values.
       </info>
     </unit>
     <unit id="feet_inches" label="Feet-Inches [ft-in]" type="formatted" extendedinput="true" value=".0254"
-      inputpattern="(\d+)-(\d+)( \d+/\d+)?" outputpattern="%1ft - %2in">
+      inputpattern="(\d+)-(\d+)?( ?\d+/\d+)?" outputpattern="%1ft - %2in">
       <subunits>
         <subunit value="12" />
       </subunits>
