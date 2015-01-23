@@ -1,7 +1,15 @@
 #include <unit.hpp>
 
 Unit::Unit( UnitType _type, const QString& _id, const QString& _label ) :
-  type(_type), id(_id), label(_label), lblInfo(0), column(1), paintResult(false), isExtendedInput(false) {
+  type(_type),
+  id(_id),
+  label(_label),
+  lblDeviation(0),
+  lblInfo(0),
+  column(1),
+  paintResult(false),
+  isExtendedInput(false)
+{
 
   lblUnit = new QLabel( label );
   lblUnit->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
@@ -60,6 +68,7 @@ void UnitGroup::initialize( QLabel *_lblInfo ) {
 
 QList<Unit*> UnitGroup::clone() {
   columns++;
+  gridcolumns+=2;
   QList<Unit*> lstUnits;
   int r = 0;
   foreach( Unit* u, units ) {
@@ -68,21 +77,24 @@ QList<Unit*> UnitGroup::clone() {
         FactorUnit *fu = ((FactorUnit*)u)->clone();
         fu->column = columns;
         lstUnits << fu;
-        gridUnitFields->addWidget( fu, r, columns );
+        gridUnitFields->addWidget( fu->lblDeviation, r, gridcolumns );
+        gridUnitFields->addWidget( fu, r, gridcolumns+1 );
         break;
         }
       case Unit::TRANSFORM: {
         TransformUnit *tu = ((TransformUnit*)u)->clone();
         tu->column = columns;
         lstUnits << tu;
-        gridUnitFields->addWidget( tu, r, columns );
+        gridUnitFields->addWidget( tu->lblDeviation, r, gridcolumns );
+        gridUnitFields->addWidget( tu, r, gridcolumns+1 );
         break;
         }
       case Unit::FORMATTED: {
         FormattedUnit *fu = ((FormattedUnit*)u)->clone();
         fu->column = columns;
         lstUnits << fu;
-        gridUnitFields->addWidget( fu, r, columns );
+        gridUnitFields->addWidget( fu->lblDeviation, r, gridcolumns );
+        gridUnitFields->addWidget( fu, r, gridcolumns+1 );
         break;
         }
       default:

@@ -220,6 +220,35 @@ void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
     statusbar->showMessage( tr("Error in Converter Core"), 2000 );
   }
 
+  QString stylePos = "color:green;font-weight:bold;";
+  QString styleNeg = "color:red;font-weight:bold;";
+
+  if ( u->column == 2 ) {
+    unsigned int i = 0;
+    foreach( Unit *B, lstUnits ) {
+      Unit *A = selectedGroup->units.at(i);
+      double db = B->text().toDouble();
+      double da = A->text().toDouble();
+      double diff = db-da;
+      B->lblDeviation->setText(QString::number(diff, 'f', 2));
+      B->lblDeviation->setStyleSheet( diff > 0 ? stylePos : styleNeg );
+      i++;
+    }
+  } else
+  if ( u->column > 2 ) {
+    unsigned int i = 0;
+    foreach( Unit *B, lstUnits ) {
+      Unit *A = selectedGroup->additionalUnits.at(u->column-3).at(i);
+      double db = B->text().toDouble();
+      double da = A->text().toDouble();
+      double diff = db-da;
+      B->lblDeviation->setText(QString::number(diff, 'f', 2));
+      B->lblDeviation->setStyleSheet( diff > 0 ? stylePos : styleNeg );
+      i++;
+    }
+
+  }
+
 }
 
 void Convert::lblInfoLinkHovered( const QString& url ) {
@@ -291,7 +320,7 @@ void Convert::actionSortDescTriggered() {
 
 void Convert::actionAddSplit() {
   if ( selectedGroup->columns == 5 ) {
-    statusbar->showMessage( tr("Maximum of 5 additional unit sets allowed"), 3000 );
+    statusbar->showMessage( tr("Maximum of 5 unit sets reached"), 3000 );
     return;
   }
   QList<Unit*> lstUnits = selectedGroup->clone();
@@ -302,11 +331,16 @@ void Convert::actionAddSplit() {
 
 void Convert::actionRemoveSplit() {
   if ( selectedGroup->additionalUnits.size() > 0 ) {
+    foreach ( Unit* u, selectedGroup->additionalUnits.last() ) {
+      delete u->lblDeviation;
+    }
     qDeleteAll(
         selectedGroup->additionalUnits.last().begin(),
         selectedGroup->additionalUnits.last().end()
         );
+
     selectedGroup->additionalUnits.removeLast();
     selectedGroup->columns--;
+    selectedGroup->gridcolumns-=2;
   }
 }

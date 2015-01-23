@@ -32,6 +32,7 @@ class Unit : public QLineEdit {
     QString label;
 
     QLabel *lblUnit;
+    QLabel *lblDeviation;
 
     QString info;
     QLabel *lblInfo;
@@ -63,6 +64,7 @@ class FactorUnit : public Unit {
       fu->info = this->info;
       fu->lblInfo = this->lblInfo;
       fu->lblUnit = this->lblUnit;
+      fu->lblDeviation = new QLabel("0%", fu);
       return fu;
     }
 };
@@ -85,6 +87,7 @@ class TransformUnit : public Unit {
       tu->info = this->info;
       tu->lblInfo = this->lblInfo;
       tu->lblUnit = this->lblUnit;
+      tu->lblDeviation = new QLabel("0%", tu);
       return tu;
     }
 };
@@ -112,6 +115,7 @@ class FormattedUnit : public Unit {
       fu->lblInfo = this->lblInfo;
       fu->lblUnit = this->lblUnit;
       fu->subUnits = this->subUnits;
+      fu->lblDeviation = new QLabel("0%", fu);
       return fu;
     }
 };
@@ -123,7 +127,8 @@ class UnitGroup : public QWidget {
     UnitGroup( const QString& _id, const QString& _label ) :
       id(_id),
       label(_label),
-      columns(1)
+      columns(1),
+      gridcolumns(0)
     {}
 
     void initialize( QLabel* );
@@ -137,6 +142,7 @@ class UnitGroup : public QWidget {
 
     QList<Unit*> clone();
     unsigned int columns;
+    unsigned int gridcolumns;
     QList< QList<Unit*> > additionalUnits;
 };
 
