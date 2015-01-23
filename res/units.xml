@@ -233,6 +233,24 @@ the values.
         second squared" Source: <a href="http://en.wikipedia.org/wiki/Dyne">Wikipedia</a>]]>
       </info>
     </unit>
+    <unit id="lbf" label="Pound Force" type="factor" value="4.448222">
+      <info>
+        <![CDATA[The pound or pound force (symbol: lb, lbf, or lbf) is a unit
+        of force used in some systems of measurement including English
+        engineering units and the British Gravitational System.
+        Source: <a href="http://en.wikipedia.org/wiki/Pound_%28force%29">Wikipedia</a>]]>
+      </info>
+    </unit>
+    <unit id="kp" label="Kilopond" type="factor" value="9.80665">
+      <info>
+        <![CDATA[The kilogram-force (kgf or kgF), or kilopond (kp, from Latin
+        pondus meaning weight), is a gravitational metric unit of force. It is
+        equal to the magnitude of the force exerted by one kilogram of mass in
+        a 9.80665 m/s2 gravitational field (standard gravity, a conventional
+        value approximating the average magnitude of gravity on Earth) Source:
+        <a href="http://en.wikipedia.org/wiki/Kilogram-force">Wikipedia</a>]]>
+      </info>
+    </unit>
   </group>
 
   <!-- lengths/distance - relative to base SI unit m (meter) -->
