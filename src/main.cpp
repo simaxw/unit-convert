@@ -231,7 +231,7 @@ void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
       double da = A->text().toDouble();
       double diff = db-da;
       B->lblDeviation->setText(QString::number(diff, 'f', 2));
-      B->lblDeviation->setStyleSheet( diff > 0 ? stylePos : styleNeg );
+      B->lblDeviation->setStyleSheet( diff >= 0 ? stylePos : styleNeg );
       i++;
     }
   } else
@@ -243,7 +243,7 @@ void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
       double da = A->text().toDouble();
       double diff = db-da;
       B->lblDeviation->setText(QString::number(diff, 'f', 2));
-      B->lblDeviation->setStyleSheet( diff > 0 ? stylePos : styleNeg );
+      B->lblDeviation->setStyleSheet( diff >= 0 ? stylePos : styleNeg );
       i++;
     }
 

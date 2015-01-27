@@ -13,3 +13,4 @@ moc*
 /release/
 /bin/
 object_script*
+/installer/packages/convert/data
