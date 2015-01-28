@@ -64,7 +64,7 @@ class FactorUnit : public Unit {
       fu->info = this->info;
       fu->lblInfo = this->lblInfo;
       fu->lblUnit = this->lblUnit;
-      fu->lblDeviation = new QLabel("0%", fu);
+      fu->lblDeviation = new QLabel("0", fu);
       return fu;
     }
 };
@@ -87,7 +87,7 @@ class TransformUnit : public Unit {
       tu->info = this->info;
       tu->lblInfo = this->lblInfo;
       tu->lblUnit = this->lblUnit;
-      tu->lblDeviation = new QLabel("0%", tu);
+      tu->lblDeviation = new QLabel("0", tu);
       return tu;
     }
 };
@@ -115,7 +115,7 @@ class FormattedUnit : public Unit {
       fu->lblInfo = this->lblInfo;
       fu->lblUnit = this->lblUnit;
       fu->subUnits = this->subUnits;
-      fu->lblDeviation = new QLabel("0%", fu);
+      fu->lblDeviation = new QLabel("0", fu);
       return fu;
     }
 };
