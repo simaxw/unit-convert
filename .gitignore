@@ -15,3 +15,5 @@ moc*
 object_script*
 /installer/packages/convert/data
 /installer/*.exe
+/installer/**/*.xml
+/installer/**/*.qs

@@ -25,8 +25,15 @@ set appsource=..\release\bin
 set appflist=convert.exe data.rcc
 
 set pkgdir=packages\convert\data
+set PATH=%qtsource%\bin;C:\Qt\Tools\mingw491_32\bin;%PATH%
 
 REM ===================================
+
+echo o Building Application Executable
+cd ..
+qmake
+mingw32-make
+cd installer
 
 echo o Creating Directories
 IF NOT EXIST %pkgdir% ( mkdir %pkgdir% )
@@ -45,8 +52,11 @@ FOR %%f IN (%appflist%) DO (
 )
 
 powershell -NoLogo -Command "(Get-Content packages\convert\meta\package.in.txt) | ForEach-Object { $_ -replace '{VERSION}', '%APPVERSION%' -replace '{DATE}', '%APPDATE%' } | Set-Content packages\convert\meta\package.xml"
+powershell -NoLogo -Command "(Get-Content packages\convert\meta\installshortcut.qs.in.txt) | ForEach-Object { $_ -replace '{VERSION}', '%APPVERSION%' } | Set-Content packages\convert\meta\installshortcut.qs"
 powershell -NoLogo -Command "(Get-Content config\config.in.txt) | ForEach-Object { $_ -replace '{VERSION}', '%APPVERSION%' } | Set-Content config\config.xml"
 
 set exename=convert-setup-%APPVERSION%.exe
 echo o Building %exename%
 %creator_exe% -v --offline-only -c config\config.xml -p packages %exename% 
+
+pause
