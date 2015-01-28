@@ -178,9 +178,9 @@ bool Convert::initialize() {
   about = new ConvertAbout;
   about->setWindowIcon( QIcon( ":/icon/icons/about.png" ) );
   about->strDate = CONVERT_DATE;
+  strVersion = QString( CONVERT_VERSION );
   about->strVersion = strVersion;
   about->initialize();
-  strVersion = QString( CONVERT_VERSION );
   setWindowTitle( "SUConvert " + strVersion );
   about->setWindowTitle(tr("About") + " " + windowTitle());
   setWindowIcon( QIcon( ":/icon/icons/convert.png" ) );

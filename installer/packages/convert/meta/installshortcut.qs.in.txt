@@ -8,7 +8,7 @@ Component.prototype.createOperations = function() {
     component.addOperation(
       "CreateShortcut",
       "@TargetDir@/convert.exe",
-      "@StartMenuDir@/Convert.lnk"
+      "@StartMenuDir@/Convert - {VERSION}.lnk"
     );
   }
 }
