@@ -2,8 +2,8 @@
 <Package>
   <DisplayName>Convert</DisplayName>
   <Description>Unit Conversion Tool</Description>
-  <Version>2.0.7</Version>
-  <ReleaseDate>2015-01-21</ReleaseDate>
+  <Version>{VERSION}</Version>
+  <ReleaseDate>{DATE}</ReleaseDate>
   <Name>convert</Name>
   <Licenses>
     <License name="GPL" file="license.txt" />

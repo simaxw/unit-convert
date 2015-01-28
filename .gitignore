@@ -14,3 +14,4 @@ moc*
 /bin/
 object_script*
 /installer/packages/convert/data
+/installer/*.exe
