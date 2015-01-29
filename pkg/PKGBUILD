@@ -1,0 +1,28 @@
+# Maintainer: Simon Wilper <sxw@chronowerks.de>
+pkgname=convert-git
+pkgver=2.0.8
+pkgrel=1
+pkgdesc="Qt5 Unit Converter for various mathematical units"
+url="https://www.chronowerks.de/cgit/convert.git/"
+arch=('x86_64' 'i686')
+license=('GPLv3')
+depends=('qt5-base', 'qt5-script' )
+provides=("convert")
+conflicts=("convert")
+install='foo.install'
+source=("https://www.chronowerks.de/repos/convert.git")
+md5sums=('SKIP')
+
+build() {
+  cd "${srcdir}/convert"
+  qmake
+  make -j4
+}
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+  install -Dm644 COPYING "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+}
+
+# vim:set ts=2 sw=2 et:

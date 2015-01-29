@@ -18,6 +18,7 @@
 #include <QToolBar>
 #include <QSplitter>
 #include <QTreeView>
+#include <QHeaderView>
 #include <QVBoxLayout>
 #include <QScrollArea>
 #include <QtMath>

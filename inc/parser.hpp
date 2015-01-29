@@ -26,7 +26,11 @@ class UnitContentHandler : public QXmlDefaultHandler {
 
   public:
     UnitContentHandler() :
-      isCDATA(false), currentUnitGroup(0), currentUnit(0)
+      isCDATA(false),
+      isCollection(false),
+      currentUnitGroup(0),
+      currentUnit(0),
+      currentCollection(0)
     {}
     bool startElement( const QString&, const QString&, const QString&, const QXmlAttributes& );
     bool endElement( const QString&, const QString&, const QString& );
