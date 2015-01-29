@@ -35,14 +35,18 @@ class UnitContentHandler : public QXmlDefaultHandler {
     bool characters( const QString& );
 
     QList<UnitGroup*> getUnitGroups() { return unitGroups; }
+    QList<UnitCollection*> getUnitCollections() { return collections; }
 
   private:
     bool isCDATA;
+    bool isCollection;
     QString current;
     QStack<QString> docTree;
     QList<UnitGroup*> unitGroups;
+    QList<UnitCollection*> collections;
     UnitGroup *currentUnitGroup;
     Unit *currentUnit;
+    UnitCollection *currentCollection;
 };
 
 class UnitXMLParser {
@@ -55,6 +59,7 @@ class UnitXMLParser {
     {}
     bool initialize();
 
+    QList<UnitCollection*> getUnitCollections() { return contentHandler->getUnitCollections(); }
     QList<UnitGroup*> getUnitGroups() { return contentHandler->getUnitGroups(); }
     QString getErrorMessage() { return errorHandler->errorString(); }
 

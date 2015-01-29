@@ -29,6 +29,11 @@ bool UnitContentHandler::startElement(
     const QXmlAttributes& attr ) {
   docTree << localName;
 
+  if ( localName == "collection" ) {
+    UnitCollection *coll = new UnitCollection( attr.value("id"), attr.value("label"), attr.value("icon") );
+    isCollection = true;
+    currentCollection = coll;
+  } else
   if ( localName == "group" ) {
     UnitGroup *g = new UnitGroup( attr.value("id"), attr.value("label") );
     g->icon = attr.value("icon");
@@ -56,10 +61,6 @@ bool UnitContentHandler::startElement(
       currentUnit = fu;
     }
   } else
-  if ( localName == "info" ) {
-  } else
-  if ( localName == "subunits" ) {
-  } else
   if ( localName == "subunit" ) {
     QString val = attr.value("value");
     if ( !val.isEmpty() ) {
@@ -79,9 +80,16 @@ bool UnitContentHandler::endElement(
     docTree.pop();
   }
 
+  if ( localName == "collection" ) {
+    isCollection = false;
+    collections.append(currentCollection);
+  } else
   if ( localName == "group" ) {
     if ( currentUnitGroup ) {
-      unitGroups.append(currentUnitGroup);
+      if ( isCollection && currentCollection )
+        currentCollection->lstGroups.append(currentUnitGroup);
+      else
+        unitGroups.append(currentUnitGroup);
     }
   } else
   if ( localName == "unit" ) {
@@ -123,5 +131,6 @@ bool UnitXMLParser::initialize() {
   if ( !reader.parse( in ) ) {
     return false;
   }
+
   return true;
 }

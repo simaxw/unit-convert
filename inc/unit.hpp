@@ -146,4 +146,18 @@ class UnitGroup : public QWidget {
     QList< QList<Unit*> > additionalUnits;
 };
 
+class UnitCollection {
+  public:
+    UnitCollection( const QString& _id, const QString& _label, const QString& _icon ) :
+      id(_id),
+      label(_label),
+      icon(_icon)
+    {}
+
+    QString id;
+    QString label;
+    QString icon;
+    QList<UnitGroup*> lstGroups;
+};
+
 #endif

@@ -88,10 +88,10 @@ bool Convert::initialize() {
   splitter = new QSplitter( this );
 
   // initialize the unit group list
-  lstUnitGroups = new QListView;
-  lstUnitGroups->setStyleSheet("font-size: 12pt; font-family:sans; margin:10px;");
-  lstUnitGroups->setEditTriggers(QAbstractItemView::NoEditTriggers);
-  splitter->addWidget(lstUnitGroups);
+  treeUnitGroups = new QTreeView;
+  treeUnitGroups->setStyleSheet("font-size: 12pt; font-family:sans; margin:0;");
+  treeUnitGroups->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  splitter->addWidget(treeUnitGroups);
 
   // initialize widget with VBoxLayout
   QWidget *unitStackInfo = new QWidget;
@@ -127,9 +127,30 @@ bool Convert::initialize() {
 
   // Iterate over the unit groups and add them to the stacked layout.
   // Then create a StandardItem and add this to the StandardItemModel.
-  // Finally assign the model to the ListView
+  // Finally assign the model to the View
   unsigned int originalIndex = 0;
   foreach( UnitGroup* g, p.getUnitGroups() ) {
+    g->initialize(lblInfo);
+    unitLayout->addWidget(g);
+
+    foreach ( Unit *u, g->units ) {
+      connect( u, SIGNAL(textEdited(const QString&)),
+          this, SLOT(txtUnitsTextEdited(const QString&)));
+    }
+
+    QStandardItem *item = new QStandardItem( g->label );
+    item->setData( QVariant( originalIndex ) );
+    item->setIcon( QIcon(g->icon) );
+    modelUnitGroups->appendRow( item );
+
+    originalIndex++;
+  }
+  foreach ( UnitCollection* coll, p.getUnitCollections() ) {
+    QStandardItem *itemColl = new QStandardItem(coll->label);
+    itemColl->setIcon(QIcon(coll->icon));
+    modelUnitGroups->appendRow(itemColl);
+
+    foreach ( UnitGroup *g, coll->lstGroups ) {
       g->initialize(lblInfo);
       unitLayout->addWidget(g);
 
@@ -141,25 +162,28 @@ bool Convert::initialize() {
       QStandardItem *item = new QStandardItem( g->label );
       item->setData( QVariant( originalIndex ) );
       item->setIcon( QIcon(g->icon) );
-      modelUnitGroups->appendRow( item );
 
+      itemColl->appendRow(item);
       originalIndex++;
+    }
+
   }
 
-  lstUnitGroups->setModel( modelUnitGroups );
+  treeUnitGroups->setModel( modelUnitGroups );
 
-  connect( lstUnitGroups->selectionModel(),
+  connect( treeUnitGroups->selectionModel(),
       SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection& )),
       this,
-      SLOT(lstUnitGroupsSelectionChanged( const QItemSelection&, const QItemSelection& ))
+      SLOT(treeUnitGroupsSelectionChanged( const QItemSelection&, const QItemSelection& ))
     );
 
   setCentralWidget(splitter);
 
+  /*
   if ( unitLayout->count() > 0 ) {
     int lastIdx = settings->value( "last.group", 0 ).toInt();
     QModelIndex index = modelUnitGroups->index( lastIdx, 0 );
-    lstUnitGroups->selectionModel()->select( index, QItemSelectionModel::Select );
+    treeUnitGroups->selectionModel()->select( index, QItemSelectionModel::Select );
 
     if ( selectedGroup ) {
       int lastFocusedIdx = settings->value( "last.focused", 0 ).toInt();
@@ -168,6 +192,7 @@ bool Convert::initialize() {
       }
     }
   }
+  */
 
   if ( settings ) {
     restoreGeometry( settings->value( "mainwindow.geom" ).toByteArray() );
@@ -185,18 +210,27 @@ bool Convert::initialize() {
   about->setWindowTitle(tr("About") + " " + windowTitle());
   setWindowIcon( QIcon( ":/icon/icons/convert.png" ) );
 
-  modelUnitGroups->invisibleRootItem()->sortChildren( 0, Qt::AscendingOrder );
+  //modelUnitGroups->invisibleRootItem()->sortChildren( 0, Qt::AscendingOrder );
 
   return true;
 }
 
-void Convert::lstUnitGroupsSelectionChanged( const QItemSelection& selected, const QItemSelection& ) {
-  int idx = selected.indexes().at(0).row();
-  if ( idx > unitLayout->count() ) {
-    return;
-  }
-  QVariant voriginalIndex = modelUnitGroups->itemFromIndex(selected.indexes().at(0))->data();
-  setVisibleUnitGroup(voriginalIndex.toInt());
+void Convert::treeUnitGroupsSelectionChanged( const QItemSelection& selected, const QItemSelection& ) {
+  /*
+  QModelIndex index = selected.indexes().at(0);
+  if ( !index.isValid() ) return;
+
+  QStandardItem *item = modelUnitGroups->itemFromIndex(index);
+  if ( !item ) return;
+
+  qDebug() << item->text() << " has originalIndex " << item->data();
+*/
+  //QVariant originalIndex = modelUnitGroups->itemFromIndex(index)->data();
+
+  //if ( originalIndex.isValid() ) {
+    //qDebug() << "Requesting index " << index.row() << " Stack has " << unitLayout->count();
+
+    //setVisibleUnitGroup(originalIndex.toInt());
 }
 
 void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
@@ -261,7 +295,8 @@ void Convert::lblInfoLinkHovered( const QString& url ) {
 
 void Convert::actionQuitTriggered() {
   if ( settings ) {
-    QVariant voriginalIndex = modelUnitGroups->itemFromIndex(lstUnitGroups->selectionModel()->selectedIndexes().at(0))->data();
+    /*
+    QVariant voriginalIndex = modelUnitGroups->itemFromIndex(treeUnitGroups->selectionModel()->selectedIndexes().at(0))->data();
     settings->setValue( "last.group", voriginalIndex.toInt() );
 
     if ( selectedGroup ) {
@@ -269,6 +304,7 @@ void Convert::actionQuitTriggered() {
       int idx = selectedGroup->units.indexOf(u);
       settings->setValue( "last.focused", idx );
     }
+    */
 
     settings->setValue( "mainwindow.geom", saveGeometry() );
     settings->setValue( "mainwindow.state", saveState() );
@@ -279,18 +315,18 @@ void Convert::actionQuitTriggered() {
 }
 
 void Convert::actionPreviousTriggered() {
-  int idx = lstUnitGroups->selectionModel()->selectedIndexes().at(0).row();
+  int idx = treeUnitGroups->selectionModel()->selectedIndexes().at(0).row();
   if ( idx != 0 ) {
     QModelIndex index = modelUnitGroups->index( idx-1, 0 );
-    lstUnitGroups->selectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
+    treeUnitGroups->selectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
   }
 }
 
 void Convert::actionNextTriggered() {
-  int idx = lstUnitGroups->selectionModel()->selectedIndexes().at(0).row();
+  int idx = treeUnitGroups->selectionModel()->selectedIndexes().at(0).row();
   if ( idx < unitGroups.size()-1 ) {
     QModelIndex index = modelUnitGroups->index( idx+1, 0 );
-    lstUnitGroups->selectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
+    treeUnitGroups->selectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
   }
 }
 

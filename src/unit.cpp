@@ -10,7 +10,6 @@ Unit::Unit( UnitType _type, const QString& _id, const QString& _label ) :
   paintResult(false),
   isExtendedInput(false)
 {
-
   lblUnit = new QLabel( label );
   lblUnit->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
   lblUnit->setBuddy(this);
@@ -129,7 +128,4 @@ void FormattedUnit::paintEvent(QPaintEvent *e) {
   int endPos = fm.width(text());
   result = qse.evaluate(eval).toString();
   painter.drawText( endPos+10, rect.height()-(fm.height()/2) + COFFSET, "= " + result );
- 
-
-  
 }

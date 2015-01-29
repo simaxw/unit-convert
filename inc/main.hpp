@@ -17,7 +17,7 @@
 #include <QAction>
 #include <QToolBar>
 #include <QSplitter>
-#include <QListView>
+#include <QTreeView>
 #include <QVBoxLayout>
 #include <QScrollArea>
 #include <QtMath>
@@ -42,7 +42,7 @@ class Convert : public QMainWindow {
     bool initialize();
 
   private slots:
-    void lstUnitGroupsSelectionChanged( const QItemSelection&, const QItemSelection& );
+    void treeUnitGroupsSelectionChanged( const QItemSelection&, const QItemSelection& );
     void txtUnitsTextEdited( const QString& );
     void lblInfoLinkHovered( const QString& );
     void actionQuitTriggered();
@@ -79,7 +79,7 @@ class Convert : public QMainWindow {
 
     QLabel *lblInfo;
     QToolBar *tbMain;
-    QListView *lstUnitGroups;
+    QTreeView *treeUnitGroups;
     QSplitter *splitter;
     QWidget *widgetUnitList;
     QScrollArea *scrInfo;
