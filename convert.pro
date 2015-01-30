@@ -11,8 +11,8 @@ TARGET = bin/convert
 
 INCLUDEPATH += inc
 
-QMAKE_CXXFLAGS_DEBUG += -O0 -fno-inline
-CONFIG += C++11 debug
+#QMAKE_CXXFLAGS_DEBUG += -O0 -fno-inline
+#CONFIG += C++11 debug
 
 OBJECTS_DIR = obj
 MOC_DIR = obj
