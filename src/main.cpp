@@ -1,5 +1,9 @@
 #include "main.hpp"
 
+/** initialize the main window
+ *
+ * @return bool true on success, false otherwise
+ */
 bool Convert::initialize() {
 
   // the data.rcc gets compiled as a binary file via rcc. It is expected
@@ -39,40 +43,40 @@ bool Convert::initialize() {
 
   // Actions
   actionQuit     = new QAction( QIcon(":/icon/icons/quit.png"),          tr("&Quit"),      this);
-  actionPrevious = new QAction( QIcon(":/icon/icons/up.png"),            tr("&Previous"),  this);
-  actionNext     = new QAction( QIcon(":/icon/icons/down.png"),          tr("&Next"),      this);
-  actionSortAsc  = new QAction( QIcon(":/icon/icons/a_to_z.png"),        tr("Sort &Asc"),  this);
-  actionSortDesc = new QAction( QIcon(":/icon/icons/a_to_z.png"),        tr("Sort Des&c"), this);
+
+  actionSort     = new QAction( QIcon(":/icon/icons/a_to_z.png"),        tr("&Sort"),      this);
+  actionSortAsc  = new QAction( tr("&Ascending"), this );
+  actionSortDesc = new QAction( tr("&Descending"), this );
+  
   actionSplit    = new QAction( QIcon(":/icon/icons/add-new-tab.png"),   tr("&Split"),     this);
   actionUnsplit  = new QAction( QIcon(":/icon/icons/window-close.png"),  tr("&Unsplit"),   this);
   actionHelp     = new QAction( QIcon(":/icon/icons/about.png"),         tr("&Help"),      this);
   actionAbout    = new QAction( QIcon(":/icon/icons/about.png"),         tr("&About"),     this);
 
   actionQuit    ->setShortcut( QKeySequence( tr("Ctrl+Q") ) );
-  actionPrevious->setShortcut( QKeySequence( "Ctrl+Up" ) );
-  actionNext    ->setShortcut( QKeySequence( "Ctrl+Down" ) );
   actionSplit   ->setShortcut( QKeySequence( "F2" ) );
   actionUnsplit ->setShortcut( QKeySequence( "F3" ) );
   actionHelp    ->setShortcut( QKeySequence( "F1" ) );
 
   // Signals connected to Slots
   connect( actionQuit,     SIGNAL(triggered()), this, SLOT(actionQuitTriggered()) );
-  connect( actionPrevious, SIGNAL(triggered()), this, SLOT(actionPreviousTriggered()) );
-  connect( actionNext,     SIGNAL(triggered()), this, SLOT(actionNextTriggered()) );
+  connect( actionSort,     SIGNAL(triggered()), this, SLOT(actionSortTriggered()) );
   connect( actionSortAsc,  SIGNAL(triggered()), this, SLOT(actionSortAscTriggered()) );
   connect( actionSortDesc, SIGNAL(triggered()), this, SLOT(actionSortDescTriggered()) );
   connect( actionSplit,    SIGNAL(triggered()), this, SLOT(actionAddSplit()) );
   connect( actionUnsplit,  SIGNAL(triggered()), this, SLOT(actionRemoveSplit()) );
   help = new ConvertHelp;
+  help->setWindowTitle( QString(tr("SUConvert %1 - Help")).arg(strVersion) );
   connect( actionHelp,     SIGNAL(triggered()), help, SLOT(show()) );
   connect( actionAbout,    SIGNAL(triggered()), this, SLOT(actionAboutTriggered()) );
 
+  menSort = new QMenu( tr("Sort"), this );
+  menSort->addAction( actionSortAsc );
+  menSort->addAction( actionSortDesc );
+
   // add all actions to the main toolbar. Re-order here:
   tbMain->addAction(actionQuit);
-  tbMain->addAction(actionSortAsc);
-  tbMain->addAction(actionSortDesc);
-  tbMain->addAction(actionPrevious);
-  tbMain->addAction(actionNext);
+  tbMain->addAction(actionSort);
   tbMain->addAction(actionSplit);
   tbMain->addAction(actionUnsplit);
   tbMain->addAction(actionHelp);
@@ -182,21 +186,6 @@ bool Convert::initialize() {
 
   setCentralWidget(splitter);
 
-  /*
-  if ( unitLayout->count() > 0 ) {
-    int lastIdx = settings->value( "last.group", 0 ).toInt();
-    QModelIndex index = modelUnitGroups->index( lastIdx, 0 );
-    treeUnitGroups->selectionModel()->select( index, QItemSelectionModel::Select );
-
-    if ( selectedGroup ) {
-      int lastFocusedIdx = settings->value( "last.focused", 0 ).toInt();
-      if ( lastFocusedIdx >= 0 && lastFocusedIdx < selectedGroup->units.size() ) {
-        selectedGroup->units.at(lastFocusedIdx)->setFocus();
-      }
-    }
-  }
-  */
-
   if ( settings ) {
     restoreGeometry( settings->value( "mainwindow.geom" ).toByteArray() );
     restoreState( settings->value( "mainwindow.state" ).toByteArray() );
@@ -262,6 +251,7 @@ void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
   if ( u->column == 2 ) {
     unsigned int i = 0;
     foreach( Unit *B, lstUnits ) {
+      if ( B->type == Unit::FORMATTED ) continue;
       Unit *A = selectedGroup->units.at(i);
       double db = B->text().toDouble();
       double da = A->text().toDouble();
@@ -274,6 +264,7 @@ void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
   if ( u->column > 2 ) {
     unsigned int i = 0;
     foreach( Unit *B, lstUnits ) {
+      if ( B->type == Unit::FORMATTED ) continue;
       Unit *A = selectedGroup->additionalUnits.at(u->column-3).at(i);
       double db = B->text().toDouble();
       double da = A->text().toDouble();
@@ -297,24 +288,9 @@ void Convert::lblInfoLinkHovered( const QString& url ) {
 
 void Convert::actionQuitTriggered() {
   if ( settings ) {
-    QVariant voriginalIndex = modelUnitGroups->itemFromIndex(treeUnitGroups->selectionModel()->selectedIndexes().at(0))->data();
-    int i = 0;
-    if ( voriginalIndex.isValid() ) {
-      i = voriginalIndex.toInt();
-    }
-
-    settings->setValue( "last.group", i );
-
-    if ( selectedGroup ) {
-      Unit *u = (Unit*)qApp->focusWidget();
-      int idx = selectedGroup->units.indexOf(u);
-      settings->setValue( "last.focused", idx );
-    }
-
     settings->setValue( "mainwindow.geom", saveGeometry() );
     settings->setValue( "mainwindow.state", saveState() );
     settings->setValue( "splitter.size", splitter->saveState() );
-
   }
   qApp->quit();
 }
@@ -363,7 +339,8 @@ void Convert::setVisibleUnitGroup( int idx ) {
   selectedGroup = qobject_cast<UnitGroup*>(unitLayout->currentWidget());
 
   // transfer focus to first input field
-  //selectedGroup->units.at(0)->setFocus();
+  if ( selectedGroup->units.size() > 0 )
+    selectedGroup->units.at(0)->setFocus();
 }
 
 void Convert::actionSortAscTriggered() {
@@ -399,4 +376,8 @@ void Convert::actionRemoveSplit() {
     selectedGroup->columns--;
     selectedGroup->gridcolumns-=2;
   }
+}
+
+void Convert::actionSortTriggered() {
+  menSort->exec(QCursor::pos());
 }

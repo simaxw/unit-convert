@@ -811,7 +811,7 @@ the values.
     </unit>   
   </group>  
   
-  <group id="" label="Mass Flows" icon=":icon/icons/weight.png">
+  <group id="mflow" label="Mass Flows" icon=":icon/icons/mass-flow.png">
     <unit id="kgpersecond" label="Kilograms per Second" type="transform"
       toSI="x" fromSI="x"/>
     <unit id="kgperminute" label="Kilograms per Minute" type="transform"

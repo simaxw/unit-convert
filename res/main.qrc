@@ -26,6 +26,16 @@
     <file>icons/arrows.png</file>
     <file>icons/add-new-tab.png</file>
     <file>icons/window-close.png</file>
+    <file>icons/density.png</file>
+    <file>icons/mass-flow.png</file>
+    <file>icons/e-per-m.png</file>
+    <file>icons/e-per-v.png</file>
+    <file>icons/eff.png</file>
+    <file>icons/torque.png</file>
+    <file>icons/gas.png</file>
+    <file>icons/liquid.png</file>
+    <file>icons/speed.png</file>
+    <file>icons/angle.png</file>
   </qresource>
   <qresource prefix="/data">
     <file>units.xml</file>

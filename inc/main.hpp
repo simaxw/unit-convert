@@ -16,6 +16,7 @@
 #include <QItemSelection>
 #include <QAction>
 #include <QToolBar>
+#include <QMenu>
 #include <QSplitter>
 #include <QTreeView>
 #include <QHeaderView>
@@ -50,6 +51,7 @@ class Convert : public QMainWindow {
     void actionPreviousTriggered();
     void actionNextTriggered();
     void actionAboutTriggered();
+    void actionSortTriggered();
     void actionSortAscTriggered();
     void actionSortDescTriggered();
     void actionAddSplit();
@@ -68,11 +70,12 @@ class Convert : public QMainWindow {
     CCore cc;
     QStatusBar *statusbar;
 
-    QAction *actionQuit;
-    QAction *actionPrevious;
-    QAction *actionNext;
+    QAction *actionSort;
+    QMenu *menSort;
     QAction *actionSortAsc;
     QAction *actionSortDesc;
+
+    QAction *actionQuit;
     QAction *actionSplit;
     QAction *actionUnsplit;
     QAction *actionHelp;

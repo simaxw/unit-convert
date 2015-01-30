@@ -115,7 +115,7 @@ class FormattedUnit : public Unit {
       fu->lblInfo = this->lblInfo;
       fu->lblUnit = this->lblUnit;
       fu->subUnits = this->subUnits;
-      fu->lblDeviation = new QLabel("0", fu);
+      fu->lblDeviation = new QLabel(QString(), fu);
       return fu;
     }
 };
