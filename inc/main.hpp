@@ -30,6 +30,8 @@
 
 #define CONVERT_VERSION "2.1.2"
 #define CONVERT_DATE "2015-01-31"
+#define COMPANY_NAME "Chronowerks"
+#define CONVERT_NAME "SUConvert"
 
 class Convert : public QMainWindow {
   Q_OBJECT

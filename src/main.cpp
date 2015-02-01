@@ -26,7 +26,12 @@ bool Convert::initialize() {
 
   // initialize settings object from settings.ini stored in the same
   // path as the executable in INI format
-  settings = new QSettings( qApp->applicationDirPath() + "/settings.ini", QSettings::IniFormat, this );
+  settings = new QSettings(
+      QSettings::IniFormat,
+      QSettings::UserScope,
+      COMPANY_NAME,
+      CONVERT_NAME,
+      this );
 
   // UI
   // Status Bar
@@ -66,7 +71,7 @@ bool Convert::initialize() {
   connect( actionSplit,    SIGNAL(triggered()), this, SLOT(actionAddSplit()) );
   connect( actionUnsplit,  SIGNAL(triggered()), this, SLOT(actionRemoveSplit()) );
   help = new ConvertHelp;
-  help->setWindowTitle( QString(tr("SUConvert %1 - Help")).arg(strVersion) );
+  help->setWindowTitle( QString(tr("%1 %2 - Help")).arg(CONVERT_NAME).arg(strVersion) );
   connect( actionHelp,     SIGNAL(triggered()), help, SLOT(show()) );
   connect( actionAbout,    SIGNAL(triggered()), this, SLOT(actionAboutTriggered()) );
 
@@ -202,11 +207,12 @@ bool Convert::initialize() {
 
   setCentralWidget(splitter);
 
+  strVersion = QString( CONVERT_VERSION );
+
   about = new ConvertAbout;
   about->setWindowIcon( QIcon( ":/icon/icons/about.png" ) );
-  about->setWindowTitle( "SUConvert " + strVersion );
+  about->setWindowTitle( QString("%1 " + strVersion).arg(CONVERT_NAME) );
   about->strDate = CONVERT_DATE;
-  strVersion = QString( CONVERT_VERSION );
   about->strVersion = strVersion;
   about->initialize();
   setWindowTitle( "SUConvert " + strVersion );
