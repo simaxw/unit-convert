@@ -35,7 +35,9 @@ class Convert : public QMainWindow {
   Q_OBJECT
 
   public:
+    enum SortDirection { ASC, DESC };
     Convert() :
+      sdUnitGroups(ASC),
       modelUnitGroups(0),
       unitLayout(0),
       settings(0),
@@ -48,8 +50,6 @@ class Convert : public QMainWindow {
     void txtUnitsTextEdited( const QString& );
     void lblInfoLinkHovered( const QString& );
     void actionQuitTriggered();
-    void actionPreviousTriggered();
-    void actionNextTriggered();
     void actionAboutTriggered();
     void actionSortTriggered();
     void actionSortAscTriggered();
@@ -58,6 +58,7 @@ class Convert : public QMainWindow {
     void actionRemoveSplit();
 
   private:
+    SortDirection sdUnitGroups;
     void setVisibleUnitGroup( int );
     QStandardItemModel *modelUnitGroups;
     QStackedLayout *unitLayout;
@@ -81,6 +82,7 @@ class Convert : public QMainWindow {
     QAction *actionHelp;
     QAction *actionAbout;
 
+    QLabel *lblTitle;
     QLabel *lblInfo;
     QToolBar *tbMain;
     QTreeView *treeUnitGroups;

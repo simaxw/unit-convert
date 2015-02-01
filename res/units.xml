@@ -826,4 +826,13 @@ the values.
       toSI="x * 2.20462262 * 60 * 60" fromSI="x / 2.20462262 / 60 / 60"/>
   </group>
 
+  <group id="angle" label="Angles" icon=":icon/icons/angle.png">
+    <unit id="degree" label="Degree" type="factor" value="0.0174532925"/>
+    <unit id="rad" label="Radians" type="factor" value="1"/>
+    <unit id="gon" label="Gon" type="factor" value="0.0157"/>
+    <unit id="r" label="Revolution" type="factor" value="6.283185307189"/>
+    <unit id="sextant" label="Sextant" type="factor" value="1.047197551198"/>
+
+  </group>
+
 </units>

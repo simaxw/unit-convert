@@ -104,6 +104,11 @@ bool Convert::initialize() {
   QWidget *unitStackInfo = new QWidget;
   QVBoxLayout *vboxUnitStackInfo = new QVBoxLayout;
   unitStackInfo->setLayout(vboxUnitStackInfo);
+
+  lblTitle = new QLabel( "Title" );
+  lblTitle->setStyleSheet( "font-size:16pt;font-weight:bold;background:rgb(100,100,100);color:white;padding:4px;" );
+  vboxUnitStackInfo->addWidget(lblTitle);
+
   splitter->addWidget(unitStackInfo);
 
   // assign the StackedLayout to the unit list widget
@@ -117,8 +122,16 @@ bool Convert::initialize() {
   lblInfo->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
   lblInfo->setStyleSheet("background:white;color:black;font-size:12pt;line-height:150%;padding:10px;");
   lblInfo->setOpenExternalLinks(true);
-  lblInfo->setTextInteractionFlags(Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse|Qt::TextBrowserInteraction|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
-  connect( lblInfo, SIGNAL(linkHovered(const QString& )), this, SLOT(lblInfoLinkHovered(const QString&)) );
+  lblInfo->setTextInteractionFlags(
+      Qt::LinksAccessibleByKeyboard|
+      Qt::LinksAccessibleByMouse|
+      Qt::TextBrowserInteraction|
+      Qt::TextSelectableByKeyboard|
+      Qt::TextSelectableByMouse
+      );
+  connect(  lblInfo, SIGNAL(linkHovered(const QString& )),
+            this, SLOT(lblInfoLinkHovered(const QString&))
+            );
   if ( unitGroups.size() == 0 ) {
     lblInfo->setText( "<html>No Units configured</html>" );
   }
@@ -176,6 +189,8 @@ bool Convert::initialize() {
 
   }
 
+  unitLayout->addWidget( new QWidget(this) );
+
   treeUnitGroups->setModel( modelUnitGroups );
 
   connect( treeUnitGroups->selectionModel(),
@@ -185,12 +200,6 @@ bool Convert::initialize() {
     );
 
   setCentralWidget(splitter);
-
-  if ( settings ) {
-    restoreGeometry( settings->value( "mainwindow.geom" ).toByteArray() );
-    restoreState( settings->value( "mainwindow.state" ).toByteArray() );
-    splitter->restoreState( settings->value( "splitter.size" ).toByteArray() );
-  }
 
   about = new ConvertAbout;
   about->setWindowIcon( QIcon( ":/icon/icons/about.png" ) );
@@ -203,8 +212,28 @@ bool Convert::initialize() {
   about->setWindowTitle(tr("About") + " " + windowTitle());
   setWindowIcon( QIcon( ":/icon/icons/convert.png" ) );
 
-  modelUnitGroups->invisibleRootItem()->sortChildren( 0, Qt::AscendingOrder );
-  treeUnitGroups->selectionModel()->select( modelUnitGroups->index(0,0), QItemSelectionModel::ClearAndSelect );
+  if ( settings ) {
+    restoreGeometry( settings->value( "mainwindow.geom" ).toByteArray() );
+    restoreState( settings->value( "mainwindow.state" ).toByteArray() );
+    splitter->restoreState( settings->value( "splitter.size" ).toByteArray() );
+
+    int sd = settings->value( "sort.unitgroups", 0 ).toInt();
+    modelUnitGroups->invisibleRootItem()->sortChildren( 0, sd == 0 ? Qt::AscendingOrder : Qt::DescendingOrder );
+    sdUnitGroups = (sd == 0 ? ASC : DESC);
+
+    QModelIndex groupIndex;
+    QList<QVariant> indexTree = settings->value( "last.unitgroup" ).toList();
+    if ( indexTree.length() == 2 ) {
+      QModelIndex collectionIndex = modelUnitGroups->index(indexTree.at(1).toInt(),0);
+      treeUnitGroups->setExpanded(collectionIndex, true);
+      groupIndex = collectionIndex.child(indexTree.at(0).toInt(),0);
+    } else
+    if ( indexTree.length() == 1 ) {
+      groupIndex = modelUnitGroups->index(indexTree.at(0).toInt(),0);
+    }
+    treeUnitGroups->selectionModel()->select(
+          groupIndex, QItemSelectionModel::ClearAndSelect );
+  }
 
   return true;
 }
@@ -220,8 +249,14 @@ void Convert::treeUnitGroupsSelectionChanged( const QItemSelection& selected, co
 
   QVariant originalIndex = item->data();
 
-  if ( originalIndex.isValid() )
+  if ( originalIndex.isValid() ) {
     setVisibleUnitGroup(originalIndex.toInt());
+  } else {
+    unitLayout->setCurrentIndex(unitLayout->count()-1);
+    lblInfo->setText(QString());
+    lblTitle->setText(QString());
+  }
+
 }
 
 void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
@@ -291,32 +326,23 @@ void Convert::actionQuitTriggered() {
     settings->setValue( "mainwindow.geom", saveGeometry() );
     settings->setValue( "mainwindow.state", saveState() );
     settings->setValue( "splitter.size", splitter->saveState() );
+    settings->setValue( "sort.unitgroups", QVariant(sdUnitGroups) );
+
+    QModelIndexList indexes = treeUnitGroups->selectionModel()->selectedIndexes();
+    if ( indexes.length() > 0 ) {
+      QModelIndex index = indexes.at(0);
+      if ( index.isValid() ) {
+        QList<QVariant> indexTree;
+        indexTree << QVariant(index.row());
+        QModelIndex parent = index.parent();
+        if ( parent.isValid() ) {
+          indexTree << QVariant(parent.row());
+        }
+        settings->setValue( "last.unitgroup", QVariant(indexTree) );
+      }
+    }
   }
   qApp->quit();
-}
-
-void Convert::actionPreviousTriggered() {
-  if ( treeUnitGroups->selectionModel()->selectedIndexes().size() == 0 ) return;
-
-  QModelIndex index = treeUnitGroups->selectionModel()->selectedIndexes().at(0);
-  if ( !index.isValid() ) return;
-
-  QModelIndex indexPrev = treeUnitGroups->indexAbove(index);
-  if ( !indexPrev.isValid() ) return;
-
-  treeUnitGroups->selectionModel()->select( indexPrev, QItemSelectionModel::ClearAndSelect );
-}
-
-void Convert::actionNextTriggered() {
-  if ( treeUnitGroups->selectionModel()->selectedIndexes().size() == 0 ) return;
-
-  QModelIndex index = treeUnitGroups->selectionModel()->selectedIndexes().at(0);
-  if ( !index.isValid() ) return;
-
-  QModelIndex indexNext = treeUnitGroups->indexBelow(index);
-  if ( !indexNext.isValid() ) return;
-
-  treeUnitGroups->selectionModel()->select( indexNext, QItemSelectionModel::ClearAndSelect );
 }
 
 void Convert::actionAboutTriggered() {
@@ -341,14 +367,18 @@ void Convert::setVisibleUnitGroup( int idx ) {
   // transfer focus to first input field
   if ( selectedGroup->units.size() > 0 )
     selectedGroup->units.at(0)->setFocus();
+
+  lblTitle->setText(selectedGroup->label);
 }
 
 void Convert::actionSortAscTriggered() {
   modelUnitGroups->invisibleRootItem()->sortChildren( 0, Qt::AscendingOrder );
+  sdUnitGroups = ASC;
 }
 
 void Convert::actionSortDescTriggered() {
   modelUnitGroups->invisibleRootItem()->sortChildren( 0, Qt::DescendingOrder );
+  sdUnitGroups = DESC;
 }
 
 void Convert::actionAddSplit() {
