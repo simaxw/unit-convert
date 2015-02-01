@@ -115,6 +115,7 @@ bool Convert::initialize() {
   widgetUnitList = new QWidget;
   unitLayout = new QStackedLayout;
   widgetUnitList->setLayout(unitLayout);
+  widgetUnitList->setStyleSheet( "font-size:16pt;" );
 
   scrInfo = new QScrollArea;
   lblInfo = new QLabel;
@@ -230,7 +231,10 @@ bool Convert::initialize() {
     } else
     if ( indexTree.length() == 1 ) {
       groupIndex = modelUnitGroups->index(indexTree.at(0).toInt(),0);
+    } else {
+      groupIndex = modelUnitGroups->index(0,0);
     }
+
     treeUnitGroups->selectionModel()->select(
           groupIndex, QItemSelectionModel::ClearAndSelect );
   }
