@@ -28,8 +28,8 @@
 #include "parser.hpp"
 #include "help.hpp"
 
-#define CONVERT_VERSION "2.1.2"
-#define CONVERT_DATE "2015-01-31"
+#define CONVERT_VERSION "2.1.4"
+#define CONVERT_DATE "2015-02-01"
 #define COMPANY_NAME "Chronowerks"
 #define CONVERT_NAME "SUConvert"
 

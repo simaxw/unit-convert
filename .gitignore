@@ -17,3 +17,8 @@ object_script*
 /installer/*.exe
 /installer/**/*.xml
 /installer/**/*.qs
+/pkg/src/
+/pkg/pkg/
+/pkg/*.xz
+.MTREE
+.PKGINFO
