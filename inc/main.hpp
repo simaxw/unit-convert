@@ -28,8 +28,8 @@
 #include "parser.hpp"
 #include "help.hpp"
 
-#define CONVERT_VERSION "2.1.1"
-#define CONVERT_DATE "2015-01-30"
+#define CONVERT_VERSION "2.1.2"
+#define CONVERT_DATE "2015-01-31"
 
 class Convert : public QMainWindow {
   Q_OBJECT
