@@ -55,13 +55,16 @@ bool Convert::initialize() {
   
   actionSplit    = new QAction( QIcon(":/icon/icons/add-new-tab.png"),   tr("&Split"),     this);
   actionUnsplit  = new QAction( QIcon(":/icon/icons/window-close.png"),  tr("&Unsplit"),   this);
+  actionToggleDiff = new QAction( tr("Toggle Diff"), this );
+  actionToggleDiff->setCheckable(true);
   actionHelp     = new QAction( QIcon(":/icon/icons/about.png"),         tr("&Help"),      this);
   actionAbout    = new QAction( QIcon(":/icon/icons/about.png"),         tr("&About"),     this);
 
-  actionQuit    ->setShortcut( QKeySequence( tr("Ctrl+Q") ) );
-  actionSplit   ->setShortcut( QKeySequence( "F2" ) );
-  actionUnsplit ->setShortcut( QKeySequence( "F3" ) );
-  actionHelp    ->setShortcut( QKeySequence( "F1" ) );
+  actionQuit       ->setShortcut( QKeySequence( tr("Ctrl+Q") ) );
+  actionSplit      ->setShortcut( QKeySequence( "F2" ) );
+  actionUnsplit    ->setShortcut( QKeySequence( "F3" ) );
+  actionToggleDiff ->setShortcut( QKeySequence( "F4" ) );
+  actionHelp       ->setShortcut( QKeySequence( "F1" ) );
 
   // Signals connected to Slots
   connect( actionQuit,     SIGNAL(triggered()), this, SLOT(actionQuitTriggered()) );
@@ -70,6 +73,7 @@ bool Convert::initialize() {
   connect( actionSortDesc, SIGNAL(triggered()), this, SLOT(actionSortDescTriggered()) );
   connect( actionSplit,    SIGNAL(triggered()), this, SLOT(actionAddSplit()) );
   connect( actionUnsplit,  SIGNAL(triggered()), this, SLOT(actionRemoveSplit()) );
+  connect( actionToggleDiff,  SIGNAL(triggered()), this, SLOT(actionToggleDiffTriggered()) );
   help = new ConvertHelp;
   help->setWindowTitle( QString(tr("%1 %2 - Help")).arg(CONVERT_NAME).arg(strVersion) );
   connect( actionHelp,     SIGNAL(triggered()), help, SLOT(show()) );
@@ -84,6 +88,7 @@ bool Convert::initialize() {
   tbMain->addAction(actionSort);
   tbMain->addAction(actionSplit);
   tbMain->addAction(actionUnsplit);
+  tbMain->addAction(actionToggleDiff);
   tbMain->addAction(actionHelp);
   tbMain->addAction(actionAbout);
 
@@ -318,9 +323,7 @@ void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
       B->lblDeviation->setStyleSheet( diff >= 0 ? stylePos : styleNeg );
       i++;
     }
-
   }
-
 }
 
 void Convert::lblInfoLinkHovered( const QString& url ) {
@@ -396,7 +399,7 @@ void Convert::actionAddSplit() {
     statusbar->showMessage( tr("Maximum of 5 unit sets reached"), 3000 );
     return;
   }
-  QList<Unit*> lstUnits = selectedGroup->clone();
+  QList<Unit*> lstUnits = selectedGroup->clone(actionToggleDiff->isChecked());
   foreach( Unit* u, lstUnits ) {
     connect( u, SIGNAL(textEdited(const QString&)), this, SLOT(txtUnitsTextEdited(const QString&)) );
   }
@@ -420,4 +423,17 @@ void Convert::actionRemoveSplit() {
 
 void Convert::actionSortTriggered() {
   menSort->exec(QCursor::pos());
+}
+
+void Convert::actionToggleDiffTriggered() {
+  if ( !selectedGroup ) return;
+  QGridLayout *l = selectedGroup->gridUnitFields;
+
+  if ( l->columnCount() < 3 ) return;
+
+  for ( int c = 2; c < l->columnCount(); c+=2 ) {
+    for ( int r = 0; r < l->rowCount(); r++ ) {
+      l->itemAtPosition(r,c)->widget()->setVisible(actionToggleDiff->isChecked());
+    }
+  }
 }

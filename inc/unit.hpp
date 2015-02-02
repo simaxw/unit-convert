@@ -64,7 +64,7 @@ class FactorUnit : public Unit {
       fu->info = this->info;
       fu->lblInfo = this->lblInfo;
       fu->lblUnit = this->lblUnit;
-      fu->lblDeviation = new QLabel("0", fu);
+      fu->lblDeviation = new QLabel(QString(), fu);
       return fu;
     }
 };
@@ -87,7 +87,7 @@ class TransformUnit : public Unit {
       tu->info = this->info;
       tu->lblInfo = this->lblInfo;
       tu->lblUnit = this->lblUnit;
-      tu->lblDeviation = new QLabel("0", tu);
+      tu->lblDeviation = new QLabel(QString(), tu);
       return tu;
     }
 };
@@ -140,7 +140,7 @@ class UnitGroup : public QWidget {
 
     QGridLayout *gridUnitFields;
 
-    QList<Unit*> clone();
+    QList<Unit*> clone( bool );
     unsigned int columns;
     unsigned int gridcolumns;
     QList< QList<Unit*> > additionalUnits;

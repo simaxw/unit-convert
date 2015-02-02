@@ -58,10 +58,12 @@ class Convert : public QMainWindow {
     void actionSortDescTriggered();
     void actionAddSplit();
     void actionRemoveSplit();
+    void actionToggleDiffTriggered();
 
   private:
     SortDirection sdUnitGroups;
     void setVisibleUnitGroup( int );
+
     QStandardItemModel *modelUnitGroups;
     QStackedLayout *unitLayout;
     QList<UnitGroup*> unitGroups;
@@ -81,6 +83,7 @@ class Convert : public QMainWindow {
     QAction *actionQuit;
     QAction *actionSplit;
     QAction *actionUnsplit;
+    QAction *actionToggleDiff;
     QAction *actionHelp;
     QAction *actionAbout;
 

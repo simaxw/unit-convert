@@ -65,7 +65,7 @@ void UnitGroup::initialize( QLabel *_lblInfo ) {
   layout->addStretch(1);
 }
 
-QList<Unit*> UnitGroup::clone() {
+QList<Unit*> UnitGroup::clone( bool showDiffLabel ) {
   columns++;
   gridcolumns+=2;
   QList<Unit*> lstUnits;
@@ -77,6 +77,7 @@ QList<Unit*> UnitGroup::clone() {
         fu->column = columns;
         lstUnits << fu;
         gridUnitFields->addWidget( fu->lblDeviation, r, gridcolumns );
+        fu->lblDeviation->setVisible(showDiffLabel);
         gridUnitFields->addWidget( fu, r, gridcolumns+1 );
         break;
         }
@@ -85,6 +86,7 @@ QList<Unit*> UnitGroup::clone() {
         tu->column = columns;
         lstUnits << tu;
         gridUnitFields->addWidget( tu->lblDeviation, r, gridcolumns );
+        tu->lblDeviation->setVisible(showDiffLabel);
         gridUnitFields->addWidget( tu, r, gridcolumns+1 );
         break;
         }
@@ -93,6 +95,7 @@ QList<Unit*> UnitGroup::clone() {
         fu->column = columns;
         lstUnits << fu;
         gridUnitFields->addWidget( fu->lblDeviation, r, gridcolumns );
+        fu->lblDeviation->setVisible(showDiffLabel);
         gridUnitFields->addWidget( fu, r, gridcolumns+1 );
         break;
         }
