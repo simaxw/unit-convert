@@ -19,6 +19,7 @@ MOC_DIR = obj
 UI_DIR = obj
 RCC_DIR = obj
 
+win32:RC_FILE = res/convert.rc
 win32:DEFINES += COFFSET=2
 unix:DEFINES += COFFSET=0
 win32:DATA_OUT = release/bin/data.rcc
