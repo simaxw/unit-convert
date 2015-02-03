@@ -24,6 +24,7 @@
 #include <QScrollArea>
 #include <QtMath>
 #include <QCloseEvent>
+#include <QLayoutItem>
 #include "ccore.hpp"
 #include "about.hpp"
 #include "parser.hpp"

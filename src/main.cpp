@@ -59,7 +59,7 @@ bool Convert::initialize() {
   actionToggleDiff->setCheckable(true);
   actionSettings = new QAction( QIcon(":/icon/icons/settings.png"),      tr("Settings"), this );
   actionHelp     = new QAction( QIcon(":/icon/icons/about.png"),         tr("&Help"),      this);
-  actionAbout    = new QAction( QIcon(":/icon/icons/about.png"),         tr("&About"),     this);
+  actionAbout    = new QAction( QIcon(":/icon/icons/light_bulb.png"),         tr("&About"),     this);
 
   actionQuit       ->setShortcut( QKeySequence( tr("Ctrl+Q") ) );
   actionSplit      ->setShortcut( QKeySequence( "F2" ) );
@@ -225,7 +225,7 @@ bool Convert::initialize() {
   strVersion = QString( CONVERT_VERSION );
 
   about = new ConvertAbout;
-  about->setWindowIcon( QIcon( ":/icon/icons/about.png" ) );
+  about->setWindowIcon( QIcon( ":/icon/icons/light_bulb.png" ) );
   about->setWindowTitle( QString("%1 " + strVersion).arg(CONVERT_NAME) );
   about->strDate = CONVERT_DATE;
   about->strVersion = strVersion;
@@ -308,30 +308,31 @@ void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
   QString stylePos = "color:green;font-weight:bold;";
   QString styleNeg = "color:red;font-weight:bold;";
 
-  if ( u->column == 2 ) {
-    unsigned int i = 0;
-    foreach( Unit *B, lstUnits ) {
-      if ( B->type == Unit::FORMATTED ) continue;
-      Unit *A = selectedGroup->units.at(i);
-      double db = B->text().toDouble();
-      double da = A->text().toDouble();
-      double diff = db-da;
-      B->lblDeviation->setText(QString::number(diff, 'f', 2));
-      B->lblDeviation->setStyleSheet( diff >= 0 ? stylePos : styleNeg );
-      i++;
-    }
-  } else
-  if ( u->column > 2 ) {
-    unsigned int i = 0;
-    foreach( Unit *B, lstUnits ) {
-      if ( B->type == Unit::FORMATTED ) continue;
-      Unit *A = selectedGroup->additionalUnits.at(u->column-3).at(i);
-      double db = B->text().toDouble();
-      double da = A->text().toDouble();
-      double diff = db-da;
-      B->lblDeviation->setText(QString::number(diff, 'f', 2));
-      B->lblDeviation->setStyleSheet( diff >= 0 ? stylePos : styleNeg );
-      i++;
+  //qDebug() << selectedGroup->gridUnitFields->columnCount();
+
+  unsigned int c = selectedGroup->gridUnitFields->columnCount();
+  unsigned int r = selectedGroup->gridUnitFields->rowCount();
+  for ( unsigned int k = 0; k < r; k++ ) {
+    for ( unsigned int i = 2; i < c; i+=2 ) {
+      QLayoutItem *liDiff = selectedGroup->gridUnitFields->itemAtPosition(k,i);
+      QLayoutItem *liA = selectedGroup->gridUnitFields->itemAtPosition(k,i-1);
+      QLayoutItem *liB = selectedGroup->gridUnitFields->itemAtPosition(k,i+1);
+
+      if ( !liDiff || !liA || !liB ) {
+        return;
+      }
+
+      QLabel *lblDiff = qobject_cast<QLabel*>(liDiff->widget());
+      QLineEdit *A = qobject_cast<QLineEdit*>(liA->widget());
+      QLineEdit *B = qobject_cast<QLineEdit*>(liB->widget());
+
+      if ( lblDiff && A && B ) {
+        double db = B->text().toDouble();
+        double da = A->text().toDouble();
+        double diff = db-da;
+        lblDiff->setText(QString::number(diff, 'f', 2));
+        lblDiff->setStyleSheet( diff >= 0 ? stylePos : styleNeg );
+      }
     }
   }
 }
@@ -449,7 +450,9 @@ void Convert::actionToggleDiffTriggered() {
 
   for ( int c = 2; c < l->columnCount(); c+=2 ) {
     for ( int r = 0; r < l->rowCount(); r++ ) {
-      l->itemAtPosition(r,c)->widget()->setVisible(actionToggleDiff->isChecked());
+      QLayoutItem *li = l->itemAtPosition(r,c);
+      if ( li )
+        li->widget()->setVisible(actionToggleDiff->isChecked());
     }
   }
 }
