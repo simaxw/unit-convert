@@ -23,13 +23,15 @@
 #include <QVBoxLayout>
 #include <QScrollArea>
 #include <QtMath>
+#include <QCloseEvent>
 #include "ccore.hpp"
 #include "about.hpp"
 #include "parser.hpp"
 #include "help.hpp"
+#include "settings.hpp"
 
-#define CONVERT_VERSION "2.1.4"
-#define CONVERT_DATE "2015-02-01"
+#define CONVERT_VERSION "2.1.5"
+#define CONVERT_DATE "2015-02-02"
 #define COMPANY_NAME "Chronowerks"
 #define CONVERT_NAME "SUConvert"
 
@@ -46,6 +48,7 @@ class Convert : public QMainWindow {
       selectedGroup(0)
     {}
     bool initialize();
+    void closeEvent( QCloseEvent* );
 
   private slots:
     void treeUnitGroupsSelectionChanged( const QItemSelection&, const QItemSelection& );
@@ -59,6 +62,7 @@ class Convert : public QMainWindow {
     void actionAddSplit();
     void actionRemoveSplit();
     void actionToggleDiffTriggered();
+    void actionSettingsTriggered();
 
   private:
     SortDirection sdUnitGroups;
@@ -84,6 +88,7 @@ class Convert : public QMainWindow {
     QAction *actionSplit;
     QAction *actionUnsplit;
     QAction *actionToggleDiff;
+    QAction *actionSettings;
     QAction *actionHelp;
     QAction *actionAbout;
 
@@ -94,6 +99,7 @@ class Convert : public QMainWindow {
     QSplitter *splitter;
     QWidget *widgetUnitList;
     QScrollArea *scrInfo;
+    Settings *settingsWindow;
 };
 
 #endif

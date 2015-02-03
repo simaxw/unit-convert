@@ -24,14 +24,14 @@ bool Convert::initialize() {
   // the parser holds the unit groups (widgets)
   unitGroups = p.getUnitGroups();
 
-  // initialize settings object from settings.ini stored in the same
-  // path as the executable in INI format
+  // initialize settings
   settings = new QSettings(
       QSettings::IniFormat,
       QSettings::UserScope,
       COMPANY_NAME,
       CONVERT_NAME,
-      this );
+      this
+      );
 
   // UI
   // Status Bar
@@ -55,8 +55,9 @@ bool Convert::initialize() {
   
   actionSplit    = new QAction( QIcon(":/icon/icons/add-new-tab.png"),   tr("&Split"),     this);
   actionUnsplit  = new QAction( QIcon(":/icon/icons/window-close.png"),  tr("&Unsplit"),   this);
-  actionToggleDiff = new QAction( QIcon(":/icon/icons/delta.png"), tr("Toggle Diff"), this );
+  actionToggleDiff = new QAction( QIcon(":/icon/icons/delta.png"),       tr("Toggle Diff"), this );
   actionToggleDiff->setCheckable(true);
+  actionSettings = new QAction( QIcon(":/icon/icons/settings.png"),      tr("Settings"), this );
   actionHelp     = new QAction( QIcon(":/icon/icons/about.png"),         tr("&Help"),      this);
   actionAbout    = new QAction( QIcon(":/icon/icons/about.png"),         tr("&About"),     this);
 
@@ -78,13 +79,14 @@ bool Convert::initialize() {
   help->setWindowTitle( QString(tr("%1 %2 - Help")).arg(CONVERT_NAME).arg(strVersion) );
   connect( actionHelp,     SIGNAL(triggered()), help, SLOT(show()) );
   connect( actionAbout,    SIGNAL(triggered()), this, SLOT(actionAboutTriggered()) );
-
+  connect( actionSettings, SIGNAL(triggered()), this, SLOT(actionSettingsTriggered()) );
   menSort = new QMenu( tr("Sort"), this );
   menSort->addAction( actionSortAsc );
   menSort->addAction( actionSortDesc );
 
   // add all actions to the main toolbar. Re-order here:
   tbMain->addAction(actionQuit);
+  tbMain->addAction(actionSettings);
   tbMain->addAction(actionSort);
   tbMain->addAction(actionSplit);
   tbMain->addAction(actionUnsplit);
@@ -103,11 +105,12 @@ bool Convert::initialize() {
 
   // initialize the unit group list
   treeUnitGroups = new QTreeView;
-  treeUnitGroups->setStyleSheet("font-size: 12pt; font-family:sans; margin:0;");
+  //treeUnitGroups->setStyleSheet("font-size: 12pt; font-family:sans; margin:0;");
   treeUnitGroups->setEditTriggers(QAbstractItemView::NoEditTriggers);
   treeUnitGroups->header()->hide();
   treeUnitGroups->setSelectionBehavior( QAbstractItemView::SelectItems );
   treeUnitGroups->setSelectionMode( QAbstractItemView::SingleSelection );
+
   splitter->addWidget(treeUnitGroups);
 
   // initialize widget with VBoxLayout
@@ -125,7 +128,10 @@ bool Convert::initialize() {
   widgetUnitList = new QWidget;
   unitLayout = new QStackedLayout;
   widgetUnitList->setLayout(unitLayout);
-  widgetUnitList->setStyleSheet( "font-size:16pt;" );
+  //widgetUnitList->setStyleSheet( "font-size:16pt;" );
+
+  treeUnitGroups->setFont( settings->value("treeview.font").value<QFont>() );
+  widgetUnitList->setFont( settings->value("unitlist.font").value<QFont>() );
 
   scrInfo = new QScrollArea;
   lblInfo = new QLabel;
@@ -199,6 +205,10 @@ bool Convert::initialize() {
     }
 
   }
+
+  settingsWindow = new Settings( 0, widgetUnitList, treeUnitGroups );
+  settingsWindow->setWindowTitle( QString(tr("%1 %2 - Settings")).arg(CONVERT_NAME).arg(strVersion) );
+  settingsWindow->initialize();
 
   unitLayout->addWidget( new QWidget(this) );
 
@@ -336,6 +346,8 @@ void Convert::lblInfoLinkHovered( const QString& url ) {
 
 void Convert::actionQuitTriggered() {
   if ( settings ) {
+    settings->setValue( "treeview.font", QVariant(treeUnitGroups->font()) );
+    settings->setValue( "unitlist.font", QVariant(widgetUnitList->font()) );
     settings->setValue( "mainwindow.geom", saveGeometry() );
     settings->setValue( "mainwindow.state", saveState() );
     settings->setValue( "splitter.size", splitter->saveState() );
@@ -356,6 +368,10 @@ void Convert::actionQuitTriggered() {
     }
   }
   qApp->quit();
+}
+
+void Convert::closeEvent( QCloseEvent* ) {
+  actionQuitTriggered();
 }
 
 void Convert::actionAboutTriggered() {
@@ -436,4 +452,9 @@ void Convert::actionToggleDiffTriggered() {
       l->itemAtPosition(r,c)->widget()->setVisible(actionToggleDiff->isChecked());
     }
   }
+}
+
+void Convert::actionSettingsTriggered() {
+  settingsWindow->show();
+  settingsWindow->activateWindow();
 }

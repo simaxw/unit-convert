@@ -1376,6 +1376,15 @@
        x2="444"
        y2="997.36218"
        gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4138-4"
+       id="linearGradient4189"
+       x1="335.60297"
+       y1="985.68298"
+       x2="378.59927"
+       y2="985.68298"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1385,7 +1394,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="4.0000002"
-     inkscape:cx="421.17516"
+     inkscape:cx="379.30016"
      inkscape:cy="55.662809"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -1393,8 +1402,8 @@
      showgrid="true"
      inkscape:grid-bbox="false"
      inkscape:grid-points="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="686"
+     inkscape:window-width="934"
+     inkscape:window-height="574"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:object-paths="false"
@@ -2052,6 +2061,15 @@
          d="m 420,982.36218 c 0,0 22,6 22,12 0,6.00002 -12,18.00002 -12,18.00002"
          style="fill:none;stroke:url(#linearGradient7147);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
     </g>
+    <path
+       inkscape:connector-curvature="0"
+       d="m 378.59926,1008.6826 -21.22516,-45.99924 -0.61423,0 -21.15691,45.99924 z M 370,1006.3622 l -30.37041,0 15.35582,-32.5544 z"
+       id="text2403"
+       style="font-size:100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:url(#linearGradient4189);fill-opacity:1.0;stroke:none;font-family:FreeSerif;-inkscape-font-specification:FreeSerif;color:#000000;fill-rule:nonzero;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-filename="/home/sxw/wrk/convert/res/icons/delta.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
   <g
      inkscape:groupmode="layer"

@@ -37,7 +37,8 @@ src/main.cpp\
 src/about.cpp\
 src/parser.cpp\
 src/unit.cpp\
-src/help.cpp
+src/help.cpp\
+src/settings.cpp
 
 HEADERS +=\
 inc/ccore.hpp\
@@ -45,4 +46,5 @@ inc/main.hpp\
 inc/about.hpp\
 inc/parser.hpp\
 inc/unit.hpp\
-inc/help.hpp
+inc/help.hpp\
+inc/settings.hpp
