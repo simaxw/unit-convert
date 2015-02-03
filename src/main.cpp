@@ -55,7 +55,7 @@ bool Convert::initialize() {
   
   actionSplit    = new QAction( QIcon(":/icon/icons/add-new-tab.png"),   tr("&Split"),     this);
   actionUnsplit  = new QAction( QIcon(":/icon/icons/window-close.png"),  tr("&Unsplit"),   this);
-  actionToggleDiff = new QAction( tr("Toggle Diff"), this );
+  actionToggleDiff = new QAction( QIcon(":/icon/icons/delta.png"), tr("Toggle Diff"), this );
   actionToggleDiff->setCheckable(true);
   actionHelp     = new QAction( QIcon(":/icon/icons/about.png"),         tr("&Help"),      this);
   actionAbout    = new QAction( QIcon(":/icon/icons/about.png"),         tr("&About"),     this);

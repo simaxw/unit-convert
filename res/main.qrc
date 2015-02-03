@@ -36,6 +36,7 @@
     <file>icons/liquid.png</file>
     <file>icons/speed.png</file>
     <file>icons/angle.png</file>
+    <file>icons/delta.png</file>
   </qresource>
   <qresource prefix="/data">
     <file>units.xml</file>
