@@ -115,6 +115,7 @@ bool Convert::initialize() {
 
   // initialize widget with VBoxLayout
   QWidget *unitStackInfo = new QWidget;
+  unitStackInfo->setStyleSheet( "border: 2px solid red;" );
   QVBoxLayout *vboxUnitStackInfo = new QVBoxLayout;
   unitStackInfo->setLayout(vboxUnitStackInfo);
 

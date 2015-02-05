@@ -78,6 +78,7 @@ QList<Unit*> UnitGroup::clone( bool showDiffLabel ) {
         lstUnits << fu;
         gridUnitFields->addWidget( fu->lblDeviation, r, gridcolumns );
         fu->lblDeviation->setVisible(showDiffLabel);
+        fu->lblDeviation->setFont(QFont("sans serif",9));
         gridUnitFields->addWidget( fu, r, gridcolumns+1 );
         break;
         }
@@ -87,6 +88,7 @@ QList<Unit*> UnitGroup::clone( bool showDiffLabel ) {
         lstUnits << tu;
         gridUnitFields->addWidget( tu->lblDeviation, r, gridcolumns );
         tu->lblDeviation->setVisible(showDiffLabel);
+        tu->lblDeviation->setFont(QFont("sans serif",9));
         gridUnitFields->addWidget( tu, r, gridcolumns+1 );
         break;
         }
@@ -96,6 +98,7 @@ QList<Unit*> UnitGroup::clone( bool showDiffLabel ) {
         lstUnits << fu;
         gridUnitFields->addWidget( fu->lblDeviation, r, gridcolumns );
         fu->lblDeviation->setVisible(showDiffLabel);
+        fu->lblDeviation->setFont(QFont("sans serif",9));
         gridUnitFields->addWidget( fu, r, gridcolumns+1 );
         break;
         }
