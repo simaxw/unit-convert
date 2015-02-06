@@ -10,8 +10,8 @@ ConvertAbout::ConvertAbout() {
 void ConvertAbout::reset() {
   resize( 350,200 );
   lblAbout->setPixmap( QPixmap() );
-  QByteArray aboutText64("PGgxPkNvbnZlcnQ8L2gxPjxwPlVuaXQgQ29udmVyc2lvbiBUb29sPC9wPjxwPlZlcnNpb24gJTEgLSAlMjwvcD48Y2VudGVyPjxwPjxiPlNpbW9uIFdpbHBlcjwvYj48L3A+IDxwPjxiPlV3ZSBFc2NoZW5ob3JzdDwvYj48L3A+PC9jZW50ZXI+Cg==");
-  QString aboutText = QString(QByteArray::fromBase64(aboutText64)).arg(strVersion).arg(strDate);
+  QString aboutText = QString("<h1>Convert</h1><p>Unit Conversion Tool</p><p>Version %1 - %2</p><center><p><b>Simon Wilper</b></p> <p><b>Uwe Eschenhorst</b></p></center>").
+    arg(strVersion).arg(strDate);
   lblAbout->setText(aboutText);
 }
 
