@@ -84,6 +84,7 @@ bool CCore::convertUnits( QList<Unit*> lstUnits, Unit *u ) {
       default:
         break;
     }
+    tu->setCursorPosition(0);
   }
   return true;
 }
