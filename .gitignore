@@ -19,6 +19,6 @@ object_script*
 /installer/**/*.qs
 /pkg/src/
 /pkg/pkg/
-/pkg/*.xz
+/pkg/*tar.*
 .MTREE
 .PKGINFO
