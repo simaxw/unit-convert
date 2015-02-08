@@ -7,8 +7,17 @@
 bool Convert::initialize() {
 
   // the data.rcc gets compiled as a binary file via rcc. It is expected
-  // in the same path as the executable
-  bool rc = QResource::registerResource( qApp->applicationDirPath() + "/data.rcc" );
+  // in the same path as the executable or in /usr/share/convert on Linux
+  QStringList paths = {
+    "/usr/share/convert",
+    qApp->applicationDirPath()
+  };
+  bool rc = false;
+  foreach ( QString p, paths ) {
+    rc = QResource::registerResource( p + "/data.rcc" );
+    if ( rc ) break;
+  }
+
   if ( !rc ) {
     QMessageBox::critical( this, tr("Error"), tr("Data file data.rcc missing."));
     return false;
@@ -34,7 +43,6 @@ bool Convert::initialize() {
     addToolBar( Qt::TopToolBarArea, tb );
   }
 
-  // Simon Wilper
   // initialize XML parser with units.xml file now (2015-01-06) contained in the data.rcc
   UnitXMLParser p( ":data/units.xml" );
   if ( !p.initialize()) {

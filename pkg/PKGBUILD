@@ -1,7 +1,7 @@
 # Maintainer: Simon Wilper <sxw@chronowerks.de>
 
 pkgname=convert
-pkgver=2.1.4
+pkgver=2.2.1
 pkgrel=1
 pkgdesc='Qt5 based Unit Converter for various scientific units'
 url='https://www.chronowerks.de/cgit/convert.git/'
@@ -20,7 +20,8 @@ build() {
 
 package() {
   cd "${srcdir}/${pkgname}"
-  mkdir -p ${pkgdir}/opt/${pkgname}
-  install -s bin/${pkgname} ${pkgdir}/opt/${pkgname}/
-  install -m 644 bin/data.rcc ${pkgdir}/opt/${pkgname}/
+  mkdir -p ${pkgdir}/bin
+  mkdir -p ${pkgdir}/usr/share/${pkgname}
+  install -s bin/${pkgname} ${pkgdir}/bin/${pkgname}/
+  install -m 644 bin/data.rcc ${pkgdir}/usr/share/${pkgname}/
 }
