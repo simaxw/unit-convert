@@ -30,9 +30,10 @@
 #include "parser.hpp"
 #include "help.hpp"
 #include "settings.hpp"
+#include "menufactory.hpp"
 
-#define CONVERT_VERSION "2.1.5"
-#define CONVERT_DATE "2015-02-02"
+#define CONVERT_VERSION "2.2.0"
+#define CONVERT_DATE "2015-02-08"
 #define COMPANY_NAME "Chronowerks"
 #define CONVERT_NAME "SUConvert"
 
@@ -64,6 +65,7 @@ class Convert : public QMainWindow {
     void actionRemoveSplit();
     void actionToggleDiffTriggered();
     void actionSettingsTriggered();
+    void actionHelpTriggered();
 
   private:
     SortDirection sdUnitGroups;
@@ -101,6 +103,7 @@ class Convert : public QMainWindow {
     QWidget *widgetUnitList;
     QScrollArea *scrInfo;
     Settings *settingsWindow;
+    MenuFactory *mf;
 };
 
 #endif

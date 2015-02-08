@@ -14,6 +14,26 @@ bool Convert::initialize() {
     return false;
   }
 
+  mf = new MenuFactory( ":/data/menu.xml", this );
+  if ( !mf->initialize() ) {
+    QMessageBox::critical( this, tr("Error"), QString(tr("Failed to create application menu: %1")).arg(mf->lastError()) );
+    return false;
+  }
+
+  actionToggleDiff = new QAction( QIcon(":/icon/icons/delta.png"),       tr("Toggle Diff"), this );
+  actionToggleDiff->setCheckable(true);
+
+  foreach ( QToolBar *tb, mf->getContentHandler()->getToolbars() ) {
+    tb->setMovable(true);
+    tb->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
+    tb->setIconSize( QSize( 24, 24 ) );
+    tb->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    if ( tb->objectName() == "main" ) {
+      tb->addAction(actionToggleDiff);
+    }
+    addToolBar( Qt::TopToolBarArea, tb );
+  }
+
   // Simon Wilper
   // initialize XML parser with units.xml file now (2015-01-06) contained in the data.rcc
   UnitXMLParser p( ":data/units.xml" );
@@ -33,68 +53,28 @@ bool Convert::initialize() {
       this
       );
 
-  // UI
-  // Status Bar
+  // ***
+  // *** Initialize Statusbar
+  // ***
+
   statusbar = new QStatusBar(this);
   setStatusBar(statusbar);
 
-  // Main Toolbar
-  tbMain = new QToolBar(this);
-  tbMain->setObjectName("main");
-  tbMain->setMovable(true);
-  tbMain->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
-  tbMain->setIconSize( QSize( 24, 24 ) );
-  tbMain->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+  // ***
+  // *** Initialize Sort Popup Menu
+  // *** and the help window
+  // ***
 
-  // Actions
-  actionQuit     = new QAction( QIcon(":/icon/icons/quit.png"),          tr("&Quit"),      this);
-
-  actionSort     = new QAction( QIcon(":/icon/icons/a_to_z.png"),        tr("&Sort"),      this);
-  actionSortAsc  = new QAction( tr("&Ascending"), this );
-  actionSortDesc = new QAction( tr("&Descending"), this );
-  
-  actionSplit    = new QAction( QIcon(":/icon/icons/add-new-tab.png"),   tr("&Split"),     this);
-  actionUnsplit  = new QAction( QIcon(":/icon/icons/window-close.png"),  tr("&Unsplit"),   this);
-  actionToggleDiff = new QAction( QIcon(":/icon/icons/delta.png"),       tr("Toggle Diff"), this );
-  actionToggleDiff->setCheckable(true);
-  actionSettings = new QAction( QIcon(":/icon/icons/settings.png"),      tr("Settings"), this );
-  actionHelp     = new QAction( QIcon(":/icon/icons/about.png"),         tr("&Help"),      this);
-  actionAbout    = new QAction( QIcon(":/icon/icons/light_bulb.png"),         tr("&About"),     this);
-
-  actionQuit       ->setShortcut( QKeySequence( tr("Ctrl+Q") ) );
-  actionSplit      ->setShortcut( QKeySequence( "F2" ) );
-  actionUnsplit    ->setShortcut( QKeySequence( "F3" ) );
-  actionToggleDiff ->setShortcut( QKeySequence( "F4" ) );
-  actionHelp       ->setShortcut( QKeySequence( "F1" ) );
-
-  // Signals connected to Slots
-  connect( actionQuit,     SIGNAL(triggered()), this, SLOT(actionQuitTriggered()) );
-  connect( actionSort,     SIGNAL(triggered()), this, SLOT(actionSortTriggered()) );
-  connect( actionSortAsc,  SIGNAL(triggered()), this, SLOT(actionSortAscTriggered()) );
-  connect( actionSortDesc, SIGNAL(triggered()), this, SLOT(actionSortDescTriggered()) );
-  connect( actionSplit,    SIGNAL(triggered()), this, SLOT(actionAddSplit()) );
-  connect( actionUnsplit,  SIGNAL(triggered()), this, SLOT(actionRemoveSplit()) );
-  connect( actionToggleDiff,  SIGNAL(triggered()), this, SLOT(actionToggleDiffTriggered()) );
   help = new ConvertHelp;
   help->setWindowTitle( QString(tr("%1 %2 - Help")).arg(CONVERT_NAME).arg(strVersion) );
-  connect( actionHelp,     SIGNAL(triggered()), help, SLOT(show()) );
-  connect( actionAbout,    SIGNAL(triggered()), this, SLOT(actionAboutTriggered()) );
-  connect( actionSettings, SIGNAL(triggered()), this, SLOT(actionSettingsTriggered()) );
+
   menSort = new QMenu( tr("Sort"), this );
+  actionSortAsc  = new QAction( tr("&Ascending"), this );
+  actionSortDesc = new QAction( tr("&Descending"), this );
   menSort->addAction( actionSortAsc );
   menSort->addAction( actionSortDesc );
-
-  // add all actions to the main toolbar. Re-order here:
-  tbMain->addAction(actionQuit);
-  tbMain->addAction(actionSettings);
-  tbMain->addAction(actionSort);
-  tbMain->addAction(actionSplit);
-  tbMain->addAction(actionUnsplit);
-  tbMain->addAction(actionToggleDiff);
-  tbMain->addAction(actionHelp);
-  tbMain->addAction(actionAbout);
-
-  addToolBar( Qt::TopToolBarArea, tbMain );
+  connect( actionSortAsc,  SIGNAL(triggered()), this, SLOT(actionSortAscTriggered()) );
+  connect( actionSortDesc, SIGNAL(triggered()), this, SLOT(actionSortDescTriggered()) );
 
   // ***
   // *** Initialize Main UI Elements
@@ -461,4 +441,8 @@ void Convert::actionToggleDiffTriggered() {
 void Convert::actionSettingsTriggered() {
   settingsWindow->show();
   settingsWindow->activateWindow();
+}
+
+void Convert::actionHelpTriggered() {
+  help->show();
 }

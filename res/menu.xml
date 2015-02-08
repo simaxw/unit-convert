@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menubar id="main">
+  <menu name="file" label="~File">
+    <action
+      name="quit"
+      label="~Quit"
+      accel="Ctrl+Q"
+      help="Quit Application and save all changes"
+      icon="quit.png"
+      toolbar="main"
+      slot="actionQuitTriggered()" />
+    <action
+      name="sort"
+      label="~Sort"
+      help="Sort Unit Groups"
+      icon="a_to_z.png"
+      toolbar="main"
+      slot="actionSortTriggered()" />
+    <action
+      name="settings"
+      label="~Settings"
+      help="Open Settings"
+      icon="settings.png"
+      toolbar="main"
+      slot="actionSettingsTriggered()" />
+    <action
+      name="split"
+      label="~Split"
+      help="Split Unit Fields"
+      icon="add-new-tab.png"
+      toolbar="main"
+      slot="actionAddSplit()" />
+    <action
+      name="unsplit"
+      label="~Remove Split"
+      help="Unsplit Unit Fields"
+      icon="window-close.png"
+      toolbar="main"
+      slot="actionRemoveSplit()" />
+    <action
+      name="help"
+      label="~Help"
+      help="Help"
+      icon="about.png"
+      toolbar="main"
+      slot="actionHelpTriggered()" />
+    <action
+      name="about"
+      label="~About"
+      help="About Dialog"
+      icon="light_bulb.png"
+      toolbar="main"
+      slot="actionAboutTriggered()" />
+  </menu>
+</menubar>

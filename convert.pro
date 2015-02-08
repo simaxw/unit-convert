@@ -39,7 +39,8 @@ src/about.cpp\
 src/parser.cpp\
 src/unit.cpp\
 src/help.cpp\
-src/settings.cpp
+src/settings.cpp\
+src/menufactory.cpp
 
 HEADERS +=\
 inc/ccore.hpp\
@@ -48,4 +49,5 @@ inc/about.hpp\
 inc/parser.hpp\
 inc/unit.hpp\
 inc/help.hpp\
-inc/settings.hpp
+inc/settings.hpp\
+inc/menufactory.hpp
