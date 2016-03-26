@@ -13,7 +13,7 @@ INCLUDEPATH += inc
 
 #QMAKE_CXXFLAGS_DEBUG += -O0 -fno-inline
 #CONFIG += C++11 debug
-CONFIG += C++11
+CONFIG += C++11 silent
 
 OBJECTS_DIR = obj
 MOC_DIR = obj
