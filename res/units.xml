@@ -44,8 +44,8 @@ the values.
     </unit>
     <unit id="cubicfoot" label="Cubic Foot [cft] or [ft^3]" type="factor" value=".02831685">
       <info>
-        <![CDATA[The term cubic foot is an Imperial and US customary (non-metric) unit of 
-    volume, used in the United States and the United Kingdom. It is defined as the volume 
+        <![CDATA[The term cubic foot is an Imperial and US customary (non-metric) unit of
+    volume, used in the United States and the United Kingdom. It is defined as the volume
     of a cube with sides of one foot (0.3048 m) in length. Its volume is 28.3168 liters or
     about one 35th (1/35.3147248277) of a cubic meter. Source: <a href="http://en.wikipedia.org/wiki/Cubic_foot">Wikipedia</a>]]>
       </info>
@@ -65,10 +65,10 @@ the values.
     </unit>
   <unit id="bushel" label="Bushel [bsh] or [bu]" type="factor" value="0.03523907">
       <info>
-        <![CDATA[Agricultural products that are sold by the bushel in the United States are 
-    often sold by weight in other countries. There can be a considerable variation in the 
-    weight per unit volume due to differences in variety, size, or condition of the commodity, 
-    tightness of pack, degree to which the container is heaped, etc. The following conversion 
+        <![CDATA[Agricultural products that are sold by the bushel in the United States are
+    often sold by weight in other countries. There can be a considerable variation in the
+    weight per unit volume due to differences in variety, size, or condition of the commodity,
+    tightness of pack, degree to which the container is heaped, etc. The following conversion
     factors are used by the U.S. Department of Agriculture for statistical purposes:
     <br>
     barley = 21.9 kg per bushel<br>
@@ -82,14 +82,14 @@ the values.
         <![CDATA[In the United States, the cup, tablespoon, and teaspoon are defined as 8, 1/2, and 1/6
     fluid ounces, respectively. for pratical usage the metric equivalents are 250 mL, 15 mL, and 5 mL.]]>
       </info>
-    </unit> 
+    </unit>
   <unit id="quart" label="Quart (liquid) [qr]" type="factor" value=".0009463529">
       <info>
-        <![CDATA[The quart is a unit of volume (for either the imperial or United States 
-    customary units) equal to a quarter of a gallon (hence the name quart), two pints, 
-    or four cups. Since gallons of various sizes have historically been in use, quarts 
-    of various sizes have also existed; see gallon for further discussion. Three of these 
-    kinds of quarts remain in current use, all approximately equal to one litre. Its proper 
+        <![CDATA[The quart is a unit of volume (for either the imperial or United States
+    customary units) equal to a quarter of a gallon (hence the name quart), two pints,
+    or four cups. Since gallons of various sizes have historically been in use, quarts
+    of various sizes have also existed; see gallon for further discussion. Three of these
+    kinds of quarts remain in current use, all approximately equal to one litre. Its proper
     abbreviation is qt. Source: <a href="https://en.wikipedia.org/wiki/Quart">Wikipedia</a>]]>
       </info>
     </unit>
@@ -124,52 +124,52 @@ the values.
     </unit>
     <unit id="barreloil" label="Barrel (U.S., oil) [bbl]" type="factor" value=".1589873">
       <info>
-        <![CDATA[An oil barrel (abbreviated as bbl) is a unit of volume whose 
-    definition has not been universally standardized. In the United States 
-    and Canada, an oil barrel is defined as 42 US gallons, which is about 
-    159 liters [9] or 35 imperial gallons,[10] and it can also be defined 
-    in those units, depending on the context. Oil companies that are listed 
-    on American stock exchanges typically report their production in terms 
-    of volume and use the units of bbl, Mbbl (one thousand barrels), or 
-    MMbbl (one million barrels). It's important to mention that there is a 
-    conflict concerning the units for oil barrels (see below, the 
-    section "Definitions and units). For all other physical quantities, 
-    according to the International System of Units, the uppercase letter "M" 
-    means "one million", for example: Mm (one million metres), 
-    MHz (one million hertz, or megahertz), MW (one million watts, or megawatt), 
-    MeV (one million electronvolt, or megaelectronvolt), Mbyte (one million bytes, 
-    or megabyte). But due to tradition, the Mbbl acronym is used today meaning 
-    "one thousand bbl", as a heritage of the roman number "M" meaning "one thousand". 
-    On the other hand, there are efforts to avoid this ambiguity, and most of the 
+        <![CDATA[An oil barrel (abbreviated as bbl) is a unit of volume whose
+    definition has not been universally standardized. In the United States
+    and Canada, an oil barrel is defined as 42 US gallons, which is about
+    159 liters [9] or 35 imperial gallons,[10] and it can also be defined
+    in those units, depending on the context. Oil companies that are listed
+    on American stock exchanges typically report their production in terms
+    of volume and use the units of bbl, Mbbl (one thousand barrels), or
+    MMbbl (one million barrels). It's important to mention that there is a
+    conflict concerning the units for oil barrels (see below, the
+    section "Definitions and units). For all other physical quantities,
+    according to the International System of Units, the uppercase letter "M"
+    means "one million", for example: Mm (one million metres),
+    MHz (one million hertz, or megahertz), MW (one million watts, or megawatt),
+    MeV (one million electronvolt, or megaelectronvolt), Mbyte (one million bytes,
+    or megabyte). But due to tradition, the Mbbl acronym is used today meaning
+    "one thousand bbl", as a heritage of the roman number "M" meaning "one thousand".
+    On the other hand, there are efforts to avoid this ambiguity, and most of the
     barrel dealers today prefer to use bbl, instead of Mbbl, mbbl, MMbbl or mmbbl.
-    
-    Outside the United States and Canada, volumes of oil are usually reported in 
-    cubic metres (m3) instead of oil barrels. Cubic metre is the International System. 
-    More commonly, companies on the European stock exchanges report the mass of oil in 
-    metric tonnes. Since different varieties of petroleum have different densities, 
-    however, there is not a single conversion between mass and volume. For example, 
-    one tonne of heavy distillates might occupy a volume of 256 US gallons (6.1 bbl). 
-    In contrast, one tonne of crude oil might occupy 272 gallons (6.5 bbl) and one 
-    tonne of gasoline will require 333 gallons (7.9 bbl).[11] Overall, the conversion 
-    is usually between 6 and 8 bbl per tonne. 
+
+    Outside the United States and Canada, volumes of oil are usually reported in
+    cubic metres (m3) instead of oil barrels. Cubic metre is the International System.
+    More commonly, companies on the European stock exchanges report the mass of oil in
+    metric tonnes. Since different varieties of petroleum have different densities,
+    however, there is not a single conversion between mass and volume. For example,
+    one tonne of heavy distillates might occupy a volume of 256 US gallons (6.1 bbl).
+    In contrast, one tonne of crude oil might occupy 272 gallons (6.5 bbl) and one
+    tonne of gasoline will require 333 gallons (7.9 bbl).[11] Overall, the conversion
+    is usually between 6 and 8 bbl per tonne.
     Source: <a href="http://en.wikipedia.org/wiki/Barrel_%28unit%29">Wikipedia</a>]]>
       </info>
-    </unit> 
-  
+    </unit>
+
   </group>
 
   <group id="powers" label="Powers" icon=":/icon/icons/power.png">
     <unit id="w" label="Watt [W]" type="factor" value="1">
       <info>
-        <![CDATA[The watt (symbol: W) is a derived unit of power in the 
-    International System of Units (SI), named after the Scottish engineer 
-    James Watt (1736–1819). The unit is defined as joule per second and 
-    can be used to express the rate of energy conversion or transfer with 
+        <![CDATA[The watt (symbol: W) is a derived unit of power in the
+    International System of Units (SI), named after the Scottish engineer
+    James Watt (1736–1819). The unit is defined as joule per second and
+    can be used to express the rate of energy conversion or transfer with
     respect to time.
     Source: <a href="http://en.wikipedia.org/wiki/Watt">Wikipedia</a>]]>
       </info>
     </unit>
-    <unit id="w" label="Kilo-Watt [kW]" type="factor" value="1000"></unit>  
+    <unit id="w" label="Kilo-Watt [kW]" type="factor" value="1000"></unit>
     <unit id="hp" label="Horsepower (metric) [HP]" type="factor" value="735.49875">
       <info>
         <![CDATA[Horsepower (hp) is the name of several units of
@@ -191,28 +191,28 @@ the values.
       <info>
         <![CDATA[550 foot pounds-force per second = 1.0 Horsepower (imperial mechanical). Source: <a href="http://en.wikipedia.org/wiki/Horsepower">Wikipedia</a>]]>
       </info>
-    </unit> 
+    </unit>
    <unit id="btuhour" label="BTU per hour [Btu/h]" type="factor" value=".2930711">
       <info>
-        <![CDATA[In physics, power is the rate of doing work. It is equivalent to an 
-    amount of energy consumed per unit time. 
+        <![CDATA[In physics, power is the rate of doing work. It is equivalent to an
+    amount of energy consumed per unit time.
     Source: <a href="https://en.wikipedia.org/wiki/Power_%28physics%29">Wikipedia</a>]]>
       </info>
-    </unit> 
+    </unit>
     <unit id="btusec" label="BTU per second [Btu/sec]" type="factor" value="1055.056">
       <info>
-        <![CDATA[In physics, power is the rate of doing work. It is equivalent to an 
-    amount of energy consumed per unit time. 
+        <![CDATA[In physics, power is the rate of doing work. It is equivalent to an
+    amount of energy consumed per unit time.
     Source: <a href="https://en.wikipedia.org/wiki/Power_%28physics%29">Wikipedia</a>]]>
       </info>
-    </unit>   
+    </unit>
   </group>
     <unit id="ftlbfps" label="Foot Pound-Force per Second [ft-lb/sec]" type="factor" value="1.355818">
       <info>
         <![CDATA[550 foot pounds-force per second = 1.0 Horsepower (imperial mechanical). Source: <a href="http://en.wikipedia.org/wiki/Horsepower">Wikipedia</a>]]>
       </info>
-    </unit> 
-  
+    </unit>
+
   <group id="forces" label="Forces" icon=":/icon/icons/force.png">
     <unit id="n" label="Newton" type="factor" value="1">
       <info>
@@ -318,19 +318,30 @@ the values.
       </unit>
       <unit id="yard" label="Yard [yd]" type="factor" value=".9144">
         <info>
-          <![CDATA[A yard (abbreviation: yd) is a unit of length in the imperial 
-      and United States customary systems of measurement. Historically a yard was 
-      also used in other systems of units. The yard is equal to 3 feet or 36 inches. 
-      Under an agreement in 1959 between Australia, Canada, New Zealand, South Africa, 
-      the United Kingdom and the United States, the yard (known as the "international yard" 
-      in the United States) was legally defined to be exactly 0.9144 metres. Prior to 
-      that date, the legal definition of the yard when expressed in terms of metric units 
+          <![CDATA[A yard (abbreviation: yd) is a unit of length in the imperial
+      and United States customary systems of measurement. Historically a yard was
+      also used in other systems of units. The yard is equal to 3 feet or 36 inches.
+      Under an agreement in 1959 between Australia, Canada, New Zealand, South Africa,
+      the United Kingdom and the United States, the yard (known as the "international yard"
+      in the United States) was legally defined to be exactly 0.9144 metres. Prior to
+      that date, the legal definition of the yard when expressed in terms of metric units
       varied slightly from country to country. Source: <a href="http://en.wikipedia.org/wiki/Yard">Wikipedia</a>]]>
-        </info> 
+        </info>
       </unit>
     </group>
 
     <group id="alen" label="Astronomical Lenghts" icon=":icon/icons/planets.png">
+      <unit id="meter" label="Meter [m]" type="factor" value="1">
+        <info>
+          <![CDATA[The metre (meter in American English), (SI unit symbol:
+          m; SI dimension symbol: L), is the fundamental unit of length in
+          the International System of Units (SI).[1] Originally intended
+          to be one ten-millionth of the distance from the Earth's equator
+          to the North Pole (at sea level), its definition has been
+          periodically refined to reflect growing knowledge of
+          metrology. Source: <a href="http://en.wikipedia.org/wiki/Meter">Wikipedia</a>]]>
+        </info>
+      </unit>
       <unit id="pc" label="Parsec" type="factor" value="30.856776e+15">
         <info>
           <![CDATA[The parsec (symbol: pc) is a unit of length used in astronomy,
@@ -489,8 +500,8 @@ the values.
     </unit>
     <unit id="inchhg" label="Inch of Mercury [inHg]" type="factor" value="3.386389">
       <info>
-        <![CDATA[ Inches of mercury, (inHg and "Hg) is a unit of measurement for pressure. 
-    It is still used for barometric pressure in weather reports, refrigeration and aviation 
+        <![CDATA[ Inches of mercury, (inHg and "Hg) is a unit of measurement for pressure.
+    It is still used for barometric pressure in weather reports, refrigeration and aviation
     in the United States. It is defined as the pressure exerted by a circular column of
     mercury of 1 inch in height at 32 °F (0 °C) at the standard acceleration of gravity.
     Source: <a href="http://en.wikipedia.org/wiki/Inch_of_mercury">Wikipedia</a>]]>
@@ -498,27 +509,27 @@ the values.
     </unit>
    <unit id="mmhg" label="Millimeter of Mercury [mm Hg]" type="factor" value=".1333224">
       <info>
-        <![CDATA[ A millimeter of mercury is a manometric unit of pressure, formerly defined as 
-    the extra pressure generated by a column of mercury one millimetre high. It is now defined 
+        <![CDATA[ A millimeter of mercury is a manometric unit of pressure, formerly defined as
+    the extra pressure generated by a column of mercury one millimetre high. It is now defined
     precisely as 13.5951 × 9.80665 = 133.322387415 pascals.[1] It is denoted by the symbol "mmHg".
-    Although not an SI unit, the millimeter of mercury is still routinely used in medicine, 
+    Although not an SI unit, the millimeter of mercury is still routinely used in medicine,
     meteorology and many other scientific fields.
-    One millimeter of mercury is approximately 1 Torr, or 1/760 of standard atmospheric pressure. 
-    The two units are not exactly equal; however, the difference (less than 0.000015%) is negligible 
+    One millimeter of mercury is approximately 1 Torr, or 1/760 of standard atmospheric pressure.
+    The two units are not exactly equal; however, the difference (less than 0.000015%) is negligible
     for most practical uses.
     Source: <a href="https://en.wikipedia.org/wiki/Millimeter_of_mercury">Wikipedia</a>]]>
       </info>
     </unit>
    <unit id="torr" label="Torr [Torr]" type="factor" value=".1333224">
       <info>
-        <![CDATA[The torr (symbol: Torr) is a unit of pressure, now defined as exactly 1⁄760 of a 
+        <![CDATA[The torr (symbol: Torr) is a unit of pressure, now defined as exactly 1⁄760 of a
     standard atmosphere. Thus one torr is exactly 101325⁄760 pascals (~133.3 Pa).
-    Historically, one torr was intended to be the same as one "millimetre of mercury". However, 
-    subsequent redefinitions of the two units made them slightly different (by less than 0.000015%). 
-    The torr is not part of the International System of Units (SI), but it is often combined with 
-    the metric prefix milli to name one millitorr (mTorr) or 0.001 Torr. The unit was named after 
-    Evangelista Torricelli, an Italian physicist and mathematician who discovered the principle 
-    of the barometer in 1644. 
+    Historically, one torr was intended to be the same as one "millimetre of mercury". However,
+    subsequent redefinitions of the two units made them slightly different (by less than 0.000015%).
+    The torr is not part of the International System of Units (SI), but it is often combined with
+    the metric prefix milli to name one millitorr (mTorr) or 0.001 Torr. The unit was named after
+    Evangelista Torricelli, an Italian physicist and mathematician who discovered the principle
+    of the barometer in 1644.
     Source: <a href="https://en.wikipedia.org/wiki/Torr">Wikipedia</a>]]>
       </info>
     </unit>
@@ -526,7 +537,7 @@ the values.
 
   <!-- areas - relative to base SI unit square km -->
   <group id="area" label="Areas" icon=":icon/icons/rect.png">
-  <unit id="squarecentimeter" label="Square_centimeter [cm^2]" type="factor" value="1e-4"></unit> 
+  <unit id="squarecentimeter" label="Square_centimeter [cm^2]" type="factor" value="1e-4"></unit>
   <unit id="squaremeter" label="Square_meter [m^2]" type="factor" value="1">
       <info>
         <![CDATA[The square metre (British spelling) or square meter (American
@@ -788,29 +799,29 @@ the values.
       <info>
         <![CDATA[Source: <a href="http://en.wikipedia.org/wiki/Specific_energy">Wikipedia</a>]]>
       </info>
-    </unit> 
+    </unit>
     <unit id="btukg" label="BTU per kilogram [BTU/kg]" type="factor" value="1.055056">
       <info>
         <![CDATA[Source: <a href="http://en.wikipedia.org/wiki/Specific_energy">Wikipedia</a>]]>
       </info>
-    </unit>   
+    </unit>
     <unit id="btulb" label="BTU per pound [BTU/lb]" type="factor" value="2.326000171">
       <info>
         <![CDATA[Source: <a href="http://en.wikipedia.org/wiki/Specific_energy">Wikipedia</a>]]>
       </info>
-    </unit>   
+    </unit>
     <unit id="kcalkg" label="Kilocalorie per kilogram [kcal/kg]" type="factor" value="4.1868">
       <info>
         <![CDATA[Source: <a href="http://en.wikipedia.org/wiki/Specific_energy">Wikipedia</a>]]>
       </info>
-    </unit>   
+    </unit>
     <unit id="kwhkg" label="Kilowatt-hour per kilogram [kWh/kg]" type="factor" value="3600">
       <info>
         <![CDATA[Source: <a href="http://en.wikipedia.org/wiki/Specific_energy">Wikipedia</a>]]>
       </info>
-    </unit>   
-  </group>  
-  
+    </unit>
+  </group>
+
   <group id="mflow" label="Mass Flows" icon=":icon/icons/mass-flow.png">
     <unit id="kgpersecond" label="Kilograms per Second" type="transform"
       toSI="x" fromSI="x"/>
