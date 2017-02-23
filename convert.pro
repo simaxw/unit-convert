@@ -11,8 +11,7 @@ TARGET = bin/convert
 
 INCLUDEPATH += inc
 
-#QMAKE_CXXFLAGS_DEBUG += -O0 -fno-inline
-#CONFIG += C++11 debug
+QT += xml widgets script
 CONFIG += C++11 silent
 
 OBJECTS_DIR = obj
@@ -23,16 +22,14 @@ RCC_DIR = obj
 win32:RC_FILE = res/convert.rc
 win32:DEFINES += COFFSET=2
 unix:DEFINES += COFFSET=0
-#win32:DATA_OUT = release/bin/data.rcc
-#unix:DATA_OUT = bin/data.rcc
+win32:DATA_OUT = release/bin/data.rcc
+unix:DATA_OUT = bin/data.rcc
 
 # 2015-01-06 - Simon Wilper
 # Create data.rcc automatically after linking stage
-
 # 2016-08-31 NO! Don't! Use QtCreators "Add Build Step"!
-#QMAKE_POST_LINK = rcc --verbose --compress 9 --binary -o $$DATA_OUT res/main.qrc
-
-QT += xml widgets script
+# 2017-02-24 NO! Not using QtCreator right now...
+QMAKE_POST_LINK = rcc --verbose --compress 9 --binary -o $$DATA_OUT res/main.qrc
 
 SOURCES +=\
 src/app.cpp\
