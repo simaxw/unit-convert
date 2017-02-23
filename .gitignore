@@ -22,3 +22,4 @@ object_script*
 /pkg/*tar.*
 .MTREE
 .PKGINFO
+.qmake.stash

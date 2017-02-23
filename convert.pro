@@ -12,7 +12,7 @@ TARGET = bin/convert
 INCLUDEPATH += inc
 
 QT += xml widgets script
-CONFIG += C++11 silent
+CONFIG += C++14 release silent
 
 OBJECTS_DIR = obj
 MOC_DIR = obj
@@ -29,7 +29,11 @@ unix:DATA_OUT = bin/data.rcc
 # Create data.rcc automatically after linking stage
 # 2016-08-31 NO! Don't! Use QtCreators "Add Build Step"!
 # 2017-02-24 NO! Not using QtCreator right now...
-QMAKE_POST_LINK = rcc --verbose --compress 9 --binary -o $$DATA_OUT res/main.qrc
+QMAKE_POST_LINK = rcc --verbose --compress 9 --binary\
+  -o $$DATA_OUT res/main.qrc
+
+QMAKE_CXXFLAGS += -s -g0
+QMAKE_LFLAGS += -Wl,-s -g0
 
 SOURCES +=\
 src/app.cpp\
