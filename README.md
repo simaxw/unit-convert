@@ -1,4 +1,4 @@
-# Unit Conversion Tool 2.0.7
+# Unit Conversion Tool 2.1.0
 
 Convert to all configured units in one unit group while typing.
 
@@ -12,8 +12,3 @@ be set to one of the types:
 
 All units may be given a info section to supply further mathematical
 background information to the specific unit.
-
-# History of Changes
-
-* Simon Wilper 2015-01-06
-    - unit groups now sortable

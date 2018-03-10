@@ -32,8 +32,8 @@
 #include "settings.hpp"
 #include "menufactory.hpp"
 
-#define CONVERT_VERSION "2.2.1"
-#define CONVERT_DATE "2015-02-08"
+#define CONVERT_VERSION "2.1.0"
+#define CONVERT_DATE "2018-03-10"
 #define COMPANY_NAME "Chronowerks"
 #define CONVERT_NAME "SUConvert"
 

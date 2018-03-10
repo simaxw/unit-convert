@@ -1,4 +1,4 @@
-#include <unit.hpp>
+#include "unit.hpp"
 
 Unit::Unit( UnitType _type, const QString& _id, const QString& _label ) :
   type(_type),
