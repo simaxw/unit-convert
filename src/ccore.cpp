@@ -24,7 +24,8 @@ bool CCore::convertUnits( QList<Unit*> lstUnits, Unit *u ) {
 
         if ( fu->isExtendedInput ) {
 
-          QString eval = r.cap(1) + " * " + QString::number(fu->subUnits[0]) + " + " + r.cap(2);
+          QString eval = r.cap(1) + " * " + QString::number(fu->subUnits[0]) +
+            " + " + r.cap(2);
           if ( !r.cap(3).isEmpty() ) {
             eval += " + (" + r.cap(3) + ")";
           }

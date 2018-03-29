@@ -38,7 +38,8 @@ class MenuFactoryContentHandler : public QObject, public QXmlDefaultHandler {
       currentMenu(0),
       slotContainer(_slotContainer)
     {}
-    bool startElement( const QString&, const QString&, const QString&, const QXmlAttributes& );
+    bool startElement( const QString&, const QString&, const QString&,
+        const QXmlAttributes& );
     bool endElement( const QString&, const QString&, const QString& );
     QMenuBar* getMenuBar() { return menubar; }
     QList<QToolBar*> getToolbars() { return toolbars.values(); }

@@ -54,7 +54,6 @@ class FactorUnit : public Unit {
     FactorUnit( const QString& _id, const QString& _label, const double _value ) :
       Unit(Unit::FACTOR,_id,_label), value(_value)
     {
-      //setValidator( new QDoubleValidator );
     }
 
     double value;
@@ -76,7 +75,6 @@ class TransformUnit : public Unit {
     TransformUnit( const QString& _id, const QString& _label, const QString& _fromSI, const QString& _toSI ) :
       Unit(Unit::TRANSFORM,_id,_label), fromSI(_fromSI), toSI(_toSI)
     {
-      //setValidator( new QDoubleValidator );
     }
 
     QString fromSI;

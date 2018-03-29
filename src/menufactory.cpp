@@ -91,7 +91,9 @@ void MenuFactoryContentHandler::handleActionTriggered() {
       QMetaObject::normalizedSignature(slotName.toUtf8().constData())
       );
   if ( slotIndex < 0 ) {
-    QMessageBox::critical( 0, tr("Error"), QString(tr("Error calling Action. Slot %1 does not exist.")).arg(slotName) );
+    QMessageBox::critical( 0, tr("Error"),
+        QString(tr("Error calling Action. Slot %1 does not exist.")).arg(
+          slotName) );
     return;
   }
 

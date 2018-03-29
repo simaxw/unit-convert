@@ -19,17 +19,22 @@ bool Convert::initialize() {
   }
 
   if ( !rc ) {
-    QMessageBox::critical( this, tr("Error"), tr("Data file data.rcc missing."));
+    QMessageBox::critical( this, tr("Error"),
+       tr("Data file data.rcc missing. It is either expected in "
+         "/usr/share/convert or in the same directory the binary resides in"));
     return false;
   }
 
   mf = new MenuFactory( ":/data/menu.xml", this );
   if ( !mf->initialize() ) {
-    QMessageBox::critical( this, tr("Error"), QString(tr("Failed to create application menu: %1")).arg(mf->lastError()) );
+    QMessageBox::critical( this, tr("Error"),
+        QString(tr("Failed to create application menu: %1")).arg(
+          mf->lastError()) );
     return false;
   }
 
-  actionToggleDiff = new QAction( QIcon(":/icon/icons/delta.png"),       tr("Toggle Diff"), this );
+  actionToggleDiff = new QAction( QIcon(":/icon/icons/delta.png"),
+      tr("Toggle Diff"), this );
   actionToggleDiff->setCheckable(true);
 
   foreach ( QToolBar *tb, mf->getContentHandler()->getToolbars() ) {
@@ -43,7 +48,8 @@ bool Convert::initialize() {
     addToolBar( Qt::TopToolBarArea, tb );
   }
 
-  // initialize XML parser with units.xml file now (2015-01-06) contained in the data.rcc
+  // initialize XML parser with units.xml file now (2015-01-06) contained in the
+  // data.rcc
   UnitXMLParser p( ":data/units.xml" );
   if ( !p.initialize()) {
     QMessageBox::critical( this, tr("Error"), p.getErrorMessage() );
@@ -74,15 +80,18 @@ bool Convert::initialize() {
   // ***
 
   help = new ConvertHelp;
-  help->setWindowTitle( QString(tr("%1 %2 - Help")).arg(CONVERT_NAME).arg(strVersion) );
+  help->setWindowTitle( QString(tr("%1 %2 - Help")).arg(CONVERT_NAME).arg(
+        strVersion) );
 
   menSort = new QMenu( tr("Sort"), this );
   actionSortAsc  = new QAction( tr("&Ascending"), this );
   actionSortDesc = new QAction( tr("&Descending"), this );
   menSort->addAction( actionSortAsc );
   menSort->addAction( actionSortDesc );
-  connect( actionSortAsc,  SIGNAL(triggered()), this, SLOT(actionSortAscTriggered()) );
-  connect( actionSortDesc, SIGNAL(triggered()), this, SLOT(actionSortDescTriggered()) );
+  connect( actionSortAsc,  SIGNAL(triggered()), this,
+      SLOT(actionSortAscTriggered()) );
+  connect( actionSortDesc, SIGNAL(triggered()), this,
+      SLOT(actionSortDescTriggered()) );
 
   // ***
   // *** Initialize Main UI Elements
@@ -93,7 +102,6 @@ bool Convert::initialize() {
 
   // initialize the unit group list
   treeUnitGroups = new QTreeView;
-  //treeUnitGroups->setStyleSheet("font-size: 12pt; font-family:sans; margin:0;");
   treeUnitGroups->setEditTriggers(QAbstractItemView::NoEditTriggers);
   treeUnitGroups->header()->hide();
   treeUnitGroups->setSelectionBehavior( QAbstractItemView::SelectItems );
@@ -102,22 +110,23 @@ bool Convert::initialize() {
   splitter->addWidget(treeUnitGroups);
 
   // initialize widget with VBoxLayout
-  QWidget *unitStackInfo = new QWidget;
-  //unitStackInfo->setStyleSheet( "border: 2px solid red;" );
+  splitterUnits_Info = new QSplitter();
+  QWidget *unitStackInfo = new QWidget();
   QVBoxLayout *vboxUnitStackInfo = new QVBoxLayout;
   unitStackInfo->setLayout(vboxUnitStackInfo);
 
   lblTitle = new QLabel( "Title" );
-  lblTitle->setStyleSheet( "font-size:16pt;font-weight:bold;background:rgb(100,100,100);color:white;padding:4px;" );
-  vboxUnitStackInfo->addWidget(lblTitle);
+  lblTitle->setStyleSheet(
+      "font-size:16pt;font-weight:bold;background:rgb(100,100,100);"
+      "color:white;padding:4px;");
+  //vboxUnitStackInfo->addWidget(lblTitle);
 
-  splitter->addWidget(unitStackInfo);
+  splitterUnits_Info->addWidget(unitStackInfo);
 
   // assign the StackedLayout to the unit list widget
   widgetUnitList = new QWidget;
   unitLayout = new QStackedLayout;
   widgetUnitList->setLayout(unitLayout);
-  //widgetUnitList->setStyleSheet( "font-size:16pt;" );
 
   treeUnitGroups->setFont( settings->value("treeview.font").value<QFont>() );
   widgetUnitList->setFont( settings->value("unitlist.font").value<QFont>() );
@@ -126,7 +135,8 @@ bool Convert::initialize() {
   lblInfo = new QLabel;
   lblInfo->setWordWrap(true);
   lblInfo->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-  lblInfo->setStyleSheet("background:white;color:black;font-size:12pt;line-height:150%;padding:10px;");
+  lblInfo->setStyleSheet("background:white;color:black;font-size:12pt;"
+      "line-height:150%;padding:10px;");
   lblInfo->setOpenExternalLinks(true);
   lblInfo->setTextInteractionFlags(
       Qt::LinksAccessibleByKeyboard|
@@ -135,9 +145,9 @@ bool Convert::initialize() {
       Qt::TextSelectableByKeyboard|
       Qt::TextSelectableByMouse
       );
-  connect(  lblInfo, SIGNAL(linkHovered(const QString& )),
-            this, SLOT(lblInfoLinkHovered(const QString&))
-            );
+  connect(lblInfo, SIGNAL(linkHovered(const QString&)),
+          this, SLOT(lblInfoLinkHovered(const QString&))
+         );
   if ( unitGroups.size() == 0 ) {
     lblInfo->setText( "<html>No Units configured</html>" );
   }
@@ -145,8 +155,13 @@ bool Convert::initialize() {
   scrInfo->setWidget(lblInfo);
 
   // add the widgets to the VBoxLayout
-  vboxUnitStackInfo->addWidget(widgetUnitList);
-  vboxUnitStackInfo->addWidget(scrInfo);
+  //vboxUnitStackInfo->addWidget(widgetUnitList);
+
+  //splitterUnits_Info->addWidget(scrInfo);
+  //vboxUnitStackInfo->addWidget(splitterUnits_Info);
+
+  qDebug() << vboxUnitStackInfo;
+  qDebug() << splitterUnits_Info;
 
   // initialize the list model for the unit groups
   modelUnitGroups = new QStandardItemModel;
@@ -157,7 +172,10 @@ bool Convert::initialize() {
   unsigned int originalIndex = 0;
   foreach( UnitGroup* g, p.getUnitGroups() ) {
     g->initialize(lblInfo);
-    unitLayout->addWidget(g);
+    QScrollArea *scr = new QScrollArea(this);
+    scr->setWidgetResizable(true);
+    scr->setWidget(g);
+    unitLayout->addWidget(scr);
 
     foreach ( Unit *u, g->units ) {
       connect( u, SIGNAL(textEdited(const QString&)),
@@ -178,7 +196,10 @@ bool Convert::initialize() {
 
     foreach ( UnitGroup *g, coll->lstGroups ) {
       g->initialize(lblInfo);
-      unitLayout->addWidget(g);
+      QScrollArea *scr = new QScrollArea(this);
+      scr->setWidgetResizable(true);
+      scr->setWidget(g);
+      unitLayout->addWidget(scr);
 
       foreach ( Unit *u, g->units ) {
         connect( u, SIGNAL(textEdited(const QString&)),
@@ -196,7 +217,8 @@ bool Convert::initialize() {
   }
 
   settingsWindow = new Settings( 0, widgetUnitList, treeUnitGroups );
-  settingsWindow->setWindowTitle( QString(tr("%1 %2 - Settings")).arg(CONVERT_NAME).arg(strVersion) );
+  settingsWindow->setWindowTitle( QString(tr("%1 %2 - Settings")).arg(
+        CONVERT_NAME).arg(strVersion) );
   settingsWindow->initialize();
 
   unitLayout->addWidget( new QWidget(this) );
@@ -206,7 +228,8 @@ bool Convert::initialize() {
   connect( treeUnitGroups->selectionModel(),
       SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection& )),
       this,
-      SLOT(treeUnitGroupsSelectionChanged( const QItemSelection&, const QItemSelection& ))
+      SLOT(treeUnitGroupsSelectionChanged(
+          const QItemSelection&, const QItemSelection& ))
     );
 
   setCentralWidget(splitter);
@@ -229,13 +252,15 @@ bool Convert::initialize() {
     splitter->restoreState( settings->value( "splitter.size" ).toByteArray() );
 
     int sd = settings->value( "sort.unitgroups", 0 ).toInt();
-    modelUnitGroups->invisibleRootItem()->sortChildren( 0, sd == 0 ? Qt::AscendingOrder : Qt::DescendingOrder );
+    modelUnitGroups->invisibleRootItem()->sortChildren( 0,
+        sd == 0 ? Qt::AscendingOrder : Qt::DescendingOrder );
     sdUnitGroups = (sd == 0 ? ASC : DESC);
 
     QModelIndex groupIndex;
     QList<QVariant> indexTree = settings->value( "last.unitgroup" ).toList();
     if ( indexTree.length() == 2 ) {
-      QModelIndex collectionIndex = modelUnitGroups->index(indexTree.at(1).toInt(),0);
+      QModelIndex collectionIndex = modelUnitGroups->index(
+          indexTree.at(1).toInt(),0);
       treeUnitGroups->setExpanded(collectionIndex, true);
       groupIndex = collectionIndex.child(indexTree.at(0).toInt(),0);
     } else
@@ -252,7 +277,9 @@ bool Convert::initialize() {
   return true;
 }
 
-void Convert::treeUnitGroupsSelectionChanged( const QItemSelection& selected, const QItemSelection& ) {
+void Convert::treeUnitGroupsSelectionChanged(
+    const QItemSelection& selected,
+    const QItemSelection& ) {
   if ( selected.indexes().size() == 0 ) return;
 
   QModelIndex index = selected.indexes().at(0);
@@ -274,7 +301,12 @@ void Convert::treeUnitGroupsSelectionChanged( const QItemSelection& selected, co
 }
 
 void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
-  if ( !selectedGroup || txtInput.isEmpty() ) {
+  if ( !selectedGroup ) {
+    qDebug() << "txtUnitsTextEdited: No Unit Group Selected";
+    return;
+  }
+
+  if ( txtInput.isEmpty() ) {
     return;
   }
 
@@ -296,8 +328,6 @@ void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
 
   QString stylePos = "color:green;font-weight:bold;";
   QString styleNeg = "color:red;font-weight:bold;";
-
-  //qDebug() << selectedGroup->gridUnitFields->columnCount();
 
   unsigned int c = selectedGroup->gridUnitFields->columnCount();
   unsigned int r = selectedGroup->gridUnitFields->rowCount();
@@ -343,7 +373,8 @@ void Convert::actionQuitTriggered() {
     settings->setValue( "splitter.size", splitter->saveState() );
     settings->setValue( "sort.unitgroups", QVariant(sdUnitGroups) );
 
-    QModelIndexList indexes = treeUnitGroups->selectionModel()->selectedIndexes();
+    QModelIndexList indexes = treeUnitGroups->selectionModel()->
+      selectedIndexes();
     if ( indexes.length() > 0 ) {
       QModelIndex index = indexes.at(0);
       if ( index.isValid() ) {
@@ -381,7 +412,18 @@ void Convert::setVisibleUnitGroup( int idx ) {
 
   // switch to the selected deck
   unitLayout->setCurrentIndex(idx);
-  selectedGroup = qobject_cast<UnitGroup*>(unitLayout->currentWidget());
+
+  QScrollArea *scr = qobject_cast<QScrollArea*>(unitLayout->currentWidget());
+  if ( !scr ) {
+    qDebug() << "Unable to get Unit List Widget Scroll Area";
+    return;
+  }
+
+  selectedGroup = qobject_cast<UnitGroup*>(scr->widget());
+  if ( !selectedGroup ) {
+    qDebug() << "No Unit Group selected";
+    return;
+  }
 
   // transfer focus to first input field
   if ( selectedGroup->units.size() > 0 )
@@ -407,7 +449,8 @@ void Convert::actionAddSplit() {
   }
   QList<Unit*> lstUnits = selectedGroup->clone(actionToggleDiff->isChecked());
   foreach( Unit* u, lstUnits ) {
-    connect( u, SIGNAL(textEdited(const QString&)), this, SLOT(txtUnitsTextEdited(const QString&)) );
+    connect( u, SIGNAL(textEdited(const QString&)), this,
+        SLOT(txtUnitsTextEdited(const QString&)) );
   }
 }
 

@@ -6,7 +6,7 @@
       name="quit"
       label="~Quit"
       accel="Ctrl+Q"
-      help="Quit Application and save all changes"
+      help="Quit Application and save all Changes"
       icon="quit.png"
       toolbar="main"
       slot="actionQuitTriggered()" />

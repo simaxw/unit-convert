@@ -1,9 +1,9 @@
-#Simon Wilper
-#2013-05-25
-#2010-11-23
-#2007-08-23
-#2006-08-23
-#2015-01-05
+# Simon Wilper
+# 2013-05-25
+# 2010-11-23
+# 2007-08-23
+# 2006-08-23
+# 2015-01-05
 
 TEMPLATE = app
 
@@ -20,8 +20,10 @@ RCC_DIR = obj
 INCLUDEPATH += obj
 
 win32:RC_FILE = res/convert.rc
+
 win32:DEFINES += COFFSET=2
 unix:DEFINES += COFFSET=0
+
 win32:DATA_OUT = release/bin/data.rcc
 unix:DATA_OUT = bin/data.rcc
 
@@ -29,8 +31,11 @@ unix:DATA_OUT = bin/data.rcc
 QMAKE_POST_LINK = rcc --verbose --compress 9 --binary\
   -o $$DATA_OUT res/main.qrc
 
-QMAKE_CXXFLAGS += -s -g0
-QMAKE_LFLAGS += -Wl,-s -g0
+#QMAKE_CXXFLAGS += -s -g0
+#QMAKE_LFLAGS += -Wl,-s -g0
+
+QMAKE_CXXFLAGS += -g
+QMAKE_LFLAGS += -g
 
 SOURCES +=\
 src/app.cpp\

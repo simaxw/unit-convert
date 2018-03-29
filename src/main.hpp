@@ -32,10 +32,10 @@
 #include "settings.hpp"
 #include "menufactory.hpp"
 
-#define CONVERT_VERSION "2.1.0"
-#define CONVERT_DATE "2018-03-10"
+#define CONVERT_VERSION "2.1.0-dev"
+#define CONVERT_DATE "2018-03-25"
 #define COMPANY_NAME "Chronowerks"
-#define CONVERT_NAME "SUConvert"
+#define CONVERT_NAME "EWC Unit Conversion Tool"
 
 class Convert : public QMainWindow {
   Q_OBJECT
@@ -47,13 +47,16 @@ class Convert : public QMainWindow {
       modelUnitGroups(0),
       unitLayout(0),
       settings(0),
-      selectedGroup(0)
+      selectedGroup(0),
+      splitterUnits_Info(0),
+      scrUnits(0)
     {}
     bool initialize();
     void closeEvent( QCloseEvent* );
 
   private slots:
-    void treeUnitGroupsSelectionChanged( const QItemSelection&, const QItemSelection& );
+    void treeUnitGroupsSelectionChanged( const QItemSelection&,
+        const QItemSelection& );
     void txtUnitsTextEdited( const QString& );
     void lblInfoLinkHovered( const QString& );
     void actionQuitTriggered();
@@ -87,21 +90,17 @@ class Convert : public QMainWindow {
     QAction *actionSortAsc;
     QAction *actionSortDesc;
 
-    QAction *actionQuit;
-    QAction *actionSplit;
-    QAction *actionUnsplit;
     QAction *actionToggleDiff;
-    QAction *actionSettings;
-    QAction *actionHelp;
-    QAction *actionAbout;
 
     QLabel *lblTitle;
     QLabel *lblInfo;
     QToolBar *tbMain;
     QTreeView *treeUnitGroups;
     QSplitter *splitter;
+    QSplitter *splitterUnits_Info;
     QWidget *widgetUnitList;
     QScrollArea *scrInfo;
+    QScrollArea *scrUnits;
     Settings *settingsWindow;
     MenuFactory *mf;
 };
