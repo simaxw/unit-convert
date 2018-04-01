@@ -30,7 +30,7 @@
       help="Toggle Diff Column between two splits"
       icon="delta.png"
       toolbar="main"
-      slot="actionToggleDiff()"
+      slot="actionToggleDiffTriggered"
       isToggle="true" />
     <action
       name="split"

@@ -33,8 +33,8 @@
 #include "settings.hpp"
 #include "menufactory.hpp"
 
-#define CONVERT_VERSION "2.1.0-dev"
-#define CONVERT_DATE "2018-03-25"
+#define CONVERT_VERSION "2.2.0"
+#define CONVERT_DATE "2018-04-01"
 #define COMPANY_NAME "Chronowerks"
 #define CONVERT_NAME "EWC Unit Conversion Tool"
 
@@ -44,6 +44,7 @@ class Convert : public QMainWindow {
   public:
     enum SortDirection { ASC, DESC };
     Convert() :
+      mtoggleState(false),
       sdUnitGroups(ASC),
       modelUnitGroups(0),
       unitLayout(0),
@@ -68,11 +69,12 @@ class Convert : public QMainWindow {
     void actionSortDescTriggered();
     void actionAddSplit();
     void actionRemoveSplit();
-    void actionToggleDiffTriggered();
+    void actionToggleDiffTriggered(QAction*);
     void actionSettingsTriggered();
     void actionHelpTriggered();
 
   private:
+    bool mtoggleState;
     SortDirection sdUnitGroups;
     void setVisibleUnitGroup( int );
 
@@ -87,16 +89,12 @@ class Convert : public QMainWindow {
     CCore cc;
     QStatusBar *statusbar;
 
-    QAction *actionSort;
     QMenu *menSort;
     QAction *actionSortAsc;
     QAction *actionSortDesc;
 
-    QAction *actionToggleDiff;
-
     QLabel *lblTitle;
     QLabel *lblInfo;
-    QToolBar *tbMain;
     QTreeView *treeUnitGroups;
     QSplitter *splitter;
     QSplitter *splitterUnitsInfo;

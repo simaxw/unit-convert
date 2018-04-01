@@ -93,18 +93,30 @@ void MenuFactoryContentHandler::handleActionTriggered() {
   if ( !A ) QMessageBox::critical( 0, tr("Error"), tr("Error calling Action") );
 
   QString slotName = A->data().toString();
-  int slotIndex = slotContainer->metaObject()->indexOfMethod(
-      QMetaObject::normalizedSignature(slotName.toUtf8().constData())
-      );
-  if ( slotIndex < 0 ) {
-    QMessageBox::critical( 0, tr("Error"),
-        QString(tr("Error calling Action. Slot %1 does not exist.")).arg(
-          slotName) );
-    return;
-  }
 
-  QMetaMethod slot = slotContainer->metaObject()->method(slotIndex);
-  slot.invoke( slotContainer, Qt::DirectConnection );
+  if ( A->isCheckable() ) {
+    bool rc = slotContainer->metaObject()->invokeMethod(
+        slotContainer, slotName.toUtf8().constData(), Qt::DirectConnection,
+        Q_ARG(QAction*, A));
+
+    if ( !rc ) {
+      QMessageBox::critical( 0, tr("Error"),
+          QString(tr("Could not toggle. \"%1\" not called.")).arg(slotName));
+      return;
+    }
+  } else {
+    int slotIndex = slotContainer->metaObject()->indexOfMethod(
+        QMetaObject::normalizedSignature(slotName.toUtf8().constData())
+        );
+    if ( slotIndex < 0 ) {
+      QMessageBox::critical( 0, tr("Error"),
+          QString(tr("Error calling Action. Slot \"%1\" does not exist.")).arg(
+            slotName) );
+      return;
+    }
+    QMetaMethod slot = slotContainer->metaObject()->method(slotIndex);
+    slot.invoke( slotContainer, Qt::DirectConnection );
+  }
 }
 
 bool MenuFactory::initialize() {

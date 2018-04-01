@@ -55,18 +55,11 @@ bool Convert::initialize() {
     return false;
   }
 
-  actionToggleDiff = new QAction( QIcon(":/icon/icons/delta.png"),
-      tr("Toggle Diff"), this );
-  actionToggleDiff->setCheckable(true);
-
   foreach ( QToolBar *tb, mf->getContentHandler()->getToolbars() ) {
     tb->setMovable(true);
     tb->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
     tb->setIconSize( QSize( 24, 24 ) );
     tb->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    if ( tb->objectName() == "main" ) {
-      tb->addAction(actionToggleDiff);
-    }
     addToolBar( Qt::TopToolBarArea, tb );
   }
 
@@ -463,7 +456,7 @@ void Convert::actionAddSplit() {
     statusbar->showMessage( tr("Maximum of 5 unit sets reached"), 3000 );
     return;
   }
-  QList<Unit*> lstUnits = selectedGroup->clone(actionToggleDiff->isChecked());
+  QList<Unit*> lstUnits = selectedGroup->clone(mtoggleState);
   foreach( Unit* u, lstUnits ) {
     connect( u, SIGNAL(textEdited(const QString&)), this,
         SLOT(txtUnitsTextEdited(const QString&)) );
@@ -491,7 +484,10 @@ void Convert::actionSortTriggered() {
   menSort->exec(QCursor::pos());
 }
 
-void Convert::actionToggleDiffTriggered() {
+void Convert::actionToggleDiffTriggered(QAction *action) {
+  if ( !action ) return;
+  mtoggleState = action->isChecked();
+
   if ( !selectedGroup ) return;
   QGridLayout *l = selectedGroup->gridUnitFields;
 
@@ -501,7 +497,7 @@ void Convert::actionToggleDiffTriggered() {
     for ( int r = 0; r < l->rowCount(); r++ ) {
       QLayoutItem *li = l->itemAtPosition(r,c);
       if ( li )
-        li->widget()->setVisible(actionToggleDiff->isChecked());
+        li->widget()->setVisible(mtoggleState);
     }
   }
 }
