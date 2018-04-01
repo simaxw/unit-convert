@@ -36,11 +36,14 @@ bool MenuFactoryContentHandler::startElement(
   if ( localName == "action" ) {
     QAction *action = new QAction(0);
 
-    connect( action, SIGNAL(triggered()), this, SLOT(handleActionTriggered()) );
-    action->setData( attr.value("slot") );
+    if ( !attr.value("slot").isEmpty() ) {
+      connect( action, SIGNAL(triggered()),
+          this, SLOT(handleActionTriggered()) );
+      action->setData( attr.value("slot") );
+    }
 
     if ( !attr.value("label").isEmpty() ) {
-      action->setText( attr.value("label").replace( "~","&" ) );
+      action->setText( attr.value("label").replace("~", "&") );
     }
 
     if ( !attr.value("icon").isEmpty() ) {
@@ -55,6 +58,10 @@ bool MenuFactoryContentHandler::startElement(
       action->setStatusTip( attr.value("help") );
     }
 
+    if ( attr.value("isToggle") == "true" ) {
+      action->setCheckable(true);
+    }
+
     if ( currentMenu ) currentMenu->addAction(action);
 
     QString toolbarName = attr.value("toolbar");
@@ -65,7 +72,6 @@ bool MenuFactoryContentHandler::startElement(
     }
 
     toolbars[toolbarName]->addAction(action);
-
   }
 
   return true;

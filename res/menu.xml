@@ -25,6 +25,14 @@
       toolbar="main"
       slot="actionSettingsTriggered()" />
     <action
+      name="togglediff"
+      label="~Toggle Diff"
+      help="Toggle Diff Column between two splits"
+      icon="delta.png"
+      toolbar="main"
+      slot="actionToggleDiff()"
+      isToggle="true" />
+    <action
       name="split"
       label="~Split"
       help="Split Unit Fields"

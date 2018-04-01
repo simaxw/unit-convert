@@ -37,7 +37,8 @@ void Unit::paintEvent(QPaintEvent *e) {
 }
 
 void Unit::focusInEvent( QFocusEvent* e ) {
-  if ( lblInfo != 0 && !label.isEmpty() ) {
+  if ( !lblInfo ) return;
+  if ( !label.isEmpty() ) {
     lblInfo->setText("<html>"+info+"</html>");
   } else {
     lblInfo->setText(QString());

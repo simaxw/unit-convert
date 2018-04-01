@@ -13,6 +13,7 @@
 #include <QIcon>
 #include <QDesktopWidget>
 #include <QApplication>
+#include <QList>
 #include <QDebug>
 
 class Settings : public QWidget {
@@ -20,34 +21,19 @@ class Settings : public QWidget {
 
   public:
     Settings(
-        QWidget *parent = 0,
-        QWidget *_widgetUnits = 0,
-        QTreeView *_treeView = 0
+        QList<QWidget*> listConfigurableWidgets
         ) :
-      QWidget(parent),
-      widgetUnits(_widgetUnits),
-      treeView(_treeView)
+      mlistConfigurableWidgets(listConfigurableWidgets)
       {}
     void initialize();
 
   private:
-    void updateButtonTexts();
-    QWidget *widgetUnits;
-    QTreeView *treeView;
-
     QLabel *lblTitle;
-
-    QLabel *lblFontUnitLabels;
-    QPushButton *btnSelectFontUnitLabels;
-
-    QLabel *lblFontTreeView;
-    QPushButton *btnSelectFontTreeView;
-
     QPushButton *btnClose;
+    QList<QWidget*> mlistConfigurableWidgets;
 
   private slots:
-    void selectFontUnitLabelsTriggered();
-    void selectFontTreeViewTriggered();
+    void selectFont();
 };
 
 #endif

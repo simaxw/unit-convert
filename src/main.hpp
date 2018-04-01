@@ -25,6 +25,7 @@
 #include <QtMath>
 #include <QCloseEvent>
 #include <QLayoutItem>
+#include <QList>
 #include "ccore.hpp"
 #include "about.hpp"
 #include "parser.hpp"
@@ -48,8 +49,9 @@ class Convert : public QMainWindow {
       unitLayout(0),
       settings(0),
       selectedGroup(0),
-      splitterUnits_Info(0),
-      scrUnits(0)
+      splitterUnitsInfo(0),
+      scrUnits(0),
+      settingsWindow(0)
     {}
     bool initialize();
     void closeEvent( QCloseEvent* );
@@ -97,12 +99,13 @@ class Convert : public QMainWindow {
     QToolBar *tbMain;
     QTreeView *treeUnitGroups;
     QSplitter *splitter;
-    QSplitter *splitterUnits_Info;
+    QSplitter *splitterUnitsInfo;
     QWidget *widgetUnitList;
-    QScrollArea *scrInfo;
     QScrollArea *scrUnits;
     Settings *settingsWindow;
     MenuFactory *mf;
+
+    QList<QWidget*> listConfigurableWidgets;
 };
 
 #endif

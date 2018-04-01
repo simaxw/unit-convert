@@ -14,18 +14,26 @@ void Settings::initialize() {
   QWidget *widgetGrid = new QWidget;
   QGridLayout *grid = new QGridLayout;
   widgetGrid->setLayout(grid);
-  lblFontUnitLabels = new QLabel( tr("Unit Labels") );
-  lblFontUnitLabels->setAlignment( Qt::AlignRight|Qt::AlignVCenter );
-  grid->addWidget(lblFontUnitLabels,0,0);
 
-  btnSelectFontUnitLabels = new QPushButton( "..." );
-  grid->addWidget(btnSelectFontUnitLabels,0,1);
+  int row = 0;
+  for ( auto widget : mlistConfigurableWidgets ) {
+    QLabel *lblWidgetName = new QLabel(widget->objectName());
+    lblWidgetName->setAlignment( Qt::AlignRight|Qt::AlignVCenter );
+    grid->addWidget(lblWidgetName, row, 0);
 
-  lblFontTreeView = new QLabel( tr("Tree View") );
-  lblFontTreeView->setAlignment( Qt::AlignRight|Qt::AlignVCenter );
-  grid->addWidget(lblFontTreeView,1,0);
-  btnSelectFontTreeView = new QPushButton( "..." );
-  grid->addWidget(btnSelectFontTreeView,1,1);
+    QPushButton *btnSelectFont = new QPushButton( "..." );
+    btnSelectFont->setProperty("widgetindex", row);
+    grid->addWidget(btnSelectFont, row, 1);
+
+    QFont f = widget->font();
+    btnSelectFont->setText(QString("%1, %2pt").arg(f.family()).arg(f.pointSize()));
+    btnSelectFont->setFont(f);
+
+    connect(btnSelectFont, SIGNAL(clicked()),
+        this, SLOT(selectFont()));
+
+    row++;
+  }
 
   QVBoxLayout *vboxCentral = new QVBoxLayout;
   setLayout(vboxCentral);
@@ -42,34 +50,18 @@ void Settings::initialize() {
   vboxCentral->addStretch();
   vboxCentral->addWidget( widgetControls );
 
-  connect( btnSelectFontUnitLabels, SIGNAL(clicked()), this, SLOT(selectFontUnitLabelsTriggered()) );
-  connect( btnSelectFontTreeView, SIGNAL(clicked()), this, SLOT(selectFontTreeViewTriggered()) );
   connect( btnClose, SIGNAL(clicked()), this, SLOT(close()) );
-
-  updateButtonTexts();
 }
 
-void Settings::selectFontUnitLabelsTriggered() {
-  if ( !widgetUnits ) return;
-  widgetUnits->setFont( QFontDialog::getFont( 0, widgetUnits->font() ) );
-  updateButtonTexts();
-}
+void Settings::selectFont() {
+  QPushButton *btn = qobject_cast<QPushButton*>(sender());
+  if ( !btn ) return;
 
-void Settings::selectFontTreeViewTriggered() {
-  if ( !treeView ) return;
-  treeView->setFont( QFontDialog::getFont( 0, treeView->font() ) );
-  updateButtonTexts();
-}
+  QWidget *w = mlistConfigurableWidgets[btn->property("widgetindex").toInt()];
 
-void Settings::updateButtonTexts() {
-  if ( widgetUnits ) {
-    QFont f = widgetUnits->font();
-    btnSelectFontUnitLabels->setText(QString("%1, %2pt").arg(f.family()).arg(f.pointSize()));
-    btnSelectFontUnitLabels->setFont(f);
-  }
-  if ( treeView ) {
-    QFont f = treeView->font();
-    btnSelectFontTreeView->setText(QString("%1, %2pt").arg(f.family()).arg(f.pointSize()));
-    btnSelectFontTreeView->setFont(f);
-  }
+  w->setFont(QFontDialog::getFont(0, w->font()));
+
+  QFont f = w->font();
+  btn->setText(QString("%1, %2pt").arg(f.family()).arg(f.pointSize()));
+  btn->setFont(f);
 }

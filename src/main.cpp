@@ -5,6 +5,7 @@
  * @return bool true on success, false otherwise
  */
 bool Convert::initialize() {
+  strVersion = QString( CONVERT_VERSION );
 
   // the data.rcc gets compiled as a binary file via rcc. It is expected
   // in the same path as the executable or in /usr/share/convert on Linux
@@ -25,6 +26,27 @@ bool Convert::initialize() {
     return false;
   }
 
+  // Statusbar
+  statusbar = new QStatusBar(this);
+  setStatusBar(statusbar);
+
+  // About Window
+  about = new ConvertAbout;
+  about->setWindowIcon( QIcon( ":/icon/icons/light_bulb.png" ) );
+  about->setWindowTitle( QString("%1 " + strVersion).arg(CONVERT_NAME) );
+  about->strDate = CONVERT_DATE;
+  about->strVersion = strVersion;
+  about->initialize();
+  setWindowTitle( "SUConvert " + strVersion );
+  about->setWindowTitle(tr("About") + " " + windowTitle());
+  setWindowIcon( QIcon( ":/icon/icons/convert.png" ) );
+
+  // Help Window
+  help = new ConvertHelp;
+  help->setWindowTitle( QString(tr("%1 %2 - Help")).arg(CONVERT_NAME).arg(
+        strVersion) );
+
+  // Menu Factory
   mf = new MenuFactory( ":/data/menu.xml", this );
   if ( !mf->initialize() ) {
     QMessageBox::critical( this, tr("Error"),
@@ -48,41 +70,7 @@ bool Convert::initialize() {
     addToolBar( Qt::TopToolBarArea, tb );
   }
 
-  // initialize XML parser with units.xml file now (2015-01-06) contained in the
-  // data.rcc
-  UnitXMLParser p( ":data/units.xml" );
-  if ( !p.initialize()) {
-    QMessageBox::critical( this, tr("Error"), p.getErrorMessage() );
-    return false;
-  }
-  // the parser holds the unit groups (widgets)
-  unitGroups = p.getUnitGroups();
-
-  // initialize settings
-  settings = new QSettings(
-      QSettings::IniFormat,
-      QSettings::UserScope,
-      COMPANY_NAME,
-      CONVERT_NAME,
-      this
-      );
-
-  // ***
-  // *** Initialize Statusbar
-  // ***
-
-  statusbar = new QStatusBar(this);
-  setStatusBar(statusbar);
-
-  // ***
-  // *** Initialize Sort Popup Menu
-  // *** and the help window
-  // ***
-
-  help = new ConvertHelp;
-  help->setWindowTitle( QString(tr("%1 %2 - Help")).arg(CONVERT_NAME).arg(
-        strVersion) );
-
+  // Sort Popup Menu
   menSort = new QMenu( tr("Sort"), this );
   actionSortAsc  = new QAction( tr("&Ascending"), this );
   actionSortDesc = new QAction( tr("&Descending"), this );
@@ -93,49 +81,40 @@ bool Convert::initialize() {
   connect( actionSortDesc, SIGNAL(triggered()), this,
       SLOT(actionSortDescTriggered()) );
 
-  // ***
-  // *** Initialize Main UI Elements
-  // ***
-
-  // main splitter
-  splitter = new QSplitter( this );
+  // Initialize XML parser with units.xml file now (2015-01-06) contained in the
+  // data.rcc. The parser holds the unit groups (widgets)
+  UnitXMLParser p( ":data/units.xml" );
+  if ( !p.initialize()) {
+    QMessageBox::critical( this, tr("Error"), p.getErrorMessage() );
+    return false;
+  }
+  unitGroups = p.getUnitGroups();
 
   // initialize the unit group list
-  treeUnitGroups = new QTreeView;
+  treeUnitGroups = new QTreeView(this);
   treeUnitGroups->setEditTriggers(QAbstractItemView::NoEditTriggers);
   treeUnitGroups->header()->hide();
   treeUnitGroups->setSelectionBehavior( QAbstractItemView::SelectItems );
   treeUnitGroups->setSelectionMode( QAbstractItemView::SingleSelection );
 
-  splitter->addWidget(treeUnitGroups);
-
-  // initialize widget with VBoxLayout
-  splitterUnits_Info = new QSplitter();
-  QWidget *unitStackInfo = new QWidget();
-  QVBoxLayout *vboxUnitStackInfo = new QVBoxLayout;
-  unitStackInfo->setLayout(vboxUnitStackInfo);
+  // initialize the list model for the unit groups
+  // Iterate over the unit groups and add them to the stacked layout.
+  // Then create a StandardItem and add this to the StandardItemModel.
+  // Finally assign the model to the View
+  // assign the StackedLayout to the unit list widget
+  widgetUnitList = new QWidget(this);
 
   lblTitle = new QLabel( "Title" );
   lblTitle->setStyleSheet(
       "font-size:16pt;font-weight:bold;background:rgb(100,100,100);"
       "color:white;padding:4px;");
-  //vboxUnitStackInfo->addWidget(lblTitle);
 
-  splitterUnits_Info->addWidget(unitStackInfo);
-
-  // assign the StackedLayout to the unit list widget
-  widgetUnitList = new QWidget;
-  unitLayout = new QStackedLayout;
-  widgetUnitList->setLayout(unitLayout);
-
-  treeUnitGroups->setFont( settings->value("treeview.font").value<QFont>() );
-  widgetUnitList->setFont( settings->value("unitlist.font").value<QFont>() );
-
-  scrInfo = new QScrollArea;
+  // info label
+  QScrollArea *scrInfo = new QScrollArea;
   lblInfo = new QLabel;
   lblInfo->setWordWrap(true);
   lblInfo->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-  lblInfo->setStyleSheet("background:white;color:black;font-size:12pt;"
+  lblInfo->setStyleSheet("background:white;color:black;"
       "line-height:150%;padding:10px;");
   lblInfo->setOpenExternalLinks(true);
   lblInfo->setTextInteractionFlags(
@@ -154,21 +133,11 @@ bool Convert::initialize() {
   scrInfo->setWidgetResizable(true);
   scrInfo->setWidget(lblInfo);
 
-  // add the widgets to the VBoxLayout
-  //vboxUnitStackInfo->addWidget(widgetUnitList);
+  // unit list widget
+  unitLayout = new QStackedLayout(widgetUnitList);
+  widgetUnitList->setLayout(unitLayout);
+  modelUnitGroups = new QStandardItemModel(this);
 
-  //splitterUnits_Info->addWidget(scrInfo);
-  //vboxUnitStackInfo->addWidget(splitterUnits_Info);
-
-  qDebug() << vboxUnitStackInfo;
-  qDebug() << splitterUnits_Info;
-
-  // initialize the list model for the unit groups
-  modelUnitGroups = new QStandardItemModel;
-
-  // Iterate over the unit groups and add them to the stacked layout.
-  // Then create a StandardItem and add this to the StandardItemModel.
-  // Finally assign the model to the View
   unsigned int originalIndex = 0;
   foreach( UnitGroup* g, p.getUnitGroups() ) {
     g->initialize(lblInfo);
@@ -215,15 +184,49 @@ bool Convert::initialize() {
     }
 
   }
-
-  settingsWindow = new Settings( 0, widgetUnitList, treeUnitGroups );
-  settingsWindow->setWindowTitle( QString(tr("%1 %2 - Settings")).arg(
-        CONVERT_NAME).arg(strVersion) );
-  settingsWindow->initialize();
-
-  unitLayout->addWidget( new QWidget(this) );
-
   treeUnitGroups->setModel( modelUnitGroups );
+
+  // put UI together
+
+  splitter = new QSplitter(this);
+  splitter->addWidget(treeUnitGroups);
+
+  QWidget *widgetTitleUnitList = new QWidget(this);
+  QVBoxLayout *layoutTitleUnitList = new QVBoxLayout(widgetTitleUnitList);
+  layoutTitleUnitList->addWidget(lblTitle);
+  layoutTitleUnitList->addWidget(widgetUnitList);
+  widgetTitleUnitList->setLayout(layoutTitleUnitList);
+
+  splitterUnitsInfo = new QSplitter(Qt::Vertical, this);
+  splitterUnitsInfo->addWidget(widgetTitleUnitList);
+  splitterUnitsInfo->addWidget(scrInfo);
+
+  splitter->addWidget(splitterUnitsInfo);
+
+  setCentralWidget(splitter);
+
+  // Settings
+  settings = new QSettings(
+      QSettings::IniFormat,
+      QSettings::UserScope,
+      COMPANY_NAME,
+      CONVERT_NAME,
+      this
+      );
+
+  treeUnitGroups->setObjectName(tr("Unit Groups Tree View"));
+  treeUnitGroups->setProperty("configname", QVariant("treeview"));
+
+  widgetUnitList->setObjectName(tr("Unit List and Text Fields Widget"));
+  widgetUnitList->setProperty("configname", QVariant("unitlist"));
+
+  lblInfo->setObjectName(tr("Descriptive Information"));
+  lblInfo->setProperty("configname", QVariant("lblinfo"));
+
+  listConfigurableWidgets <<
+    treeUnitGroups <<
+    widgetUnitList <<
+    lblInfo;
 
   connect( treeUnitGroups->selectionModel(),
       SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection& )),
@@ -232,24 +235,19 @@ bool Convert::initialize() {
           const QItemSelection&, const QItemSelection& ))
     );
 
-  setCentralWidget(splitter);
-
-  strVersion = QString( CONVERT_VERSION );
-
-  about = new ConvertAbout;
-  about->setWindowIcon( QIcon( ":/icon/icons/light_bulb.png" ) );
-  about->setWindowTitle( QString("%1 " + strVersion).arg(CONVERT_NAME) );
-  about->strDate = CONVERT_DATE;
-  about->strVersion = strVersion;
-  about->initialize();
-  setWindowTitle( "SUConvert " + strVersion );
-  about->setWindowTitle(tr("About") + " " + windowTitle());
-  setWindowIcon( QIcon( ":/icon/icons/convert.png" ) );
-
   if ( settings ) {
+    for ( auto widget : listConfigurableWidgets ) {
+      widget->setFont(
+          settings->value(
+            widget->property("configname").toString() + ".font"
+            ).value<QFont>() );
+    }
+
     restoreGeometry( settings->value( "mainwindow.geom" ).toByteArray() );
     restoreState( settings->value( "mainwindow.state" ).toByteArray() );
     splitter->restoreState( settings->value( "splitter.size" ).toByteArray() );
+    splitterUnitsInfo->restoreState(
+        settings->value( "splitterUnitsInfo.size" ).toByteArray() );
 
     int sd = settings->value( "sort.unitgroups", 0 ).toInt();
     modelUnitGroups->invisibleRootItem()->sortChildren( 0,
@@ -274,12 +272,18 @@ bool Convert::initialize() {
           groupIndex, QItemSelectionModel::ClearAndSelect );
   }
 
+  settingsWindow = new Settings( listConfigurableWidgets );
+  settingsWindow->setWindowTitle( QString(tr("%1 %2 - Settings")).arg(
+        CONVERT_NAME).arg(strVersion) );
+  settingsWindow->initialize();
+
   return true;
 }
 
 void Convert::treeUnitGroupsSelectionChanged(
     const QItemSelection& selected,
-    const QItemSelection& ) {
+    const QItemSelection& )
+{
   if ( selected.indexes().size() == 0 ) return;
 
   QModelIndex index = selected.indexes().at(0);
@@ -289,18 +293,21 @@ void Convert::treeUnitGroupsSelectionChanged(
   if ( !item ) return;
 
   QVariant originalIndex = item->data();
-
   if ( originalIndex.isValid() ) {
     setVisibleUnitGroup(originalIndex.toInt());
+    widgetUnitList->setVisible(true);
+    lblTitle->setVisible(true);
   } else {
-    unitLayout->setCurrentIndex(unitLayout->count()-1);
-    lblInfo->setText(QString());
     lblTitle->setText(QString());
+    lblTitle->setVisible(false);
+    lblInfo->setText(QString());
+    widgetUnitList->setVisible(false);
   }
 
 }
 
-void Convert::txtUnitsTextEdited( const QString& txtInput  ) {
+void Convert::txtUnitsTextEdited( const QString& txtInput  )
+{
   if ( !selectedGroup ) {
     qDebug() << "txtUnitsTextEdited: No Unit Group Selected";
     return;
@@ -366,11 +373,17 @@ void Convert::lblInfoLinkHovered( const QString& url ) {
 
 void Convert::actionQuitTriggered() {
   if ( settings ) {
-    settings->setValue( "treeview.font", QVariant(treeUnitGroups->font()) );
-    settings->setValue( "unitlist.font", QVariant(widgetUnitList->font()) );
+    for ( auto widget : listConfigurableWidgets ) {
+      settings->setValue(
+          widget->property("configname").toString() + ".font",
+          QVariant(widget->font())
+          );
+    }
     settings->setValue( "mainwindow.geom", saveGeometry() );
     settings->setValue( "mainwindow.state", saveState() );
     settings->setValue( "splitter.size", splitter->saveState() );
+    settings->setValue( "splitterUnitsInfo.size",
+        splitterUnitsInfo->saveState() );
     settings->setValue( "sort.unitgroups", QVariant(sdUnitGroups) );
 
     QModelIndexList indexes = treeUnitGroups->selectionModel()->
@@ -433,16 +446,19 @@ void Convert::setVisibleUnitGroup( int idx ) {
 }
 
 void Convert::actionSortAscTriggered() {
+  if ( !modelUnitGroups ) return;
   modelUnitGroups->invisibleRootItem()->sortChildren( 0, Qt::AscendingOrder );
   sdUnitGroups = ASC;
 }
 
 void Convert::actionSortDescTriggered() {
+  if ( !modelUnitGroups ) return;
   modelUnitGroups->invisibleRootItem()->sortChildren( 0, Qt::DescendingOrder );
   sdUnitGroups = DESC;
 }
 
 void Convert::actionAddSplit() {
+  if ( !selectedGroup ) return;
   if ( selectedGroup->columns == 5 ) {
     statusbar->showMessage( tr("Maximum of 5 unit sets reached"), 3000 );
     return;
@@ -455,6 +471,7 @@ void Convert::actionAddSplit() {
 }
 
 void Convert::actionRemoveSplit() {
+  if ( !selectedGroup ) return;
   if ( selectedGroup->additionalUnits.size() > 0 ) {
     foreach ( Unit* u, selectedGroup->additionalUnits.last() ) {
       delete u->lblDeviation;
@@ -490,10 +507,12 @@ void Convert::actionToggleDiffTriggered() {
 }
 
 void Convert::actionSettingsTriggered() {
+  if ( !settingsWindow ) return;
   settingsWindow->show();
   settingsWindow->activateWindow();
 }
 
 void Convert::actionHelpTriggered() {
+  if ( !help ) return;
   help->show();
 }
