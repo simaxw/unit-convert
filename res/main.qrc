@@ -46,5 +46,7 @@
     <file>toolbar.png</file>
     <file>split.png</file>
     <file>enter-math.png</file>
+    <file>teaser.png</file>
+    <file>teaser.html</file>
   </qresource>
 </RCC>

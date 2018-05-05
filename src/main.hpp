@@ -32,6 +32,7 @@
 #include "help.hpp"
 #include "settings.hpp"
 #include "menufactory.hpp"
+#include "licensekey.hpp"
 
 #define CONVERT_VERSION "2.2.0"
 #define CONVERT_DATE "2018-04-01"
@@ -102,6 +103,7 @@ class Convert : public QMainWindow {
     QScrollArea *scrUnits;
     Settings *settingsWindow;
     MenuFactory *mf;
+    LicenseKey *licenseKey;
 
     QList<QWidget*> listConfigurableWidgets;
 };

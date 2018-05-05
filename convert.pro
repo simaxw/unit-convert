@@ -9,7 +9,7 @@ TEMPLATE = app
 
 TARGET = bin/convert
 
-QT += xml widgets script
+QT += xml widgets script network
 CONFIG += C++14 release silent
 
 OBJECTS_DIR = obj
@@ -28,8 +28,8 @@ win32:DATA_OUT = release/bin/data.rcc
 unix:DATA_OUT = bin/data.rcc
 
 # Create data.rcc automatically after linking stage
-QMAKE_POST_LINK = rcc --verbose --compress 9 --binary\
-  -o $$DATA_OUT res/main.qrc
+# QMAKE_POST_LINK = rcc --verbose --compress 9 --binary\
+#   -o $$DATA_OUT res/main.qrc
 
 #QMAKE_CXXFLAGS += -s -g0
 #QMAKE_LFLAGS += -Wl,-s -g0
@@ -46,7 +46,8 @@ src/parser.cpp\
 src/unit.cpp\
 src/help.cpp\
 src/settings.cpp\
-src/menufactory.cpp
+src/menufactory.cpp\
+src/licensekey.cpp
 
 HEADERS +=\
 src/ccore.hpp\
@@ -56,4 +57,5 @@ src/parser.hpp\
 src/unit.hpp\
 src/help.hpp\
 src/settings.hpp\
-src/menufactory.hpp
+src/menufactory.hpp\
+src/licensekey.hpp

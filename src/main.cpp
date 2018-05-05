@@ -5,6 +5,7 @@
  * @return bool true on success, false otherwise
  */
 bool Convert::initialize() {
+  bool isLicensed = false;
   strVersion = QString( CONVERT_VERSION );
 
   // the data.rcc gets compiled as a binary file via rcc. It is expected
@@ -25,6 +26,18 @@ bool Convert::initialize() {
          "/usr/share/convert or in the same directory the binary resides in"));
     return false;
   }
+
+  // License Key and Registration Window
+  licenseKey = new LicenseKey(this);
+  if ( !licenseKey->initialize() ) {
+    QMessageBox::critical( this, tr("Error"),
+       tr("Init failed"));
+    return false;
+  }
+  int lic_rc = licenseKey->exec();
+
+  if ( lic_rc == 1 ) return false;
+  if ( lic_rc == 0 ) isLicensed = false;
 
   // Statusbar
   statusbar = new QStatusBar(this);
@@ -133,6 +146,7 @@ bool Convert::initialize() {
 
   unsigned int originalIndex = 0;
   foreach( UnitGroup* g, p.getUnitGroups() ) {
+    qDebug() << g->id;
     g->initialize(lblInfo);
     QScrollArea *scr = new QScrollArea(this);
     scr->setWidgetResizable(true);

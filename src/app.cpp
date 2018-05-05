@@ -10,7 +10,7 @@ int main( int argc, char *argv[] ) {
 
   Convert c;
   if ( !c.initialize() ) {
-    return -1;
+    return 1;
   }
 
   c.show();
