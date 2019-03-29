@@ -4,6 +4,7 @@
 # 2007-08-23
 # 2006-08-23
 # 2015-01-05
+# 2019-03-29
 
 TEMPLATE = app
 
@@ -46,8 +47,8 @@ src/parser.cpp\
 src/unit.cpp\
 src/help.cpp\
 src/settings.cpp\
-src/menufactory.cpp\
-src/licensekey.cpp
+src/menufactory.cpp
+# src/licensekey.cpp
 
 HEADERS +=\
 src/ccore.hpp\
@@ -57,5 +58,5 @@ src/parser.hpp\
 src/unit.hpp\
 src/help.hpp\
 src/settings.hpp\
-src/menufactory.hpp\
-src/licensekey.hpp
+src/menufactory.hpp
+# src/licensekey.hpp
