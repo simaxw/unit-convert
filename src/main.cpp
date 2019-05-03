@@ -11,8 +11,8 @@ bool Convert::initialize() {
   // the data.rcc gets compiled as a binary file via rcc. It is expected
   // in the same path as the executable or in /usr/share/convert on Linux
   QStringList paths = {
-    "/usr/share/convert",
-    qApp->applicationDirPath()
+    qApp->applicationDirPath(),
+    "/usr/share/convert"
   };
   bool rc = false;
   foreach ( QString p, paths ) {

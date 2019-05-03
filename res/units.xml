@@ -342,6 +342,17 @@ the values.
           metrology. Source: <a href="http://en.wikipedia.org/wiki/Meter">Wikipedia</a>]]>
         </info>
       </unit>
+      <unit id="kilometer" label="Kilometer [km]" type="factor" value="1000">
+        <info>
+          <![CDATA[The metre (meter in American English), (SI unit symbol:
+          m; SI dimension symbol: L), is the fundamental unit of length in
+          the International System of Units (SI).[1] Originally intended
+          to be one ten-millionth of the distance from the Earth's equator
+          to the North Pole (at sea level), its definition has been
+          periodically refined to reflect growing knowledge of
+          metrology. Source: <a href="http://en.wikipedia.org/wiki/Meter">Wikipedia</a>]]>
+        </info>
+      </unit>
       <unit id="pc" label="Parsec" type="factor" value="30.856776e+15">
         <info>
           <![CDATA[The parsec (symbol: pc) is a unit of length used in astronomy,
