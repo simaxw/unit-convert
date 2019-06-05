@@ -840,6 +840,8 @@ the values.
       toSI="x * 60" fromSI="x / 60"/>
     <unit id="kgperhour" label="Kilograms per Hour" type="transform"
       toSI="x * 3600" fromSI="x / 3600"/>
+    <unit id="tperhour" label="Tons per Hour" type="transform"
+      toSI="x * 3.600" fromSI="x / 3.600"/>
     <unit id="lbpersecond" label="Pound per Second" type="transform"
       toSI="x * 2.20462262" fromSI="x / 2.20462262"/>
     <unit id="lbperminute" label="Pound per Minute" type="transform"
