@@ -37,6 +37,7 @@
     <file>icons/speed.png</file>
     <file>icons/angle.png</file>
     <file>icons/delta.png</file>
+    <file>icons/radiation.png</file>
   </qresource>
   <qresource prefix="/data">
     <file>units.xml</file>

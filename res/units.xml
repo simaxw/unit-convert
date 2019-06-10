@@ -18,6 +18,24 @@ Use the transform attribute to perform more complex transformation of
 the values.
 -->
 <units>
+  <group id="radiation" label="Radiation" icon=":/icon/icons/radiation.png">
+    <unit id="sievert" label="Sievert" type="factor" value="1">
+      <info>
+        <![CDATA[
+          Das Sievert (Einheitenzeichen: Sv), nach dem schwedischen Mediziner und Physiker Rolf Sievert, ist die Maßeinheit verschiedener gewichteter Strahlendosen bei ionisierender Strahlung. Sie dient zur Bestimmung der Strahlenbelastung biologischer Organismen und wird bei der Analyse des Strahlenrisikos verwendet.
+          ]]>
+      </info>
+    </unit>
+    <unit id="millisievert" label="Milli Sievert" type="factor" value="0.001">
+    </unit>
+    <unit id="rem" label="Röntgen" type="factor" value="0.01">
+      <info>
+        <![CDATA[
+          Das Röntgen (Abkürzung: R) ist eine veraltete Maßeinheit für die Ionendosis. Sie wurde nach dem deutschen Physiker Wilhelm Conrad Röntgen benannt.
+          ]]>
+      </info>
+    </unit>
+  </group>
   <group id="vol" label="Volumes" icon=":/icon/icons/volume.png">
     <unit id="qubicmetre" label="Qubic Metre [m^3]" type="factor" value="1">
       <info>
