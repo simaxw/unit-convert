@@ -1,0 +1,2 @@
+#define unitconvert_VERSION_MAJOR @unitconvert_VERSION_MAJOR@
+#define unitconvert_VERSION_MINOR @unitconvert_VERSION_MINOR@
