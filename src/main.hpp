@@ -32,10 +32,10 @@
 #include "help.hpp"
 #include "settings.hpp"
 #include "menufactory.hpp"
+#include "config.h"
 // #include "licensekey.hpp"
 
-#define CONVERT_VERSION "2.2.0"
-#define CONVERT_DATE "2018-04-01"
+#define CONVERT_DATE "2024-07-31"
 #define COMPANY_NAME "Chronowerks"
 #define CONVERT_NAME "EWC Unit Conversion Tool"
 

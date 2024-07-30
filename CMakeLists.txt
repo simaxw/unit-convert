@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.30.0)
 
 set(TARGET_NAME unitconvert)
 
-project(${TARGET_NAME} VERSION 1.1 LANGUAGES CXX)
+project(${TARGET_NAME} VERSION 2.2.0 LANGUAGES CXX)
 configure_file(config.h.in config.h)
 
 set(CMAKE_AUTOMOC ON)

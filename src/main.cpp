@@ -6,7 +6,9 @@
  */
 bool Convert::initialize() {
   //bool isLicensed = false;
-  strVersion = QString( CONVERT_VERSION );
+  strVersion = QString("%1.%2")
+    .arg(unitconvert_VERSION_MAJOR)
+    .arg(unitconvert_VERSION_MINOR);
 
   // the data.rcc gets compiled as a binary file via rcc. It is expected
   // in the same path as the executable or in /usr/share/convert on Linux
