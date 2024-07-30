@@ -1,6 +1,1 @@
-*.swp
-Makefile
-.qmake.stash
-/obj
-/bin
-/build
+build
