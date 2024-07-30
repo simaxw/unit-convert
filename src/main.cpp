@@ -267,7 +267,8 @@ bool Convert::initialize() {
       QModelIndex collectionIndex = modelUnitGroups->index(
           indexTree.at(1).toInt(),0);
       treeUnitGroups->setExpanded(collectionIndex, true);
-      groupIndex = collectionIndex.child(indexTree.at(0).toInt(),0);
+      // groupIndex = collectionIndex.child(indexTree.at(0).toInt(),0);
+      groupIndex = modelUnitGroups->index(indexTree.at(0).toInt(),0);
     } else
     if ( indexTree.length() == 1 ) {
       groupIndex = modelUnitGroups->index(indexTree.at(0).toInt(),0);

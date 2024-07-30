@@ -19,15 +19,15 @@ bool CCore::convertUnits( QList<Unit*> lstUnits, Unit *u ) {
     case Unit::FORMATTED:
       {
         FormattedUnit *fu = (FormattedUnit*)u;
-        QRegExp r = ((QRegExpValidator*)fu->validator())->regExp();
-        r.indexIn( txtInput );
+        QRegularExpression r = ((QRegularExpressionValidator*)fu->
+            validator())->regularExpression();
+        QRegularExpressionMatch m = r.match(txtInput);
 
-        if ( fu->isExtendedInput ) {
-
-          QString eval = r.cap(1) + " * " + QString::number(fu->subUnits[0]) +
-            " + " + r.cap(2);
-          if ( !r.cap(3).isEmpty() ) {
-            eval += " + (" + r.cap(3) + ")";
+        if (fu->isExtendedInput) {
+          QString eval = m.captured(1) + " * " + QString::number(fu->subUnits[0]) +
+            " + " + m.captured(2);
+          if ( !m.captured(3).isEmpty() ) {
+            eval += " + (" + m.captured(3) + ")";
           }
           siUnitValue = qse.evaluate(eval).toNumber() * fu->value;
 
@@ -36,10 +36,10 @@ bool CCore::convertUnits( QList<Unit*> lstUnits, Unit *u ) {
           int i = 1;
           inputValue = 0;
           foreach ( double subUnit, fu->subUnits ) {
-            inputValue += subUnit * r.cap(i).toDouble();
+            inputValue += subUnit * m.captured(i).toDouble();
             i++;
           }
-          inputValue += r.cap(i).toDouble();
+          inputValue += m.captured(i).toDouble();
           siUnitValue = inputValue * fu->value;
         }
       }

@@ -2,9 +2,10 @@
 #define __ccore_hpp
 
 #include <QDebug>
-#include <QRegExp>
-#include <QRegExpValidator>
-#include <QScriptEngine>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+#include <QRegularExpressionValidator>
+#include <QJSEngine>
 #include <QList>
 #include <cmath>
 #include "unit.hpp"
@@ -15,7 +16,7 @@ class CCore {
     bool convertUnits( QList<Unit*>, Unit* );
 
   private:
-    QScriptEngine qse;
+    QJSEngine qse;
 };
 
 #endif

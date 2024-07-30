@@ -1,7 +1,7 @@
 #include "settings.hpp"
 
 void Settings::initialize() {
-  QRect availGeom = QApplication::desktop()->availableGeometry();
+  QRect availGeom = QGuiApplication::primaryScreen()->availableGeometry();
   int w = availGeom.width()*.4;
   int h = availGeom.height()*.3;
   int x = availGeom.width()/2-w/2;

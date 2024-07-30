@@ -10,12 +10,16 @@
 #include <QVBoxLayout>
 #include <QGridLayout>
 #include <QDoubleValidator>
-#include <QRegExpValidator>
+#include <QRegularExpressionValidator>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #include <QPainter>
 #include <QPaintEvent>
-#include <QScriptEngine>
+#include <QJSEngine>
 #include <QColor>
 #include <QFontMetrics>
+
+#define COFFSET 0
 
 class Unit : public QLineEdit {
   Q_OBJECT
@@ -44,7 +48,7 @@ class Unit : public QLineEdit {
 
   protected:
     void paintEvent( QPaintEvent* );
-    QScriptEngine qse;
+    QJSEngine qse;
 };
 
 class FactorUnit : public Unit {
@@ -97,7 +101,7 @@ class FormattedUnit : public Unit {
     FormattedUnit( const QString& _id, const QString& _label, const double _value, const QString& _inputpattern, const QString& _outputpattern ) :
       Unit(Unit::FORMATTED,_id,_label), value(_value), inputpattern(_inputpattern), outputpattern(_outputpattern)
     {
-      setValidator( new QRegExpValidator(QRegExp(inputpattern)) );
+      setValidator( new QRegularExpressionValidator(QRegularExpression(inputpattern)) );
     }
 
     double value;

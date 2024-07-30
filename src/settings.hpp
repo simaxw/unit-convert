@@ -11,7 +11,7 @@
 #include <QFont>
 #include <QTreeView>
 #include <QIcon>
-#include <QDesktopWidget>
+#include <QScreen>
 #include <QApplication>
 #include <QList>
 #include <QDebug>
