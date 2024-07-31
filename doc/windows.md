@@ -58,6 +58,16 @@ the list of the System Path Environment Variable:
 - c:\devenv\cmake\bin
 - c:\devenv\git\bin
 
+If you can't or don't want to change the environment you can also create a file "env.bat" in "c:\devenv" so set the Path like this:
+
+```
+@echo off
+
+set PATH=%PATH%;c:\devenv\cmake\bin;c:\devenv\git\bin;c:\devenv\mingw\bin
+echo Path set
+```
+Of course you have to run this script every time you open a CMD.
+
 Open a new cmd and verify the following commands work:
 
 - g++ --version
