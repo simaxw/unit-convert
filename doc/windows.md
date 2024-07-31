@@ -58,7 +58,7 @@ the list of the System Path Environment Variable:
 - c:\devenv\cmake\bin
 - c:\devenv\git\bin
 
-If you can't or don't want to change the environment you can also create a file "env.bat" in "c:\devenv" so set the Path like this:
+If you can't or don't want to change the environment you can also create a file "env.bat" in "c:\devenv" to set the Path like this:
 
 ```
 @echo off
