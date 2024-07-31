@@ -143,3 +143,20 @@ Start the unit converter:
 
 If you want to deploy your application on other Windows machines read
 [Deploying Windows Applications](https://wiki.qt.io/Deploying_Windows_Applications).
+
+For the unit-convert application you need the following files:
+
+```
+data.rcc
+libgcc_s_seh-1.dll
+libstdc++-6.dll
+libwinpthread-1.dll
+platforms
+Qt6Core.dll
+Qt6Core5Compat.dll
+Qt6Gui.dll
+Qt6Network.dll
+Qt6Qml.dll
+Qt6Widgets.dll
+unitconvert.exe
+```
