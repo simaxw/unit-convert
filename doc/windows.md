@@ -65,7 +65,7 @@ Open a new cmd and verify the following commands work:
 - cpp --version
 - cmake --version
 - rcc --version
-- uic --version
+- moc --version
 - ninja --version
 - git --version
 
