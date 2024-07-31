@@ -43,7 +43,7 @@ MinGW, Ninja and QtBase all into this directory.
 The MinGW archive has an subdirectory called "mingw64" change into this
 first and copy the folders to "C:\devenv\mingw"
 
-The Ninja archive just contains one file. Copy this to
+The Ninja archive contains just one file. Copy this to
 "C:\devenv\mingw\bin".
 
 Copy the files of all Qt-archives from
