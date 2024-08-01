@@ -11,8 +11,7 @@ find_package(
   Qt6 COMPONENTS Core Core5Compat Widgets Network Xml Qml
 )
 
-add_executable(
-  ${TARGET_NAME}
+set(PROJECT_SOURCES
   src/about.cpp
   src/about.hpp
   src/app.cpp
@@ -31,6 +30,20 @@ add_executable(
   src/unit.cpp
   src/unit.hpp
 )
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+  enable_language("RC")
+  set (WIN32_RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/res/convert.rc)
+  add_executable(${TARGET_NAME} WIN32
+    ${PROJECT_SOURCES}
+    ${WIN32_RESOURCES}
+  )
+else()
+  add_executable(
+    ${TARGET_NAME}
+    ${PROJECT_SOURCES}
+  )
+endif()
 
 target_compile_options(
   ${TARGET_NAME}
@@ -69,3 +82,5 @@ add_custom_command(
 
 add_custom_target(ResourceTarget ALL DEPENDS ${RESOURCE_BINARY})
 add_dependencies(${TARGET_NAME} ResourceTarget)
+
+

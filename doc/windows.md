@@ -108,21 +108,7 @@ Change into the unit-convert directory and create a build directory:
 ```
 
 Instruct cmake to create the Ninja build files. The current CMake
-instructions are good for both platforms, linux and win32. However in
-this configuration Windows will spawn a cmd window on every application start.
-Insert `WIN32` into the `add_executable` instruction to prevent that:
-
-CMakeLists.txt
-
-```
-add_executable(
-  ${TARGET_NAME}
-  WIN32
-  src/about.cpp
-  src/about.hpp
-  src/app.cpp
-  ...
-```
+instructions are good for both platforms, linux and win32.
 
 Now run the build:
 
