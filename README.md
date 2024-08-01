@@ -2,6 +2,8 @@
 
 Convert to all configured units in one unit group while typing.
 
+![Screenshot](doc/mainscreen.png)
+
 In order to configure, add or remove units edit the units.xml in the bin
 directory. Unit groups may contain two or more units. Each unit has to
 be set to one of the types:
