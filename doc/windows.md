@@ -82,7 +82,7 @@ Open a new cmd and verify the following commands work:
 # Build Unit Convert
 
 The project is hosted on github. The clone URL is
-[https://github.com/simaxw/unit-convert.git]
+https://github.com/simaxw/unit-convert.git
 
 Create a new directory under `c:\devenv` called `repos`.
 
