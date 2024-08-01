@@ -114,17 +114,31 @@ Now run the build:
 
 ```
 > cmake -G Ninja ..
-...
+-- The CXX compiler identification is GNU 13.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/devenv/mingw/bin/c++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Performing Test HAVE_STDATOMIC
+-- Performing Test HAVE_STDATOMIC - Success
+-- Found WrapAtomic: TRUE
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR)
+-- Configuring done (10.2s)
+-- Generating done (0.4s)
+-- Build files have been written to: C:/devenv/repos/unit-convert/build
+```
+Errors about not finding Vulkan Headers can be ignored.
+
+Build the project:
+```
 > ninja
 ```
 
-Generate Resource file:
-
-```
-> rcc -o data.rcc --verbose --binary --compress 9 ..\res\main.qrc
-```
-
-Start the unit converter:
+Start the application:
 
 ```
 > unitconvert
