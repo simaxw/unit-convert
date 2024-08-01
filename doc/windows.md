@@ -79,7 +79,7 @@ Open a new cmd and verify the following commands work:
 - ninja --version
 - git --version
 
-## Download The Unit Convert Project
+# Build Unit Convert
 
 The project is hosted on github. The clone URL is
 [https://github.com/simaxw/unit-convert.git]
@@ -142,6 +142,8 @@ Start the unit converter:
 ```
 > unitconvert
 ```
+
+## Deploying To Machines Without Qt
 
 If you want to deploy your application on other Windows machines read
 [Deploying Windows Applications](https://wiki.qt.io/Deploying_Windows_Applications).
