@@ -6,7 +6,6 @@ project(${TARGET_NAME} VERSION 2.2.0 LANGUAGES CXX)
 configure_file(config.h.in config.h)
 
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
 
 find_package(
   Qt6 COMPONENTS Core Core5Compat Widgets Network Xml Qml
@@ -57,3 +56,16 @@ target_link_libraries(
   Qt6::Xml
   Qt6::Qml
 )
+
+set(QRC_FILE ${PROJECT_SOURCE_DIR}/res/main.qrc)
+set(RESOURCE_BINARY ${CMAKE_CURRENT_BINARY_DIR}/data.rcc)
+
+add_custom_command(
+  OUTPUT ${RESOURCE_BINARY}
+  COMMAND rcc -o ${RESOURCE_BINARY} --binary --compress 9 ${QRC_FILE}
+  DEPENDS ${QRC_FILE}
+  COMMENT "Generating binary resource file"
+)
+
+add_custom_target(ResourceTarget ALL DEPENDS ${RESOURCE_BINARY})
+add_dependencies(${TARGET_NAME} ResourceTarget)
