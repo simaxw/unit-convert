@@ -13,7 +13,7 @@
 ## Create Directory
 
 In order to have everything in one place I would recommend to create one
-directory in drive C called "devenv" for "development environment".
+directory in drive C called `devenv` for *development environment*.
 Under this directory all software components mentioned above are
 extracted to.
 
@@ -23,13 +23,13 @@ Let's begin:
 
 Even though the PortableGit package downloads as an .exe it can also be
 unpacked with 7Zip. Once you have done that create a directory named
-"git" under "C:\devenv" and move the extracted contents into that
-directory. You should now have "C:\devenv\git\bin\git.exe".
+`git` under `C:\devenv` and move the extracted contents into that
+directory. You should now have `C:\devenv\git\bin\git.exe`.
 
 ## Install CMake
 
-Create a new directory "C:\devenv\cmake" and unpack the contents to
-"C:\devenv\cmake".
+Create a new directory `C:\devenv\cmake` and unpack the contents to
+`C:\devenv\cmake`.
 
 ## Install MinGW, Ninja, Qt
 
@@ -37,17 +37,17 @@ Unfortunately the Qt Company does not provide offline installers any
 more and the online installer needs you to register an account. So we do
 a manual install here.
 
-Create a new directory C:\devenv\mingw" and unpack the contents of
-MinGW, Ninja and QtBase all into this directory.
+Create a new directory `C:\devenv\mingw` and unpack the contents of
+MinGW, Ninja and Qt all into this directory.
 
-The MinGW archive has an subdirectory called "mingw64" change into this
-first and copy the folders to "C:\devenv\mingw"
+The MinGW archive has an subdirectory called `mingw64` change into this
+first and extract the folders to `C:\devenv\mingw`.
 
-The Ninja archive contains just one file. Copy this to
-"C:\devenv\mingw\bin".
+The Ninja archive contains just one executable. Copy it to
+`C:\devenv\mingw\bin`.
 
 Copy the files of all Qt-archives from
-"6.7.2\mingw_64" to "C:\devenv\mingw".
+`6.7.2\mingw_64` to `C:\devenv\mingw`.
 
 ## Adjust PATH Environment Variable
 
@@ -58,7 +58,7 @@ the list of the System Path Environment Variable:
 - c:\devenv\cmake\bin
 - c:\devenv\git\bin
 
-If you can't or don't want to change the environment you can also create a file "env.bat" in "c:\devenv" to set the Path like this:
+If you can't or don't want to change the environment you can also create a file `env.bat` in `c:\devenv` to set the Path like this:
 
 ```
 @echo off
@@ -82,9 +82,9 @@ Open a new cmd and verify the following commands work:
 ## Download The Unit Convert Project
 
 The project is hosted on github. The clone URL is
-https://github.com/simaxw/unit-convert.git
+[https://github.com/simaxw/unit-convert.git]
 
-Create a new directory under "c:\devenv" called "repos".
+Create a new directory under `c:\devenv` called `repos`.
 
 Change into that directory and clone the repository:
 
@@ -108,8 +108,8 @@ Change into the unit-convert directory and create a build directory:
 
 Instruct cmake to create the Ninja build files. The current CMake
 instructions are good for both platforms, linux and win32. However in
-this configuration Windows will spawn a cmd window on every start.
-Insert "WIN32" into the `add_executable` instruction to prevent that:
+this configuration Windows will spawn a cmd window on every application start.
+Insert `WIN32` into the `add_executable` instruction to prevent that:
 
 CMakeLists.txt
 
@@ -122,6 +122,8 @@ add_executable(
   src/app.cpp
   ...
 ```
+
+Now run the build:
 
 ```
 > cmake -G Ninja ..
