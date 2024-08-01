@@ -102,6 +102,7 @@ Resolving deltas: 100% (482/482), done.
 Change into the unit-convert directory and create a build directory:
 
 ```
+> cd unit-convert
 > mkdir build
 > cd build
 ```
