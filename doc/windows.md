@@ -156,7 +156,8 @@ data.rcc
 libgcc_s_seh-1.dll
 libstdc++-6.dll
 libwinpthread-1.dll
-platforms
+[platforms]
+  qwindows.dll
 Qt6Core.dll
 Qt6Core5Compat.dll
 Qt6Gui.dll
