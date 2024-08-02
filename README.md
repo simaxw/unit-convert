@@ -1,4 +1,4 @@
-# Unit Conversion Tool 2.2.0
+# Unit Conversion Tool
 
 Convert to all configured units in one unit group while typing.
 
