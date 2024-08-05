@@ -3,9 +3,8 @@
 
 #include <QDebug>
 #include <QFile>
-#include <QXmlInputSource>
-#include <QXmlDefaultHandler>
-#include <QXmlSimpleReader>
+#include <QXmlStreamReader>
+#include <QXmlStreamAttributes>
 #include <QStack>
 #include <QMenuBar>
 #include <QToolBar>
@@ -18,66 +17,32 @@
 #include <QMetaObject>
 #include <QMetaMethod>
 
-class MenuFactoryErrorHandler : public QXmlDefaultHandler {
-  public:
-    bool error(const QXmlParseException&);
-    bool warning(const QXmlParseException&);
-    bool fatalError(const QXmlParseException&);
-    QString lastError() { return errorMessage; }
-
-  private:
-    QString errorMessage;
-};
-
-class MenuFactoryContentHandler : public QObject, public QXmlDefaultHandler {
+class MenuFactory : public QObject {
   Q_OBJECT
 
   public:
-    MenuFactoryContentHandler( QObject* _slotContainer ) :
-      menubar(0),
-      currentMenu(0),
+    MenuFactory( const QString& _filename, QObject *_slotContainer ) :
+      filename(_filename),
       slotContainer(_slotContainer)
     {}
-    bool startElement( const QString&, const QString&, const QString&,
-        const QXmlAttributes& );
-    bool endElement( const QString&, const QString&, const QString& );
+    bool initialize();
+    QString lastError() { return errorMessage; }
     QMenuBar* getMenuBar() { return menubar; }
     QList<QToolBar*> getToolbars() { return toolbars.values(); }
 
   private:
-    QStack<QString> docTree;
-    QHash<QString,QToolBar*> toolbars;
-
-    QMenuBar *menubar;
-    QMenu *currentMenu;
-
-    QObject *slotContainer;
-
-  private slots:
-    void handleActionTriggered();
-
-};
-
-class MenuFactory {
-  public:
-    MenuFactory( const QString& _filename, QObject *_slotContainer ) :
-      filename(_filename),
-      slotContainer(_slotContainer),
-      errorHandler(0),
-      contentHandler(0)
-    {}
-    bool initialize();
-    QString lastError() { return errorMessage; }
-    MenuFactoryContentHandler* getContentHandler() { return contentHandler; }
-
-  private:
+    bool startElement(const QString&, const QXmlStreamAttributes&);
+    bool endElement(const QString&);
     QString filename;
     QObject *slotContainer;
     QString errorMessage;
+    QStack<QString> docTree;
+    QHash<QString,QToolBar*> toolbars;
+    QMenuBar *menubar;
+    QMenu *currentMenu;
 
-    MenuFactoryErrorHandler *errorHandler;
-    MenuFactoryContentHandler *contentHandler;
-
+  private slots:
+    void handleActionTriggered();
 };
 
 #endif

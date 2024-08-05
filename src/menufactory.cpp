@@ -1,70 +1,78 @@
 #include "menufactory.hpp"
 
-bool MenuFactoryErrorHandler::error( const QXmlParseException& e ) {
-  errorMessage = QString( "Error: %1: Line %2, Column %3" ).
-    arg(e.message()).arg(e.lineNumber()).arg(e.columnNumber());
-  return false;
-}
+bool MenuFactory::initialize() {
+  QFile f(filename);
+  if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    errorMessage = QString("Unable to open File: %1")
+      .arg(f.errorString());
+    return false;
+  }
+  QXmlStreamReader reader(&f);
+  while (!reader.atEnd()) {
+    QXmlStreamReader::TokenType t = reader.readNext();
+    if (t == QXmlStreamReader::StartElement) {
+      startElement(reader.name().toString(), reader.attributes());
+    }
+    else if (t == QXmlStreamReader::EndElement) {
+      endElement(reader.name().toString());
+    }
+  }
 
-bool MenuFactoryErrorHandler::warning( const QXmlParseException& e ) {
-  errorMessage = QString( "Warning: %1: Line %2, Column %3" ).
-    arg(e.message()).arg(e.lineNumber()).arg(e.columnNumber());
+  if (reader.hasError()) {
+    return false;
+  }
+
   return true;
 }
 
-bool MenuFactoryErrorHandler::fatalError( const QXmlParseException& e ) {
-  errorMessage = QString( "FATAL: %1: Line %2, Column %3" ).
-    arg(e.message()).arg(e.lineNumber()).arg(e.columnNumber());
-  return true;
-}
-
-bool MenuFactoryContentHandler::startElement(
-    const QString&,
+bool MenuFactory::startElement(
     const QString& localName,
-    const QString&,
-    const QXmlAttributes& attr ) {
+    const QXmlStreamAttributes& attr ) {
   docTree << localName;
   if ( localName == "menubar" ) {
     menubar = new QMenuBar;
-    menubar->setObjectName( attr.value("id") );
+    menubar->setObjectName(attr.value("id").toString());
   } else
   if ( localName == "menu" ) {
-    QMenu *menu = new QMenu( attr.value("label").replace( "~","&" ) );
-    menu->setObjectName( attr.value("name") );
+    QMenu *menu = new QMenu(
+        attr.value("label").toString().replace( "~","&" ) );
+    menu->setObjectName(attr.value("name").toString());
     currentMenu = menu;
   } else
   if ( localName == "action" ) {
-    QAction *action = new QAction(0);
+    QAction *action = new QAction(nullptr);
 
     if ( !attr.value("slot").isEmpty() ) {
       connect( action, SIGNAL(triggered()),
           this, SLOT(handleActionTriggered()) );
-      action->setData( attr.value("slot") );
+      action->setData(attr.value("slot").toString());
     }
 
     if ( !attr.value("label").isEmpty() ) {
-      action->setText( attr.value("label").replace("~", "&") );
+      action->setText(
+          attr.value("label").toString().replace("~", "&") );
     }
 
     if ( !attr.value("icon").isEmpty() ) {
-      action->setIcon( QIcon( ":/icon/icons/" + attr.value("icon") ) );
+      action->setIcon(
+          QIcon(":/icon/icons/" + attr.value("icon").toString()));
     }
         
-    if ( !attr.value("accel").isEmpty() ) {
-      action->setShortcut( QKeySequence( attr.value("accel") ) );
+    if (!attr.value("accel").isEmpty()) {
+      action->setShortcut(QKeySequence(attr.value("accel").toString()));
     }
 
-    if ( !attr.value("help").isEmpty() ) {
-      action->setStatusTip( attr.value("help") );
+    if (!attr.value("help").isEmpty()) {
+      action->setStatusTip(attr.value("help").toString());
     }
 
-    if ( attr.value("isToggle") == "true" ) {
+    if (attr.value("isToggle").toString() == "true") {
       action->setCheckable(true);
     }
 
-    if ( currentMenu ) currentMenu->addAction(action);
+    if (currentMenu) currentMenu->addAction(action);
 
-    QString toolbarName = attr.value("toolbar");
+    QString toolbarName = attr.value("toolbar").toString();
     if ( !toolbars.contains(toolbarName) ) {
       QToolBar *toolbar = new QToolBar;
       toolbar->setObjectName(toolbarName);
@@ -77,31 +85,32 @@ bool MenuFactoryContentHandler::startElement(
   return true;
 }
 
-bool MenuFactoryContentHandler::endElement(
-    const QString&,
-    const QString& localName,
-    const QString& ) {
+bool MenuFactory::endElement(const QString& localName) {
   docTree.pop();
   if ( localName == "menu" ) {
-    menubar->addMenu( currentMenu );
+    menubar->addMenu(currentMenu);
   }
   return true;
 }
 
-void MenuFactoryContentHandler::handleActionTriggered() {
+void MenuFactory::handleActionTriggered() {
   QAction *A = qobject_cast<QAction*>(sender());
-  if ( !A ) QMessageBox::critical( 0, tr("Error"), tr("Error calling Action") );
+  if ( !A ) QMessageBox::critical(
+      nullptr, tr("Error"), tr("Error calling Action"));
 
   QString slotName = A->data().toString();
 
   if ( A->isCheckable() ) {
     bool rc = slotContainer->metaObject()->invokeMethod(
-        slotContainer, slotName.toUtf8().constData(), Qt::DirectConnection,
+        slotContainer,
+        slotName.toUtf8().constData(),
+        Qt::DirectConnection,
         Q_ARG(QAction*, A));
 
     if ( !rc ) {
       QMessageBox::critical( 0, tr("Error"),
-          QString(tr("Could not toggle. \"%1\" not called.")).arg(slotName));
+          QString(
+            tr("Could not toggle. \"%1\" not called.")).arg(slotName));
       return;
     }
   } else {
@@ -110,28 +119,12 @@ void MenuFactoryContentHandler::handleActionTriggered() {
         );
     if ( slotIndex < 0 ) {
       QMessageBox::critical( 0, tr("Error"),
-          QString(tr("Error calling Action. Slot \"%1\" does not exist.")).arg(
-            slotName) );
+          QString(
+            tr("Error calling Action. Slot \"%1\" does not exist."))
+          .arg(slotName));
       return;
     }
     QMetaMethod slot = slotContainer->metaObject()->method(slotIndex);
     slot.invoke( slotContainer, Qt::DirectConnection );
   }
-}
-
-bool MenuFactory::initialize() {
-  QFile f( filename );
-  QXmlInputSource *in = new QXmlInputSource( &f ); 
-
-  contentHandler = new MenuFactoryContentHandler(slotContainer);
-  errorHandler = new MenuFactoryErrorHandler;
-
-  QXmlSimpleReader reader;
-  reader.setContentHandler( contentHandler );
-  reader.setErrorHandler( errorHandler );
-  if ( !reader.parse( in ) ) {
-    errorMessage = errorHandler->lastError();
-    return false;
-  }
-  return true;
 }

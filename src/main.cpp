@@ -58,7 +58,7 @@ bool Convert::initialize() {
     return false;
   }
 
-  foreach ( QToolBar *tb, mf->getContentHandler()->getToolbars() ) {
+  foreach ( QToolBar *tb, mf->getToolbars() ) {
     tb->setMovable(true);
     tb->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
     tb->setIconSize( QSize( 24, 24 ) );
