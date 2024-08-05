@@ -29,18 +29,6 @@ bool Convert::initialize() {
     return false;
   }
 
-  // License Key and Registration Window
-  //licenseKey = new LicenseKey(this);
-  //if ( !licenseKey->initialize() ) {
-  //  QMessageBox::critical( this, tr("Error"),
-  //     tr("Init failed"));
-  //  return false;
-  //}
-  //int lic_rc = licenseKey->exec();
-
-  //if ( lic_rc == 1 ) return false;
-  //if ( lic_rc == 0 ) isLicensed = false;
-
   // Statusbar
   statusbar = new QStatusBar(this);
   setStatusBar(statusbar);
