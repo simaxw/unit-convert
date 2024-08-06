@@ -1,5 +1,5 @@
-#ifndef __main_hpp
-#define __main_hpp
+#ifndef __convert_hpp
+#define __convert_hpp
 
 #include <QDebug>
 #include <QApplication>
