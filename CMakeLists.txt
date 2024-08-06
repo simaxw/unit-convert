@@ -12,23 +12,23 @@ find_package(
 )
 
 set(PROJECT_SOURCES
-  src/about.cpp
-  src/about.hpp
-  src/app.cpp
-  src/ccore.cpp
-  src/ccore.hpp
-  src/help.cpp
-  src/help.hpp
   src/main.cpp
-  src/main.hpp
-  src/menufactory.cpp
-  src/menufactory.hpp
+  src/convert.cpp
+  src/convert.hpp
   src/parser.cpp
   src/parser.hpp
-  src/settings.cpp
-  src/settings.hpp
   src/unit.cpp
   src/unit.hpp
+  src/ccore.cpp
+  src/ccore.hpp
+  src/about.cpp
+  src/about.hpp
+  src/help.cpp
+  src/help.hpp
+  src/menufactory.cpp
+  src/menufactory.hpp
+  src/settings.cpp
+  src/settings.hpp
 )
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
@@ -80,5 +80,3 @@ add_custom_command(
 
 add_custom_target(ResourceTarget ALL DEPENDS ${RESOURCE_BINARY})
 add_dependencies(${TARGET_NAME} ResourceTarget)
-
-

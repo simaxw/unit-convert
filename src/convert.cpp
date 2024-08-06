@@ -10,24 +10,6 @@ bool Convert::initialize() {
     .arg(unitconvert_VERSION_MAJOR)
     .arg(unitconvert_VERSION_MINOR);
 
-  // the data.rcc gets compiled as a binary file via rcc. It is expected
-  // in the same path as the executable or in /usr/share/convert on Linux
-  QStringList paths = {
-    qApp->applicationDirPath(),
-    "/usr/share/convert"
-  };
-  bool rc = false;
-  foreach ( QString p, paths ) {
-    rc = QResource::registerResource( p + "/data.rcc" );
-    if ( rc ) break;
-  }
-
-  if ( !rc ) {
-    QMessageBox::critical( this, tr("Error"),
-       tr("Data file data.rcc missing. It is either expected in "
-         "/usr/share/convert or in the same directory the binary resides in"));
-    return false;
-  }
 
   // Statusbar
   statusbar = new QStatusBar(this);

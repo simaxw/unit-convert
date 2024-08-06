@@ -50,4 +50,7 @@
     <file>teaser.png</file>
     <file>teaser.html</file>
   </qresource>
+  <qresource prefix="/">
+    <file>i18n/convert.de_DE.qm</file>
+  </qresource>
 </RCC>

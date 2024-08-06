@@ -11,6 +11,7 @@
 #include <QStandardItemModel>
 #include <QStackedLayout>
 #include <QMessageBox>
+#include <QDir>
 #include <QPaintEngine>
 #include <QPainter>
 #include <QItemSelection>
@@ -26,6 +27,8 @@
 #include <QCloseEvent>
 #include <QLayoutItem>
 #include <QList>
+#include <QTranslator>
+#include <QLocale>
 #include "ccore.hpp"
 #include "about.hpp"
 #include "parser.hpp"
@@ -33,7 +36,6 @@
 #include "settings.hpp"
 #include "menufactory.hpp"
 #include "config.h"
-// #include "licensekey.hpp"
 
 #define CONVERT_DATE "2024-07-31"
 #define COMPANY_NAME "Chronowerks"
