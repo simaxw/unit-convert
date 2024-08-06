@@ -3,46 +3,34 @@
 
 #include <QDebug>
 #include <QFile>
-#include <QXmlInputSource>
-#include <QXmlDefaultHandler>
-#include <QXmlSimpleReader>
+#include <QXmlStreamReader>
+#include <QXmlStreamAttributes>
 #include <QStack>
 
 #include "unit.hpp"
 
-class UnitErrorHandler : public QXmlDefaultHandler {
-
+class UnitXMLParser {
   public:
-    bool error(const QXmlParseException&);
-    bool warning(const QXmlParseException&);
-    bool fatalError(const QXmlParseException&);
-    QString errorString() const;
-
-  private:
-    QString errorMessage;
-};
-
-class UnitContentHandler : public QXmlDefaultHandler {
-
-  public:
-    UnitContentHandler() :
-      isCDATA(false),
+    UnitXMLParser( const QString& _filename ) :
+      filename(_filename),
       isCollection(false),
-      currentUnitGroup(0),
-      currentUnit(0),
-      currentCollection(0)
+      currentUnitGroup(nullptr),
+      currentUnit(nullptr),
+      currentCollection(nullptr)
     {}
-    bool startElement( const QString&, const QString&, const QString&, const QXmlAttributes& );
-    bool endElement( const QString&, const QString&, const QString& );
-    bool startCDATA();
-    bool endCDATA();
+    bool initialize();
+
+    QList<UnitCollection*> getUnitCollections() { return collections; }
+    QList<UnitGroup*> getUnitGroups() { return unitGroups; }
+    QString getErrorMessage() { return errorMessage; }
+
+    bool startElement( const QString&, const QXmlStreamAttributes& );
+    bool endElement( const QString&);
     bool characters( const QString& );
 
-    QList<UnitGroup*> getUnitGroups() { return unitGroups; }
-    QList<UnitCollection*> getUnitCollections() { return collections; }
-
   private:
-    bool isCDATA;
+    QString filename;
+    QString errorMessage;
     bool isCollection;
     QString current;
     QStack<QString> docTree;
@@ -51,27 +39,6 @@ class UnitContentHandler : public QXmlDefaultHandler {
     UnitGroup *currentUnitGroup;
     Unit *currentUnit;
     UnitCollection *currentCollection;
-};
-
-class UnitXMLParser {
-
-  public:
-    UnitXMLParser( const QString& _fileName ) :
-      contentHandler(0),
-      errorHandler(0),
-      fileName(_fileName)
-    {}
-    bool initialize();
-
-    QList<UnitCollection*> getUnitCollections() { return contentHandler->getUnitCollections(); }
-    QList<UnitGroup*> getUnitGroups() { return contentHandler->getUnitGroups(); }
-    QString getErrorMessage() { return errorHandler->errorString(); }
-
-  private:
-    UnitContentHandler *contentHandler;
-    UnitErrorHandler *errorHandler;
-
-    QString fileName;
 };
 
 #endif

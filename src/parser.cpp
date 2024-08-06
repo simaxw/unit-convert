@@ -1,68 +1,57 @@
 #include "parser.hpp"
 
-bool UnitErrorHandler::error( const QXmlParseException& e ) {
-  errorMessage = QString( "Error: %1: Line %2, Column %3" ).
-    arg(e.message()).arg(e.lineNumber()).arg(e.columnNumber());
-  return false;
-}
-
-bool UnitErrorHandler::warning( const QXmlParseException& e ) {
-  errorMessage = QString( "Warning: %1: Line %2, Column %3" ).
-    arg(e.message()).arg(e.lineNumber()).arg(e.columnNumber());
-  return true;
-}
-
-bool UnitErrorHandler::fatalError( const QXmlParseException& e ) {
-  errorMessage = QString( "FATAL: %1: Line %2, Column %3" ).
-    arg(e.message()).arg(e.lineNumber()).arg(e.columnNumber());
-  return true;
-}
-
-QString UnitErrorHandler::errorString() const {
-  return errorMessage;
-}
-
-bool UnitContentHandler::startElement(
-    const QString&,
+bool UnitXMLParser::startElement(
     const QString& localName,
-    const QString&,
-    const QXmlAttributes& attr ) {
+    const QXmlStreamAttributes& attr ) {
+
   docTree << localName;
 
   if ( localName == "collection" ) {
-    UnitCollection *coll = new UnitCollection( attr.value("id"), attr.value("label"), attr.value("icon") );
+    UnitCollection *coll = new UnitCollection(
+        attr.value("id").toString(),
+        attr.value("label").toString(),
+        attr.value("icon").toString());
     isCollection = true;
     currentCollection = coll;
   } else
   if ( localName == "group" ) {
-    UnitGroup *g = new UnitGroup( attr.value("id"), attr.value("label") );
-    g->icon = attr.value("icon");
+    UnitGroup *g = new UnitGroup(
+        attr.value("id").toString(),
+        attr.value("label").toString());
+    g->icon = attr.value("icon").toString();
     currentUnitGroup = g;
   } else
   if ( localName == "unit" ) {
-    QString type = attr.value("type");
-    QString id = attr.value("id");
-    QString label = attr.value("label").replace("_","&").replace(QRegularExpression("(\\^(\\-?\\d+))"),"<sup>\\2</sup>");
+    QString type = attr.value("type").toString();
+    QString id = attr.value("id").toString();
+    QString label = attr.value("label")
+      .toString()
+      .replace("_","&")
+      .replace(QRegularExpression("(\\^(\\-?\\d+))"),"<sup>\\2</sup>");
 
     if ( type == "factor" ) {
-      FactorUnit *fu = new FactorUnit( id,label, attr.value("value").toDouble() );
+      FactorUnit *fu = new FactorUnit(id, label, attr.value("value").toString().toDouble());
       currentUnit = fu;
     } else
     if ( type == "transform" ) {
-      TransformUnit *tu = new TransformUnit( id,label, attr.value("fromSI"), attr.value("toSI") );
+      TransformUnit *tu = new TransformUnit(id, label,
+          attr.value("fromSI").toString(),
+          attr.value("toSI").toString());
       currentUnit = tu;
     } else
     if ( type == "formatted" ) {
-      FormattedUnit *fu = new FormattedUnit( id,label, attr.value("value").toDouble(),
-          attr.value("inputpattern"), attr.value("outputpattern") );
-      if ( attr.value("extendedinput") == "true" ) {
+      FormattedUnit *fu = new FormattedUnit(
+          id, label, attr.value("value").toDouble(),
+          attr.value("inputpattern").toString(),
+          attr.value("outputpattern").toString());
+      if ( attr.value("extendedinput").toString() == "true" ) {
         fu->isExtendedInput = true;
       }
       currentUnit = fu;
     }
   } else
   if ( localName == "subunit" ) {
-    QString val = attr.value("value");
+    QString val = attr.value("value").toString();
     if ( !val.isEmpty() ) {
       ((FormattedUnit*)currentUnit)->subUnits.append(val.toInt());
     }
@@ -71,10 +60,9 @@ bool UnitContentHandler::startElement(
   return true;
 }
 
-bool UnitContentHandler::endElement(
-    const QString&,
-    const QString& localName,
-    const QString& ) {
+bool UnitXMLParser::endElement(
+    const QString& localName
+    ) {
 
   if ( !docTree.isEmpty() ) {
     docTree.pop();
@@ -100,35 +88,37 @@ bool UnitContentHandler::endElement(
   return true;
 }
 
-bool UnitContentHandler::startCDATA() {
-  isCDATA = true;
-  return true;
-}
-
-bool UnitContentHandler::endCDATA() {
-  isCDATA = false;
-  return true;
-}
-
-bool UnitContentHandler::characters( const QString& chars ) {
-  if ( docTree.top() == "info" && isCDATA && currentUnit != 0 ) {
+bool UnitXMLParser::characters( const QString& chars ) {
+  if ( docTree.top() == "info" && currentUnit != 0 ) {
     currentUnit->info = chars;
   }
   return true;
 }
 
 bool UnitXMLParser::initialize() {
-  QFile f( fileName );
-  QXmlInputSource *in = new QXmlInputSource( &f ); 
+  QFile f(filename);
+  if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    errorMessage = QString("Unable to open File: %1")
+      .arg(f.errorString());
+    return false;
+  }
 
-  contentHandler = new UnitContentHandler;
-  errorHandler = new UnitErrorHandler;
+  QXmlStreamReader reader(&f);
+  while (!reader.atEnd()) {
+    QXmlStreamReader::TokenType t = reader.readNext();
+    if (t == QXmlStreamReader::StartElement) {
+      startElement(reader.name().toString(), reader.attributes());
+    }
+    else if (t == QXmlStreamReader::EndElement) {
+      endElement(reader.name().toString());
+    }
+    else if (t == QXmlStreamReader::Characters && reader.isCDATA()) {
+      characters(reader.text().toString());
+    }
+  }
 
-  QXmlSimpleReader reader;
-  reader.setContentHandler( contentHandler );
-  reader.setErrorHandler( errorHandler );
-  reader.setLexicalHandler( contentHandler );
-  if ( !reader.parse( in ) ) {
+  if (reader.hasError()) {
+    errorMessage = reader.errorString();
     return false;
   }
 

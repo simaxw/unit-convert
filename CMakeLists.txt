@@ -8,7 +8,7 @@ configure_file(config.h.in config.h)
 set(CMAKE_AUTOMOC ON)
 
 find_package(
-  Qt6 COMPONENTS Core Core5Compat Widgets Network Xml Qml
+  Qt6 COMPONENTS Core Widgets Xml Qml
 )
 
 set(PROJECT_SOURCES
@@ -63,9 +63,7 @@ target_include_directories(
 target_link_libraries(
   ${TARGET_NAME}
   Qt6::Core
-  Qt6::Core5Compat
   Qt6::Widgets
-  Qt6::Network
   Qt6::Xml
   Qt6::Qml
 )
