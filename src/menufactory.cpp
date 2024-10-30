@@ -1,6 +1,17 @@
 #include "menufactory.hpp"
 
 bool MenuFactory::initialize() {
+  menuItems
+    << tr("&Quit")
+    << tr("&Sort")
+    << tr("&Settings")
+    << tr("&Toggle Diff")
+    << tr("&Split")
+    << tr("&Remove Split")
+    << tr("&Help")
+    << tr("&About")
+    ;
+
   QFile f(filename);
   if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
     errorMessage = QString("Unable to open File: %1")
@@ -49,8 +60,8 @@ bool MenuFactory::startElement(
     }
 
     if ( !attr.value("label").isEmpty() ) {
-      action->setText(
-          attr.value("label").toString().replace("~", "&") );
+      action->setText(menuItems.at(actionIndex++));
+          // tr(attr.value("label").toString().replace("~", "&")) );
     }
 
     if ( !attr.value("icon").isEmpty() ) {
